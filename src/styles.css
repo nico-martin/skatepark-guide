@@ -1,0 +1,41 @@
+:root {
+  --spacing: 1.4rem;
+  --spacing-half: 0.7rem;
+  --spacing-page: 2.5rem;
+  --transition-speed: 200ms;
+
+  --c-p: #1d1d1b;
+  --c-h: #000;
+  --c-bkg: #f3f3f3;
+
+  --c-primary: #ff5722;
+  --c-secondary: #00796b;
+  --c-secondary-light: #129282;
+  --c-secondary-dark: #116f63;
+
+  --c-feedback-error: #af1616;
+
+  --bp-phone: 330px;
+  --bp-tablet: 600px;
+  --bp-tablet-landscape: 900px;
+  --bp-desktop: 1300px;
+
+  --fs: 2rem;
+  --fs-s: 1.6rem;
+  --fs-xs: 1rem;
+  --fs-l: 2.4rem;
+}
+
+body.no-outline {
+  a,
+  button,
+  .o-helloform__element--type-checkbox .o-helloform__input:focus + label:after,
+  .o-helloform__input:focus {
+    outline: none;
+  }
+}
+
+@import 'styles/keyframes/spinner.css';
+@import 'styles/reset.css';
+@import 'styles/typography.css';
+@import 'styles/document.css';
