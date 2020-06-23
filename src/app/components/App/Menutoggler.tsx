@@ -12,9 +12,10 @@ const MenuToggler = ({
   className?: string;
 }) => (
   <Button
-    className={`${className} menutoggler button button--icon`}
+    className={`${className} menutoggler`}
     onClick={() => onClick()}
     data-state={buttonState}
+    round
   >
     {[1, 2, 3].map(i => (
       <span className={`menutoggler__line menutoggler__line--${i}`} />

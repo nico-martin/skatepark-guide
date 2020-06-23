@@ -33,22 +33,25 @@ const Menu = ({ className = '' }: { className?: string }) => {
       />
       <div className="menu__elements" aria-hidden={buttonState !== 'open'}>
         <Button
-          isLink
+          element="router"
           href="/about/"
           className="menu__links menu__links--about"
           icon="mdi/information"
+          round
         />
         <Button
-          isLink
+          element="router"
           href="/park/edit/new/"
           className="menu__links menu__links--add"
           icon="mdi/markerplus"
+          round
         />
         <Button
-          isLink
+          element="router"
           href="/account/"
           className="menu__links menu__links--account"
           icon="mdi/account"
+          round
         />
       </div>
     </nav>

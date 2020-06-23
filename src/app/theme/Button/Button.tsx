@@ -8,7 +8,7 @@ import IntlLink from '@app/intl/IntlLink';
 import './Button.css';
 
 const Button = ({
-  isLink = false,
+  element = 'button',
   className = '',
   children,
   onClick,
@@ -16,38 +16,58 @@ const Button = ({
   icon,
   ...props
 }: {
-  isLink?: boolean;
+  element?: 'button' | 'router' | 'a';
   className?: string;
   children?: VNode | VNode[] | string;
   onClick?: Function;
   round?: boolean;
   icon?: string;
   [x: string]: any;
-}) =>
-  !isLink ? (
+}) => {
+  if (element === 'router') {
+    return (
+      <IntlLink
+        className={cn(className, 'button', {
+          'button--icon': icon,
+          'button--round': round,
+          'button--has-text': children,
+        })}
+        {...props}
+      >
+        {icon && <Icon icon={icon} className="button__icon" />}
+        {children && <span className="button__text">{children}</span>}
+      </IntlLink>
+    );
+  } else if (element === 'a') {
+    return (
+      <a
+        className={cn(className, 'button', {
+          'button--icon': icon,
+          'button--round': round,
+          'button--has-text': children,
+        })}
+        onClick={onClick ? () => onClick() : null}
+        {...props}
+      >
+        {icon && <Icon icon={icon} className="button__icon" />}
+        {children && <span className="button__text">{children}</span>}
+      </a>
+    );
+  }
+  return (
     <button
       className={cn(className, 'button', {
         'button--icon': icon,
         'button--round': round,
-      })}
-      onClick={() => onClick()}
-      {...props}
-    >
-      {icon && <Icon icon={icon} />}
-      {children}
-    </button>
-  ) : (
-    <IntlLink
-      className={cn(className, 'button', {
-        'button--icon': icon,
-        'button--round': round,
+        'button--has-text': children,
       })}
       onClick={onClick ? () => onClick() : null}
       {...props}
     >
-      {icon && <Icon icon={icon} />}
-      {children}
-    </IntlLink>
+      {icon && <Icon icon={icon} className="button__icon" />}
+      {children && <span className="button__text">{children}</span>}
+    </button>
   );
+};
 
 export default Button;

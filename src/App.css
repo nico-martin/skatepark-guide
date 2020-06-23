@@ -6,6 +6,25 @@
   top: 0;
   overflow: hidden;
 
+  &__content {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    z-index: 250;
+    overflow: auto;
+    @mixin transition transform;
+    //transform: translateX(100%);
+    will-change: transform;
+    &[aria-hidden='false'] {
+      transform: translateX(0);
+      @mixin box-shadow;
+    }
+  }
+
   /*
 
   &__overlay {
@@ -76,8 +95,8 @@
 
   &__controls {
     position: fixed;
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 3rem;
+    height: 3rem;
 
     &--logo,
     &--menu,

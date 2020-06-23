@@ -19,15 +19,6 @@
   --bp-tablet: 600px;
   --bp-tablet-landscape: 900px;
   --bp-desktop: 1300px;
-
-  --fs: 2rem;
-  --fs-s: 1.6rem;
-  --fs-xs: 1rem;
-  --fs-l: 2.4rem;
-
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
-  --box-shadow-hover: 0 6px 15px rgba(0, 0, 0, 0.25),
-    0 6px 8px rgba(0, 0, 0, 0.22);
 }
 
 body.no-outline {

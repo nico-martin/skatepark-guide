@@ -77,47 +77,6 @@ module.exports = (env, argv) => {
               useShortDoctype: true,
             },
       }),
-      new WebpackPwaManifest({
-        name: app.title,
-        short_name: app.short,
-        description: app.description,
-        theme_color: app.color,
-        background_color: app.colorbkg,
-        display: 'standalone',
-        crossorigin: 'use-credentials',
-        icons: [
-          {
-            src: path.resolve('./src/static/icons/favicon.png'),
-            sizes: [96, 128, 192, 256, 384, 512],
-            destination: path.join('assets', 'icon'),
-            ios: true,
-          },
-        ],
-      }),
-      new GenerateSW({
-        importWorkboxFrom: 'local',
-        include: [/\.html$/, /\.js$/, /\.css$/],
-        importsDirectory: 'wb-assets',
-        exclude: [/app\.css$/],
-        runtimeCaching: [
-          {
-            urlPattern: new RegExp(/\.(?:png|gif|jpg|svg|ico|webp)$/),
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'image-cache',
-            },
-          },
-          {
-            urlPattern: new RegExp(/\.html$/),
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'index-cache',
-            },
-          },
-        ],
-        navigateFallback: 'index.html',
-        skipWaiting: true,
-      }),
     ],
     module: {
       rules: [

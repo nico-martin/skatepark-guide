@@ -4,54 +4,50 @@ button {
 
 .button {
   cursor: pointer;
-  box-shadow: var(--box-shadow);
+  @mixin box-shadow;
+
   background-color: var(--c-secondary);
   color: #fff;
-  padding: 0.5em 1em;
+  padding: 0.5em;
   @mixin transition;
+  display: flex;
+  align-items: center;
 
   &:hover {
-    box-shadow: var(--box-shadow-hover);
+    @mixin box-shadow-hover;
     transform: translateY(-1%);
   }
 
+  &__text {
+    display: inline-block;
+    padding: 0 0.5em;
+  }
+
   &--icon {
-    display: block;
-    width: 3.2em;
-    height: 3.2em;
-    position: relative;
-    border-radius: 50%;
-    padding: 0;
+    .button__icon {
+      transform: scale(1.2);
 
-    &__icon {
-      font-size: 1.8em;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
+      svg {
+        display: block;
+      }
+    }
+  }
+
+  &--has-text {
+    .button__icon {
+      transform: scale(1.2) translateX(10%);
     }
   }
 
   &--small {
-    font-size: 0.8rem;
-  }
-  /*
-
-  &--has-icon {
-    .hello-icon {
-      transform: translateY(0.2em) scale(1.4);
-      margin-right: 0.5em;
-    }
-  }
-
-  &--small {
-    font-size: 0.8em;
+    font-size: var(--fs-s);
   }
 
   &--round {
-    border-radius: 3em;
+    border-radius: 1000px;
   }
 
+  /*
   // Color
   &--white {
     background-color: #fff;

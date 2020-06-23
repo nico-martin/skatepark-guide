@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider, useIntl } from 'react-intl';
 import { Provider, connect } from 'unistore/preact';
-import { Router } from 'preact-router';
 
 import './App.css';
 
@@ -12,6 +11,7 @@ import { State, Actions } from '@app/store/types';
 import IntlLink from '@app/intl/IntlLink';
 import { Logo } from '@app/theme';
 import Menu from '@comp/App/Menu';
+import Content from '@comp/Page/Content';
 
 const App = () => (
   <div className="app">
@@ -19,6 +19,7 @@ const App = () => (
       <Logo className="app__logo" />
     </IntlLink>
     <Menu className="app__controls app__controls--menu" />
+    <Content className="app__content" />
   </div>
 );
 
