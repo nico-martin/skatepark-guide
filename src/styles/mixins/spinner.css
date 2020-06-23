@@ -1,0 +1,14 @@
+@define-mixin spinner $border: 1px solid currentColor, $size: 100%,
+  $duration: 0.65s, $background: transparent {
+  background-color: transparent;
+  border: $border;
+  border-radius: 50%;
+  border-top-color: $background;
+  border-right-color: $background;
+  width: $size;
+  height: $size;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  animation: spinner $duration infinite linear;
+}

@@ -11,6 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@app/*": ["src/app/*"],
+      "@comp/*": ["src/app/components/*"],
       "@styles/*": ["src/styles/*"],
       "@assets/*": ["src/styles/*"],
       "react": ["node_modules/preact/compat"],

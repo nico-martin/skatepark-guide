@@ -175,6 +175,7 @@ module.exports = (env, argv) => {
         react: 'preact/compat',
         'react-dom': 'preact/compat',
         '@app': `${dirSrc}/app/`,
+        '@comp': `${dirSrc}/app/components/`,
       },
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
