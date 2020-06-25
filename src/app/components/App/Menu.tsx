@@ -1,25 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import './Menu.css';
 import MenuToggler from '@comp/App/MenuToggler';
-import IntlLink from '@app/intl/IntlLink';
-import { Icon, Button } from '@app/theme';
+import { Button } from '@app/theme';
+import { unleadingSlashIt, untrailingSlashIt } from '@app/vendor/slashit';
+import { useStoreState } from 'unistore-hooks';
+import { State } from '@app/store/types';
 
 const Menu = ({ className = '' }: { className?: string }) => {
   const [buttonState, setButtonState] = useState<'open' | 'back' | 'closed'>(
     'closed'
   );
 
+  const { intlLocale }: State = useStoreState(['intlLocale']);
+  const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    const path = untrailingSlashIt(unleadingSlashIt(location.pathname));
+    const pathParams = path.split('/');
+    if (pathParams.length === 1) {
+      setButtonState('closed');
+    } else if (pathParams.length >= 2) {
+      setButtonState('back');
+    }
+  }, [location]);
+
   const onClick = () => {
     switch (buttonState) {
       case 'back':
-        setButtonState('closed');
+        history.push(`/${intlLocale}/`);
         break;
       case 'closed':
         setButtonState('open');
         break;
       case 'open':
-        setButtonState('back');
+        setButtonState('closed');
         break;
     }
   };

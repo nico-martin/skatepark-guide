@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'preact-router/match';
-import { connect } from 'unistore/preact';
-import { Actions, State } from '@app/store/types';
+import { VNode } from 'preact';
+
+import { Link } from 'react-router-dom';
+import { useStoreState } from 'unistore-hooks';
+import { State } from '@app/store/types';
 
 import {
   leadingSlashIt,
@@ -11,24 +13,24 @@ import {
 
 const IntlLink = ({
   href,
-  test,
-  intlLocale,
   ...props
 }: {
-  href: string;
-  test: string;
-  children: string;
-  intlLocale: string;
-}) => (
-  <Link
-    {...{
-      ...props,
-      href: leadingSlashIt(
-        trailingSlashIt(intlLocale) + unleadingSlashIt(href)
-      ),
-      store: false,
-    }}
-  />
-);
+  href?: string;
+  children: VNode | VNode[] | string;
+  [x: string]: any;
+}) => {
+  const { intlLocale }: State = useStoreState(['intlLocale']);
+  return (
+    <Link
+      {...{
+        ...props,
+        to: leadingSlashIt(
+          trailingSlashIt(intlLocale) + unleadingSlashIt(href)
+        ),
+        store: false,
+      }}
+    />
+  );
+};
 
-export default connect<any, {}, State, Actions>(['intlLocale'])(IntlLink);
+export default IntlLink;

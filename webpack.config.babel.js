@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import { DefinePlugin } from 'webpack';
 
 require('dotenv').config();
 import app from './app.json';
@@ -8,9 +9,6 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-
-import WebpackPwaManifest from 'webpack-pwa-manifest';
-import { GenerateSW } from 'workbox-webpack-plugin';
 
 module.exports = (env, argv) => {
   const dirDist = path.resolve(__dirname, 'dist');
@@ -76,6 +74,9 @@ module.exports = (env, argv) => {
               removeStyleLinkTypeAttributes: true,
               useShortDoctype: true,
             },
+      }),
+      new DefinePlugin({
+        'process.env.GMAPS_KEY': JSON.stringify(process.env.GMAPS_KEY),
       }),
     ],
     module: {

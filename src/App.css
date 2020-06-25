@@ -16,13 +16,14 @@
     background-color: #fff;
     z-index: 250;
     overflow: auto;
-    @mixin transition transform;
-    //transform: translateX(100%);
-    will-change: transform;
-    &[aria-hidden='false'] {
-      transform: translateX(0);
-      @mixin box-shadow;
-    }
+  }
+
+  &__map {
+    position: fixed !important;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
   }
 
   /*
