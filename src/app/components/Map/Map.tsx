@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { maps } from '@app/vendor/settings';
-import { Gmaps, Marker, InfoWindow, Circle } from 'react-gmaps';
+import GoogleMapReact from 'google-map-react';
+
 import { settingsDB } from '@app/store/idb';
 import { getIPLatLng } from '@app/vendor/api/spg';
-
-const coords = {
-  lat: 51.5258541,
-  lng: -0.08040660000006028,
-};
 
 const Map = ({ className = '' }: { className?: string }) => {
   const [center, setCenter] = useState<{ lat: number; lng: number }>(null);
@@ -30,30 +26,22 @@ const Map = ({ className = '' }: { className?: string }) => {
   }, []);
 
   if (!center || !zoom) {
-    return <p>loading..</p>;
+    return <div />;
   }
 
   return (
-    <Gmaps
-      params={{ v: '3.exp', key: maps.key }}
-      lat={center.lat}
-      lng={center.lng}
-      zoom={zoom}
-      loadingMessage={'Be happy'}
-      className={className}
-      styles={maps.styles}
-      onMapCreated={map => {
-        map.addListener('center_changed', () => {
-          settingsDB.set('center', {
-            lat: map.getCenter().lat(),
-            lng: map.getCenter().lng(),
-          });
-        });
-        map.addListener('zoom_changed', () => {
-          settingsDB.set('zoom', map.getZoom());
-        });
-      }}
-    />
+    <div className={className} style={{ height: '100vh', width: '100%' }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: maps.key }}
+        defaultCenter={center}
+        defaultZoom={zoom}
+        options={{ disableDefaultUI: true, styles: maps.styles }}
+        onChange={v => {
+          settingsDB.set('center', v.center);
+          settingsDB.set('zoom', v.zoom);
+        }}
+      />
+    </div>
   );
 };
 
