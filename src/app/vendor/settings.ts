@@ -3,7 +3,7 @@ export const api: {
   rest: string;
 } = {
   base: 'https://skateparkguide.ch/',
-  rest: 'https://skateparkguide.ch/wp-json/skateparkguide/v1/',
+  rest: 'https://skateparkguide.ch/wp-json/skateparkguide/',
 };
 
 export const maps = {
