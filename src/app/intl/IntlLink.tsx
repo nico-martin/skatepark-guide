@@ -16,7 +16,7 @@ const IntlLink = ({
   ...props
 }: {
   href?: string;
-  children: VNode | VNode[] | string;
+  children?: VNode | VNode[] | string;
   [x: string]: any;
 }) => {
   const { intlLocale }: State = useStoreState(['intlLocale']);

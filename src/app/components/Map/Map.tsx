@@ -8,10 +8,13 @@ import { State } from '@app/store/types';
 import { useStoreState, useActions } from 'unistore-hooks';
 import { actions } from '@app/store';
 
+import Marker from './Marker';
+
 import './Map.css';
 
 const Map = ({ className = '' }: { className?: string }) => {
   const [center, setCenter] = useState<{ lat: number; lng: number }>(null);
+  const [defaultZoom, setDefaultZoom] = useState<number>(null);
   const [zoom, setZoom] = useState<number>(null);
   const [map, setMap] = useState(null);
   const { mapParks, mapParksLoading }: State = useStoreState([
@@ -33,7 +36,9 @@ const Map = ({ className = '' }: { className?: string }) => {
   };
 
   useEffect(() => {
-    settingsDB.get('zoom').then(zoom => setZoom(Number(zoom) || 9));
+    settingsDB
+      .get('zoom')
+      .then(defaultZoom => setDefaultZoom(Number(defaultZoom) || 9));
     settingsDB.get('center').then(center => {
       if (center) {
         setCenter(center);
@@ -50,12 +55,9 @@ const Map = ({ className = '' }: { className?: string }) => {
 
   useEffect(() => loadParks(), [map]);
 
-  if (!center || !zoom) {
+  if (!center || !defaultZoom) {
     return <div />;
   }
-
-  console.log('loading', mapParksLoading);
-  console.log('markers', Object.keys(mapParks).length, mapParks);
 
   return (
     <div className={`${className} map`}>
@@ -63,7 +65,7 @@ const Map = ({ className = '' }: { className?: string }) => {
       <GoogleMapReact
         bootstrapURLKeys={{ key: maps.key }}
         defaultCenter={center}
-        defaultZoom={zoom}
+        defaultZoom={defaultZoom}
         options={{
           disableDefaultUI: true,
           styles: maps.styles,
@@ -71,11 +73,22 @@ const Map = ({ className = '' }: { className?: string }) => {
         onChange={v => {
           settingsDB.set('center', v.center);
           settingsDB.set('zoom', v.zoom);
+          setZoom(v.zoom);
         }}
         onDragEnd={() => loadParks()}
         onZoomAnimationEnd={() => loadParks()}
         onGoogleApiLoaded={maps => setMap(maps.map)}
-      />
+      >
+        {Object.values(mapParks).map(marker => (
+          <Marker
+            name={marker.title}
+            lat={marker.map.lat}
+            lng={marker.map.lng}
+            small={zoom <= 9}
+            slug={marker.slug}
+          />
+        ))}
+      </GoogleMapReact>
     </div>
   );
 };
