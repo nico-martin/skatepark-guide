@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, useLocation } from 'react-router-dom';
 
+import Park from '@comp/Park/Park';
 import Page from '@comp/Page/Page';
 
 import './Content.css';
@@ -24,7 +25,9 @@ const Content = ({ className = '' }: { className?: string }) => {
   return (
     <div className={`${className} content`} aria-hidden={!open}>
       <Route path="/:lang/about/:slug?/">Page</Route>
-      <Route path="/:lang/park/:slug/">Park</Route>
+      <Route path="/:lang/park/:slug/">
+        <Park />
+      </Route>
     </div>
   );
 };

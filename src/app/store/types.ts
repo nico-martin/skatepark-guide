@@ -1,5 +1,5 @@
 import { IntlMessages } from '@app/intl/types';
-import { MapPark } from '@app/vendor/types';
+import { MapPark, Park } from '@app/vendor/types';
 
 export interface State {
   intlLocale: string;
@@ -8,6 +8,10 @@ export interface State {
     [key: string]: MapPark;
   };
   mapParksLoading: boolean;
+  currentPark: Partial<Park>;
 }
 
-export interface Actions {}
+export interface Actions {
+  loadMapParks: (State) => void;
+  loadPark: (State) => void;
+}

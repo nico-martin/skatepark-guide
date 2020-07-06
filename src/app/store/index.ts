@@ -5,13 +5,15 @@ import { State } from '@app/store/types';
 import createStore, { Store } from 'unistore';
 import devtools from 'unistore/devtools';
 import { MapBounds } from '@app/vendor/types';
-import { getMapParks } from '@app/vendor/api/spg';
+import { getMapParks, getPark } from '@app/vendor/api/spg';
+import { mapApiToPark } from '@app/vendor/park';
 
 const initialState: State = {
   intlLocale: defaultLocale,
   intlMessages: locales[defaultLocale][1],
   mapParks: {},
   mapParksLoading: false,
+  currentPark: {},
 };
 
 export const actions = (store: Store<State>) => ({
@@ -23,6 +25,15 @@ export const actions = (store: Store<State>) => ({
         mapParksLoading: false,
       })
     );
+  },
+  loadPark: ({ mapParks }, slug) => {
+    slug in mapParks && store.setState({ currentPark: mapParks[slug] });
+    getPark(slug).then(resp => {
+      store.setState({ currentPark: mapApiToPark(resp.data[0]) });
+    });
+  },
+  resetPark: () => {
+    store.setState({ currentPark: initialState.currentPark });
   },
 });
 

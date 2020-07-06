@@ -6,3 +6,5 @@ export const getIPLatLng = () => axios.get(`${api.rest}v1/geo/`);
 
 export const getMapParks = (bounds: MapBounds) =>
   axios.get(`${api.rest}v2/map-parks/?bounds=${bounds.join('|')}`);
+
+export const getPark = (slug: string) => axios.get(`${api.parks}?slug=${slug}`);

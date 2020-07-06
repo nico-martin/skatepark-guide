@@ -1,0 +1,8 @@
+.park {
+  &__header {
+    background: var(--c-secondary);
+    padding-bottom: 33.3333%;
+    position: sticky;
+    z-index: 9999;
+  }
+}

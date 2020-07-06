@@ -1,0 +1,9 @@
+.park-header {
+  &__title {
+    position: absolute;
+    bottom: var(--spacing-half);
+    left: var(--spacing-half);
+    color: #fff;
+    z-index: 10;
+  }
+}
