@@ -26,14 +26,15 @@ export const actions = (store: Store<State>) => ({
       })
     );
   },
-  loadPark: ({ mapParks }, slug) => {
-    slug in mapParks && store.setState({ currentPark: mapParks[slug] });
-    getPark(slug).then(resp => {
-      store.setState({ currentPark: mapApiToPark(resp.data[0]) });
-    });
-  },
-  resetPark: () => {
-    store.setState({ currentPark: initialState.currentPark });
+  loadPark: ({ mapParks }, slug = '') => {
+    if (slug === '') {
+      store.setState({ currentPark: initialState.currentPark });
+    } else {
+      slug in mapParks && store.setState({ currentPark: mapParks[slug] });
+      getPark(slug).then(resp => {
+        store.setState({ currentPark: mapApiToPark(resp.data[0]) });
+      });
+    }
   },
 });
 

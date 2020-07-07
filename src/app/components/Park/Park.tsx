@@ -11,12 +11,12 @@ import './Park.css';
 const Park = () => {
   const { slug } = useParams();
   const { currentPark: park }: State = useStoreState(['currentPark']);
-  const { loadPark, resetPark } = useActions(actions);
+  const { loadPark } = useActions(actions);
 
   useEffect(() => {
     loadPark(slug);
     return () => {
-      resetPark();
+      loadPark();
     };
   }, []);
 
