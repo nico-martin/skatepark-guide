@@ -10,5 +10,6 @@ export const mapApiToPark = (api: ApiPark): Park => {
     facilities: api['parks-facilities'],
     status: api.status,
     video: api['parks-video'],
+    content: api.content.rendered,
   };
 };

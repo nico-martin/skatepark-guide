@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import * as H from 'history';
+
 import { Route, useLocation, useHistory } from 'react-router-dom';
 
 import Park from '@comp/Park/Park';
@@ -9,22 +11,28 @@ import { unleadingSlashIt, untrailingSlashIt } from '@app/vendor/slashit';
 import { useStoreState } from 'unistore-hooks';
 import { State } from '@app/store/types';
 
+const moveMin = window.innerWidth / 4 > 200 ? 200 : window.innerWidth / 4;
+
 const Content = ({ className = '' }: { className?: string }) => {
+  const location = useLocation();
+  const history = useHistory();
+
   const [open, setOpen] = useState<boolean>(false);
   const [dragging, setDragging] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [transformX, setTransformX] = useState<number>(0);
+  const [delayedLocation, setDelayedLocation] = useState<H.Location>(location);
 
   const { intlLocale }: State = useStoreState(['intlLocale']);
-  const location = useLocation();
-  const history = useHistory();
 
   useEffect(() => {
     const path = untrailingSlashIt(unleadingSlashIt(location.pathname));
     const pathParams = path.split('/');
     if (pathParams.length <= 1) {
+      setTimeout(() => setDelayedLocation(location), 200);
       setOpen(false);
     } else {
+      setDelayedLocation(location);
       setOpen(true);
     }
   }, [location]);
@@ -38,30 +46,43 @@ const Content = ({ className = '' }: { className?: string }) => {
     []
   );
 
+  const start = () => {
+    setDragging(true);
+  };
+
+  const end = () => {
+    setDragging(false);
+    setStartX(0);
+    setTransformX(0);
+    transformX > moveMin && history.push(`/${intlLocale}/`);
+  };
+
+  const move = (x: number) => {
+    if (dragging) {
+      if (startX === 0) {
+        setStartX(x);
+      } else {
+        const newX = (startX - x) * -1;
+        setTransformX(newX <= 0 ? 0 : newX);
+      }
+    }
+  };
+
   return (
     <div
       className={`${className} content`}
       aria-hidden={!open}
-      onMouseDown={() => {
-        setDragging(true);
-      }}
-      onMouseUp={() => {
-        setDragging(false);
-        setStartX(0);
-        setTransformX(0);
-        // todo: 300 should be relative to viewport width
-        transformX > 300 && history.push(`/${intlLocale}/`);
+      onTouchStart={start}
+      onMouseDown={start}
+      onTouchEnd={end}
+      onMouseUp={end}
+      onTouchMove={e => {
+        e.preventDefault();
+        move(e.touches[0].clientX);
       }}
       onMouseMove={e => {
         e.preventDefault();
-        if (dragging) {
-          if (startX === 0) {
-            setStartX(e.clientX);
-          } else {
-            const x = (startX - e.clientX) * -1;
-            setTransformX(x <= 0 ? 0 : x);
-          }
-        }
+        move(e.clientX);
       }}
       style={{
         cursor: dragging ? 'grabbing' : 'default',
@@ -73,8 +94,10 @@ const Content = ({ className = '' }: { className?: string }) => {
           : {}),
       }}
     >
-      <Route path="/:lang/about/:slug?/">Page</Route>
-      <Route path="/:lang/park/:slug/">
+      <Route path="/:lang/about/:slug?/" location={delayedLocation}>
+        Page
+      </Route>
+      <Route path="/:lang/park/:slug/" location={delayedLocation}>
         <Park />
       </Route>
     </div>

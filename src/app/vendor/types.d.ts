@@ -19,6 +19,7 @@ export interface MapPark {
 
 export interface Park extends MapPark {
   video: string;
+  content: string;
 }
 
 export interface ApiPark {

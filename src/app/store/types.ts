@@ -8,7 +8,11 @@ export interface State {
     [key: string]: MapPark;
   };
   mapParksLoading: boolean;
-  currentPark: Partial<Park>;
+  park: {
+    state: string;
+    error: string;
+    data: Partial<Park>;
+  };
 }
 
 export interface Actions {
