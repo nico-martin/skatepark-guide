@@ -77,11 +77,9 @@ const Content = ({ className = '' }: { className?: string }) => {
       onTouchEnd={end}
       onMouseUp={end}
       onTouchMove={e => {
-        e.preventDefault();
         move(e.touches[0].clientX);
       }}
       onMouseMove={e => {
-        e.preventDefault();
         move(e.clientX);
       }}
       style={{
@@ -98,7 +96,7 @@ const Content = ({ className = '' }: { className?: string }) => {
         Page
       </Route>
       <Route path="/:lang/park/:slug/" location={delayedLocation}>
-        <Park />
+        <Park className="content__park" />
       </Route>
     </div>
   );

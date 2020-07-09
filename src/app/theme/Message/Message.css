@@ -1,0 +1,5 @@
+.message {
+  &--error {
+    color: var(--c-feedback-error);
+  }
+}

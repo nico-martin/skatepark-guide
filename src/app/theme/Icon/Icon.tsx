@@ -8,6 +8,8 @@ interface Props {
   className?: string;
   rotate?: 90 | 180 | 270 | false;
   spinning?: boolean;
+  button?: boolean;
+  round?: boolean;
 }
 
 const Icon = ({
@@ -15,6 +17,8 @@ const Icon = ({
   className = '',
   spinning = false,
   rotate = false,
+  button = false,
+  round = false,
 }: Props) => {
   const [loadedIcon, setLoadedIcon] = useState('');
 
@@ -35,6 +39,8 @@ const Icon = ({
         rotate !== false ? `icon--rotate-${rotate}` : '',
         {
           'icon--animation-spin': spinning,
+          'icon--button': button,
+          'icon--round': round,
         }
       )}
       dangerouslySetInnerHTML={{ __html: loadedIcon }}

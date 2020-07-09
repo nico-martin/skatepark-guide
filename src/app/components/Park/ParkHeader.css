@@ -1,9 +1,16 @@
 .park-header {
+  position: static;
+  top: 0;
+
   &__title {
     position: absolute;
     bottom: var(--spacing-half);
-    left: var(--spacing-half);
+    left: var(--spacing);
+    font-size: 1.2rem;
+    font-weight: 900;
     color: #fff;
     z-index: 10;
+    opacity: 0;
+    will-change: opacity;
   }
 }

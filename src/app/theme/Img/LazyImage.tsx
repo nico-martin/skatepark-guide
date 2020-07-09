@@ -34,14 +34,19 @@ const LazyImage = ({
   image,
   background = false,
   alt,
+  ...props
 }: {
   image: Image;
   background?: boolean;
   alt: string;
+  [key: string]: any;
 }) => {
   const set = srcSet({ imageUrl: image[0], width: image[1] });
   return (
-    <figure className={cn(BASE, background ? `${BASE}--background` : '')}>
+    <figure
+      className={cn(BASE, background ? `${BASE}--background` : '')}
+      {...props}
+    >
       {background ? (
         <React.Fragment>
           <div

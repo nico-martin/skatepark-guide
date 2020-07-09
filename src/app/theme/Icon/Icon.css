@@ -8,6 +8,7 @@
     fill: currentColor;
     height: 1em;
     width: 1em;
+    display: block;
   }
 
   &--border {
@@ -45,5 +46,12 @@
 
   &--rotate-270 {
     transform: rotate(270deg);
+  }
+
+  &--button {
+    background-color: var(--c-secondary);
+    color: #fff;
+    padding: 0.4em;
+    @mixin box-shadow;
   }
 }

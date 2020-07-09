@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Iframe } from '@app/theme';
+
 const ParkVideo = ({
   videoLink,
   className = '',
@@ -16,16 +18,14 @@ const ParkVideo = ({
 
   return (
     <div className={className}>
-      <div className="responsive-iframe">
-        <iframe
-          width="560"
-          height="315"
-          src={`https://www.youtube-nocookie.com/embed/${r[1]}`}
-          frameBorder="0"
-          //allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
+      <Iframe
+        width="560"
+        height="315"
+        src={`https://www.youtube-nocookie.com/embed/${r[1]}`}
+        frameBorder="0"
+        //allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
     </div>
   );
 };

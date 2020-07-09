@@ -1,7 +1,8 @@
 :root {
-  --spacing: 1.4rem;
-  --spacing-half: 0.7rem;
-  --spacing-page: 2.5rem;
+  --spacing: 1rem;
+  --spacing-half: 0.5rem;
+  --spacing-page: 2.2rem;
+
   --transition-speed: 200ms;
 
   --c-p: #1d1d1b;
@@ -16,10 +17,18 @@
 
   --c-feedback-error: #af1616;
 
+  --c-gray-light: #e8e7e7;
+
   --bp-phone: 330px;
   --bp-tablet: 600px;
   --bp-tablet-landscape: 900px;
   --bp-desktop: 1300px;
+
+  @mixin desktop {
+    --spacing: 1.6rem;
+    --spacing-half: 0.8rem;
+    --spacing-page: 3rem;
+  }
 }
 
 body.no-outline {
