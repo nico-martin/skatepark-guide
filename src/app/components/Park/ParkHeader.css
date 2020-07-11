@@ -13,4 +13,11 @@
     opacity: 0;
     will-change: opacity;
   }
+
+  &__controls {
+    position: absolute;
+    bottom: 0;
+    right: var(--spacing);
+    z-index: 20;
+  }
 }

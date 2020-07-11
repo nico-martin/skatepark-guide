@@ -47,6 +47,12 @@ button {
     border-radius: 1000px;
   }
 
+  &--bkg-white {
+    background-color: #fff;
+    color: var(--c-p);
+    border: 1px solid #fff;
+  }
+
   /*
   // Color
   &--white {

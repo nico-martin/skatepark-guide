@@ -12,12 +12,6 @@ import { src, srcSet, thumbnail } from '@app/vendor/imageProxy';
 
 const BASE = 'lazyimage';
 
-declare global {
-  interface Window {
-    lazySizesConfig: any;
-  }
-}
-
 lazySizes.cfg.lazyClass = `${BASE}__image--lazyload`;
 lazySizes.cfg.loadingClass = `${BASE}__image--lazyloading`;
 lazySizes.cfg.loadedClass = `${BASE}__image--lazyloaded`;

@@ -1,3 +1,6 @@
 {
-  "park.weather": "Weather"
+  "park.share.title": "Share this park",
+  "park.share.text": "Check out \"{parkTitle}\" on skatepark.guide",
+  "park.weather": "Weather",
+  "park.weather.source": "Source: {source}"
 }

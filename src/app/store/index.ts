@@ -6,7 +6,6 @@ import createStore, { Store } from 'unistore';
 import devtools from 'unistore/devtools';
 import { MapBounds } from '@app/vendor/types';
 import { getMapParks, getPark } from '@app/vendor/api/spg';
-import { mapApiToPark } from '@app/vendor/park';
 
 export const parkStates = {
   LOADING: 'loading',
@@ -19,11 +18,6 @@ const initialState: State = {
   intlMessages: locales[defaultLocale][1],
   mapParks: {},
   mapParksLoading: false,
-  park: {
-    state: parkStates.LOADING,
-    error: '',
-    data: {},
-  },
 };
 
 export const actions = (store: Store<State>) => ({
@@ -35,46 +29,6 @@ export const actions = (store: Store<State>) => ({
         mapParksLoading: false,
       })
     );
-  },
-  loadPark: ({ mapParks, park }, slug = '') => {
-    store.setState({
-      park: {
-        ...park,
-        state: parkStates.LOADING,
-      },
-    });
-    if (slug === '') {
-      store.setState({
-        park: initialState.park,
-      });
-    } else {
-      slug in mapParks &&
-        store.setState({
-          park: {
-            ...park,
-            data: mapParks[slug],
-          },
-        });
-      getPark(slug)
-        .then(resp => {
-          store.setState({
-            park: {
-              ...park,
-              state: parkStates.SUCCESS,
-              data: mapApiToPark(resp.data[0]),
-            },
-          });
-        })
-        .catch(() => {
-          store.setState({
-            park: {
-              ...park,
-              state: parkStates.ERROR,
-              error: 'Park could not be loaded',
-            },
-          });
-        });
-    }
   },
 });
 

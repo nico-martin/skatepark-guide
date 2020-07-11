@@ -13,6 +13,7 @@ const Button = ({
   children,
   onClick,
   round = false,
+  white = false,
   icon,
   ...props
 }: {
@@ -21,6 +22,7 @@ const Button = ({
   children?: VNode | VNode[] | string;
   onClick?: Function;
   round?: boolean;
+  white?: boolean;
   icon?: string;
   [x: string]: any;
 }) => {
@@ -31,6 +33,7 @@ const Button = ({
           'button--icon': icon,
           'button--round': round,
           'button--has-text': children,
+          'button--bkg-white': white,
         })}
         {...props}
       >
@@ -45,6 +48,7 @@ const Button = ({
           'button--icon': icon,
           'button--round': round,
           'button--has-text': children,
+          'button--bkg-white': white,
         })}
         onClick={onClick ? () => onClick() : null}
         {...props}
@@ -60,6 +64,7 @@ const Button = ({
         'button--icon': icon,
         'button--round': round,
         'button--has-text': children,
+        'button--bkg-white': white,
       })}
       onClick={onClick ? () => onClick() : null}
       {...props}

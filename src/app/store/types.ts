@@ -1,5 +1,5 @@
 import { IntlMessages } from '@app/intl/types';
-import { MapPark, Park } from '@app/vendor/types';
+import { MapPark } from '@app/vendor/types';
 
 export interface State {
   intlLocale: string;
@@ -8,11 +8,6 @@ export interface State {
     [key: string]: MapPark;
   };
   mapParksLoading: boolean;
-  park: {
-    state: string;
-    error: string;
-    data: Partial<Park>;
-  };
 }
 
 export interface Actions {

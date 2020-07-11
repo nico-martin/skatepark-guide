@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { State } from '@app/store/types';
-import { useStoreState, useActions } from 'unistore-hooks';
-
-import { actions, parkStates } from '@app/store';
 
 import { Loader, Message } from '@app/theme';
+import { useApi, states as parkStates } from '@app/hooks/useApi';
+import { getPark } from '@app/vendor/api/spg';
 
 import ParkHeader from '@comp/Park/ParkHeader';
 import ParkVideo from '@comp/Park/ParkVideo';
@@ -17,15 +15,7 @@ import './Park.css';
 const Park = ({ className = '' }: { className?: string }) => {
   const [scroll, setScroll] = useState<number>(0);
   const { slug } = useParams();
-  const { park }: State = useStoreState(['park']);
-  const { loadPark } = useActions(actions);
-
-  useEffect(() => {
-    loadPark(slug);
-    return () => {
-      loadPark();
-    };
-  }, [slug]);
+  const { data = {}, state, error } = useApi(() => getPark(slug));
 
   return (
     <article
@@ -33,27 +23,25 @@ const Park = ({ className = '' }: { className?: string }) => {
       // @ts-ignore
       onScroll={e => setScroll(e.target.scrollTop)}
     >
-      <ParkHeader className="park__header" park={park.data} scroll={scroll} />
-      <h1 className="park__title">{park.data.title}</h1>
+      <ParkHeader className="park__header" park={data} scroll={scroll} />
+      <h1 className="park__title">{data.title || ''}</h1>
       <div className="park__body">
-        {park.state === parkStates.LOADING && (
-          <Loader className="park__loader" />
+        {state === parkStates.LOADING && <Loader className="park__loader" />}
+        {state === parkStates.ERROR && (
+          <Message type="error">error: {error}</Message>
         )}
-        {park.state === parkStates.ERROR && (
-          <Message type="error">error: {park.error}</Message>
-        )}
-        {park.state === parkStates.SUCCESS && (
+        {state === parkStates.SUCCESS && (
           <React.Fragment>
-            <ParkVideo videoLink={park.data.video} className="park__video" />
+            <ParkVideo videoLink={data.video} className="park__video" />
             <div
               className="park__content "
-              dangerouslySetInnerHTML={{ __html: park.data.content }}
+              dangerouslySetInnerHTML={{ __html: data.content }}
             />
             <ParkContact
-              contacts={park.data.contact}
+              contacts={data.contact || {}}
               className="park__content"
             />
-            <ParkWeather className="park__weather" slug={park.data.slug} />
+            <ParkWeather className="park__weather" slug={data.slug} />
           </React.Fragment>
         )}
       </div>
