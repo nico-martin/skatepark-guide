@@ -1,12 +1,40 @@
 import React from 'react';
-import { Park } from '@app/vendor/types';
+
+import { Image } from '@app/vendor/types';
+
+import './ParkGallery.css';
+import { useIntl } from 'react-intl';
+import { LazyImage } from '@app/theme';
 
 const ParkGallery = ({
-  park,
+  images,
   className = '',
 }: {
-  park: Partial<Park>;
+  images: Array<Image>;
   className?: string;
-}) => <div />;
+}) => {
+  const { formatMessage } = useIntl();
+  return (
+    <div className={`${className} park-gallery`}>
+      <h2 className="park-gallery__title">
+        {formatMessage({ id: 'park.gallery' })}
+      </h2>
+      <div className="park-gallery__list">
+        {images.map(image => {
+          return (
+            <div className="park-gallery__element">
+              <LazyImage
+                image={image}
+                alt=""
+                className="park-gallery__img"
+                height={300}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 export default ParkGallery;

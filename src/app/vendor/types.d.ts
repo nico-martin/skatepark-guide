@@ -2,7 +2,7 @@ import { string } from 'prop-types';
 
 export type MapBounds = [number, number, number, number];
 
-type Image = [string, number, number, boolean];
+export type Image = [string, number, number, boolean?];
 
 export interface MapPark {
   id: number;
@@ -23,6 +23,7 @@ export interface Park extends MapPark {
   contact: {
     [key: string]: string;
   };
+  gallery: Array<Image>;
 }
 
 export interface ApiPark {

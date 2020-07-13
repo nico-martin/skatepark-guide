@@ -6,3 +6,22 @@ html,
 body {
   height: 100%;
 }
+
+body::-webkit-scrollbar {
+  width: 5px;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-gray) transparent;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--c-gray);
+  border-radius: 3px;
+  border: 3px solid transparent;
+}

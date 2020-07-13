@@ -36,7 +36,7 @@ const ParkHeader = ({
   }, [scroll]);
 
   useEffect(() => {
-    setParkLoved(loved.indexOf(park.slug) !== -1);
+    setParkLoved(loved ? loved.indexOf(park.slug) !== -1 : false);
   }, [loved, park]);
 
   return (

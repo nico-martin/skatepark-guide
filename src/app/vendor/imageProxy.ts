@@ -10,7 +10,7 @@ const SIZES: {
   small: 160,
 };
 
-const createImage = ({
+export const createImage = ({
   imageUrl,
   width = 0,
   height = 0,
@@ -24,6 +24,8 @@ const createImage = ({
   };
 }): string => {
   let proxyString = '';
+  width = Math.round(width);
+  height = Math.round(height);
   if (width !== 0 || height !== 0) {
     proxyString = `size-${width}x${height}/`;
   }
@@ -39,33 +41,27 @@ const createImage = ({
   return imageUrl.replace(IMAGE_HOST, PROXY_HOST + proxyString);
 };
 
-export const thumbnail = (imageUrl: string) =>
-  createImage({
-    imageUrl,
-    width: 400,
-    transform: {
-      blur: 20,
-      quality: 50,
-    },
-  });
-
-export const srcSet = ({
+export const createSrcSet = ({
   imageUrl,
-  width = 0,
+  width,
+  height,
 }: {
   imageUrl: string;
-  width?: number;
+  width: number;
+  height: number;
 }): {
   [key: number]: string;
 } => {
   const imageSizes = {};
   Object.values(SIZES).map(size => {
-    if (width && width < size) {
+    if (width < size) {
       return true;
     }
-    imageSizes[size] = createImage({ imageUrl, width: size });
+    imageSizes[size] = createImage({
+      imageUrl,
+      width: width,
+      height: height,
+    });
   });
   return imageSizes;
 };
-
-export const src = (imageUrl: string) => createImage({ imageUrl });

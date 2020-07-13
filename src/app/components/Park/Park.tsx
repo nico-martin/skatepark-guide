@@ -7,6 +7,7 @@ import { getPark } from '@app/vendor/api/spg';
 
 import ParkHeader from '@comp/Park/ParkHeader';
 import ParkVideo from '@comp/Park/ParkVideo';
+import ParkGallery from '@comp/Park/ParkGallery';
 import ParkContact from '@comp/Park/ParkContact';
 import ParkWeather from '@comp/Park/ParkWeather';
 
@@ -33,6 +34,7 @@ const Park = ({ className = '' }: { className?: string }) => {
         {state === parkStates.SUCCESS && (
           <React.Fragment>
             <ParkVideo videoLink={data.video} className="park__video" />
+            <ParkGallery className="park__video" images={data.gallery} />
             <div
               className="park__content "
               dangerouslySetInnerHTML={{ __html: data.content }}

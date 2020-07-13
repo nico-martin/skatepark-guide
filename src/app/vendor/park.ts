@@ -1,6 +1,7 @@
 import { ApiPark, Park } from '@app/vendor/types';
 
 export const mapApiToPark = (api: ApiPark): Park => {
+  //console.log(api);
   return {
     id: api.id,
     slug: api.slug,
@@ -18,5 +19,6 @@ export const mapApiToPark = (api: ApiPark): Park => {
       facebook: api['parks-facebook'],
       address: api['parks-address'],
     },
+    gallery: api['parks-gallery'],
   };
 };
