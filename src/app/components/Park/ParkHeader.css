@@ -19,5 +19,27 @@
     bottom: 0;
     right: var(--spacing);
     z-index: 20;
+    display: flex;
+    transform: translateY(30%);
+
+    & > * + * {
+      margin-left: var(--spacing-half);
+    }
+  }
+
+  &__control {
+    will-change: background-color;
+    font-size: 1.2rem;
+    @mixin transition background-color;
+
+    &:hover {
+      transform: none;
+      @mixin box-shadow;
+      background-color: var(--c-gray-light);
+    }
+  }
+
+  &__control-love[aria-checked='true'] {
+    color: var(--c-feedback-error);
   }
 }

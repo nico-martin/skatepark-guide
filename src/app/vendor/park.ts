@@ -1,5 +1,4 @@
 import { ApiPark, Park } from '@app/vendor/types';
-import { string } from 'prop-types';
 
 export const mapApiToPark = (api: ApiPark): Park => {
   return {

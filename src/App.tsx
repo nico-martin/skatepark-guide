@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
-import { Provider, useStoreState } from 'unistore-hooks';
+import { Provider, useStoreState, useActions } from 'unistore-hooks';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import './App.css';
 
-import { store } from '@app/store';
+import { actions, store } from '@app/store';
 import { State } from '@app/store/types';
 
 import IntlLink from '@app/intl/IntlLink';
@@ -20,6 +20,12 @@ const App = () => {
     'intlLocale',
     'intlMessages',
   ]);
+
+  const { setIdbLoved } = useActions(actions);
+
+  useEffect(() => {
+    setIdbLoved();
+  }, []);
 
   return (
     <IntlProvider locale={intlLocale} messages={intlMessages}>

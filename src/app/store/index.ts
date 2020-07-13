@@ -5,7 +5,8 @@ import { State } from '@app/store/types';
 import createStore, { Store } from 'unistore';
 import devtools from 'unistore/devtools';
 import { MapBounds } from '@app/vendor/types';
-import { getMapParks, getPark } from '@app/vendor/api/spg';
+import { getMapParks } from '@app/vendor/api/spg';
+import { settingsDB } from '@app/store/idb';
 
 export const parkStates = {
   LOADING: 'loading',
@@ -18,6 +19,7 @@ const initialState: State = {
   intlMessages: locales[defaultLocale][1],
   mapParks: {},
   mapParksLoading: false,
+  loved: [],
 };
 
 export const actions = (store: Store<State>) => ({
@@ -29,6 +31,21 @@ export const actions = (store: Store<State>) => ({
         mapParksLoading: false,
       })
     );
+  },
+  setLoved: ({ loved }, parks: Array<string>) => {
+    parks.map(park => {
+      loved = [...loved, ...(loved.indexOf(park) === -1 ? [park] : [])];
+    });
+    settingsDB.set('loved', loved);
+    store.setState({ loved });
+  },
+  setIdbLoved: ({ loved }) => {
+    settingsDB.get('loved').then(loved => store.setState({ loved }));
+  },
+  removeLoved: ({ loved }, parks: Array<string>) => {
+    loved = loved.filter(el => !parks.includes(el));
+    settingsDB.set('loved', loved);
+    store.setState({ loved });
   },
 });
 

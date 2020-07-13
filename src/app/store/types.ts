@@ -8,6 +8,7 @@ export interface State {
     [key: string]: MapPark;
   };
   mapParksLoading: boolean;
+  loved: Array<string>;
 }
 
 export interface Actions {
