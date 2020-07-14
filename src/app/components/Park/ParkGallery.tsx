@@ -14,7 +14,6 @@ const ParkGallery = ({
   className?: string;
 }) => {
   const { formatMessage } = useIntl();
-  console.log('IMAGES', images);
   return (
     <div className={`${className} park-gallery`}>
       <h2 className="park-gallery__title">

@@ -6,7 +6,8 @@
   top: 0;
   overflow: hidden;
 
-  &__content {
+  &__content,
+  &__settings {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -16,46 +17,11 @@
     background-color: #fff;
     z-index: 250;
     overflow: auto;
-  }
-
-  &__map {
-    position: fixed !important;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: 0;
-  }
-
-  /*
-
-  &__overlay {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    @include transition(opacity);
-    display: none;
-    opacity: 0;
   }
 
   &__settings {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: calc(100vw - 100px);
     max-width: 400px;
-    z-index: 199;
-    transform: translate(100%, 0);
-    @include transition();
-    will-change: transform;
-    &[aria-hidden='false'] {
-      transform: translateX(0);
-      @include box-shadow;
-    }
+    z-index: 200;
   }
 
   &__map {
@@ -65,26 +31,6 @@
     left: 0;
     top: 0;
   }
-
-  &__content {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    width: 100%;
-    max-width: 800px;
-    background-color: #fff;
-    z-index: 250;
-    overflow: auto;
-    @include transition();
-    transform: translateX(100%);
-    will-change: transform;
-    &[aria-hidden='false'] {
-      transform: translateX(0);
-      @include box-shadow;
-    }
-  }
-   */
 
   &__logo {
     display: block;
@@ -125,6 +71,8 @@
     &--settings {
       bottom: var(--spacing);
       right: var(--spacing);
+
+      z-index: 210;
 
       .hello-icon:first-child {
         display: none;

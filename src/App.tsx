@@ -14,6 +14,7 @@ import { Logo } from '@app/theme';
 import Menu from '@comp/App/Menu';
 import Content from '@comp/Page/Content';
 import Map from '@comp/Map/Map';
+import Settings from '@comp/App/Settings/Settings';
 
 const App = () => {
   const { intlLocale, intlMessages }: State = useStoreState([
@@ -34,6 +35,10 @@ const App = () => {
           <Logo className="app__logo" />
         </IntlLink>
         <Menu className="app__controls app__controls--menu" />
+        <Settings
+          className="app__controls app__controls--settings"
+          settingsClassName="app__settings"
+        />
         <Content className="app__content" />
         <Map className="app__map" />
       </div>

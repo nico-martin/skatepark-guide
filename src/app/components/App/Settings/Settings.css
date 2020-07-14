@@ -1,0 +1,12 @@
+.settings {
+  @mixin transition transform;
+  transform: translateX(100%);
+  will-change: transform;
+
+  &[aria-hidden='false'] {
+    transform: translateX(0);
+    @mixin box-shadow;
+  }
+
+  padding: var(--spacing);
+}
