@@ -35,15 +35,15 @@ const LazyImage = ({
 }: {
   image: Image;
   background?: boolean;
-  alt: string;
+  alt?: string;
   width?: number;
   height?: number;
   className?: string;
   [key: string]: any;
 }) => {
   let imageSize = {
-    width: image[1],
-    height: image[2],
+    width: image.width,
+    height: image.height,
   };
 
   if (width !== 0 && height !== 0) {
@@ -54,28 +54,28 @@ const LazyImage = ({
   } else if (width !== 0) {
     imageSize = {
       width,
-      height: image[2] / (image[1] / width),
+      height: image.height / (image.width / width),
     };
   } else if (height !== 0) {
     imageSize = {
-      width: (height / image[2]) * image[1],
+      width: (height / image.height) * image.width,
       height,
     };
   }
 
   const src = createImage({
-    imageUrl: image[0],
+    imageUrl: image.url,
     width: imageSize.width,
     height: imageSize.height,
   });
 
   const set = createSrcSet({
-    imageUrl: image[0],
+    imageUrl: image.url,
     ...imageSize,
   });
 
   const thumbnailUrl = createImage({
-    imageUrl: image[0],
+    imageUrl: image.url,
     width: 400,
     height: imageSize.height / (imageSize.width / 400),
     transform: {
@@ -99,7 +99,7 @@ const LazyImage = ({
             }}
           />
           <div
-            title={alt}
+            title={alt || image.alt}
             className={`${BASE}__image ${BASE}__image--lazyload`}
             style={{ backgroundImage: "url('" + thumbnailUrl + "')" }}
             data-bgset={Object.entries(set)
@@ -115,7 +115,7 @@ const LazyImage = ({
             src={thumbnailUrl}
           />
           <img
-            alt={alt}
+            alt={alt || image.alt}
             width={imageSize.width}
             height={imageSize.height}
             className={`${BASE}__image ${BASE}__image--lazyload`}

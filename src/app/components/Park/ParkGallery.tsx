@@ -14,6 +14,7 @@ const ParkGallery = ({
   className?: string;
 }) => {
   const { formatMessage } = useIntl();
+  console.log('IMAGES', images);
   return (
     <div className={`${className} park-gallery`}>
       <h2 className="park-gallery__title">
@@ -25,7 +26,6 @@ const ParkGallery = ({
             <div className="park-gallery__element">
               <LazyImage
                 image={image}
-                alt=""
                 className="park-gallery__img"
                 height={300}
               />

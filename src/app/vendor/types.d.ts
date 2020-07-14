@@ -2,7 +2,12 @@ import { string } from 'prop-types';
 
 export type MapBounds = [number, number, number, number];
 
-export type Image = [string, number, number, boolean?];
+export type Image = {
+  url: string;
+  width: number;
+  height: number;
+  alt?: string;
+};
 
 export interface MapPark {
   id: number;
