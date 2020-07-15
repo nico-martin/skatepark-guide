@@ -1,10 +1,12 @@
 .settings {
-  @mixin transition transform;
+  @mixin transition all;
   transform: translateX(100%);
+  opacity: 0;
   will-change: transform;
 
   &[aria-hidden='false'] {
     transform: translateX(0);
+    opacity: 1;
     @mixin box-shadow;
   }
 

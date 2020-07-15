@@ -93,7 +93,7 @@ const Content = ({ className = '' }: { className?: string }) => {
       }}
     >
       <Route path="/:lang/about/:slug?/" location={delayedLocation}>
-        Page
+        <Page />
       </Route>
       <Route path="/:lang/park/:slug/" location={delayedLocation}>
         <Park className="content__park" />

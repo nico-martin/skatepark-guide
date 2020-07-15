@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { useApi, states as apiStates } from '@app/hooks/useApi';
 import { Icon, Loader, Message } from '@app/theme';
@@ -21,13 +21,14 @@ const ParkWeather = ({
   }>(null);
   const { locale } = useIntl();
   const { data = {}, state, error } = useApi(() => getWeather(slug, locale));
+
   const { formatMessage } = useIntl();
 
   useEffect(() => {
     const daysToSet = {};
     if (data.list) {
       data.list.map(weather => {
-        const weatherDate = moment(weather['dt_txt']);
+        const weatherDate = dayjs(weather['dt_txt']);
         const day = weatherDate.format('YYYY-MM-DD');
         if (!(day in days) && parseInt(weatherDate.format('HH')) <= 14) {
           daysToSet[day] = { ...weather, h: weatherDate.format('HH') };
@@ -67,7 +68,7 @@ const ParkWeather = ({
             {Object.values(days).map(day => (
               <li className="park-weather__element">
                 <h4 className="park-weather__heading">
-                  {moment(day['dt_txt']).format('ddd')}
+                  {dayjs(day['dt_txt']).format('ddd')}
                 </h4>
                 <Icon
                   className="park-weather__icon"
