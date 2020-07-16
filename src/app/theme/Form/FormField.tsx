@@ -1,9 +1,10 @@
 import React from 'react';
-import cn from 'classnames';
 
 import { ConnectForm } from './ConnectForm';
 import InputText from './Input';
 import { unique } from '@app/vendor/helpers';
+
+import './FormField.css';
 
 const FormField = ({
   name,
@@ -13,6 +14,7 @@ const FormField = ({
   className = '',
   classNameLabel = '',
   classNameInput = '',
+  wide = false,
   ...props
 }: {
   name: string;
@@ -22,6 +24,7 @@ const FormField = ({
   className?: string;
   classNameLabel?: string;
   classNameInput?: string;
+  wide?: boolean;
   [k: string]: any;
 }) => {
   const [uniqueId] = React.useState(() => unique(name));
@@ -29,14 +32,16 @@ const FormField = ({
   return (
     <ConnectForm>
       {({ register, errors }) => {
-        console.log(errors[name]);
+        console.log('ERRORS', errors);
         return component({
           ...props,
           name: uniqueName,
           id: uniqueId,
           label,
           ref: register(fieldRegister),
-          className: classNameInput,
+          className: className,
+          classNameInput: classNameInput,
+          classNameLabel: classNameLabel,
           error: errors[name] ? errors[name].message : '',
         });
       }}

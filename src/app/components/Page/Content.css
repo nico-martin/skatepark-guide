@@ -10,7 +10,8 @@
     @mixin box-shadow;
   }
 
-  &__park {
+  &__park,
+  &__page {
     position: absolute;
     bottom: 0;
     right: 0;

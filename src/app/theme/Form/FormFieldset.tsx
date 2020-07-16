@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './FormFieldset.css';
+
 const FormFieldset = ({
   className = '',
   label = '',
@@ -12,7 +14,7 @@ const FormFieldset = ({
   return (
     <div className={`form-fieldset ${className}`}>
       {label !== '' && <h2 className="form-fieldset__legend">{label}</h2>}
-      {children}
+      <div className="form-fieldset__fields">{children}</div>
     </div>
   );
 };

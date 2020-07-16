@@ -8,6 +8,8 @@ const Input = ({
   id,
   label,
   className = '',
+  classNameLabel = '',
+  classNameInput = '',
   type = 'text',
   subtype = 'text',
   value: initialValue = '',
@@ -19,6 +21,8 @@ const Input = ({
   name: string;
   id: string;
   className?: string;
+  classNameLabel?: string;
+  classNameInput?: string;
   label: string;
   type?: 'text' | 'textarea' | 'select';
   subtype?: string;
@@ -31,10 +35,16 @@ const Input = ({
   [k: string]: any;
 }) => {
   const [value, setValue] = useState(initialValue);
+
   const inputProps = {
     ...props,
-    className: `${className} input__element input__element--${type} input__element--${
-      value === '' ? 'empty' : 'value'
+    className: `${classNameInput} input__element input__element--${type} input__element--${
+      value !== '' ||
+      (type === 'select' &&
+        Object.values(choices).length &&
+        Object.values(choices)[0] !== '')
+        ? 'value'
+        : 'empty'
     }`,
     name,
     id,
@@ -46,7 +56,9 @@ const Input = ({
 
   return (
     <div
-      className={`input input--${type} ${error !== '' ? 'input--error' : ''}`}
+      className={`${className} input input--${type} ${
+        error !== '' ? 'input--error' : ''
+      }`}
     >
       {type === 'textarea' && <textarea {...inputProps}>{value}</textarea>}
       {type === 'text' && (
@@ -55,13 +67,13 @@ const Input = ({
       {type === 'select' && (
         <select {...inputProps}>
           {Object.entries(choices).map(([key, val]) => (
-            <option key={key} selected={key === val}>
+            <option key={key} selected={key === value}>
               {val}
             </option>
           ))}
         </select>
       )}
-      <label className="input__label" htmlFor={id}>
+      <label className={`${classNameLabel} input__label`} htmlFor={id}>
         {label}
       </label>
       {error !== '' && <span className="input__error">{error}</span>}
