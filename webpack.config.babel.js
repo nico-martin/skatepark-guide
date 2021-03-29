@@ -1,14 +1,19 @@
 import path from 'path';
 import fs from 'fs';
-import { DefinePlugin } from 'webpack';
 
 require('dotenv').config();
+
 import app from './app.json';
 
+import { DefinePlugin } from 'webpack';
+
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+import TerserJSPlugin from 'terser-webpack-plugin';
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
 module.exports = (env, argv) => {
   const dirDist = path.resolve(__dirname, 'dist');
@@ -25,13 +30,16 @@ module.exports = (env, argv) => {
   }
 
   return {
+    optimization: {
+      minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    },
     entry: {
       app: `${dirSrc}/index.ts`,
     },
     devServer: {
       contentBase: dirDist,
       compress: true,
-      port: process.env.PORT || 8080,
+      port: process.env.PORT_DEV || 8080,
       https: serveHttps,
       hot: true,
       historyApiFallback: true,
@@ -41,7 +49,7 @@ module.exports = (env, argv) => {
       filename: 'assets/[name]-[hash].js',
       publicPath: '/',
     },
-    devtool: dev ? `cheap-module-eval-source-map` : undefined,
+    devtool: dev ? 'source-map' : false,
     plugins: [
       new CleanWebpackPlugin({
         cleanStaleWebpackAssets: false,
@@ -54,7 +62,7 @@ module.exports = (env, argv) => {
       }),
       new CopyWebpackPlugin([
         {
-          from: 'src/static',
+          from: 'src/assets/static',
           to: 'assets/static',
         },
       ]),
@@ -76,7 +84,12 @@ module.exports = (env, argv) => {
             },
       }),
       new DefinePlugin({
-        'process.env.GMAPS_KEY': JSON.stringify(process.env.GMAPS_KEY),
+        IS_DEV: JSON.stringify(dev),
+        APP_TITLE: JSON.stringify(app.title) || '',
+        APP_DESCRIPTION: JSON.stringify(app.description) || '',
+        API_BASE: JSON.stringify(
+          process.env.API_BASE || 'http://localhost:8080/'
+        ),
       }),
     ],
     module: {
@@ -108,22 +121,20 @@ module.exports = (env, argv) => {
           use: [
             {
               loader: MiniCssExtractPlugin.loader,
-              options: {
-                hmr: dev,
-                //reloadAll: true,
-              },
             },
             'css-loader',
             {
               loader: 'postcss-loader',
               options: {
-                plugins: () => [
-                  require('postcss-mixins')({
-                    mixinsDir: path.join(__dirname, 'src/styles/mixins'),
-                  }),
-                  require('postcss-nested'),
-                  require('autoprefixer'),
-                ],
+                postcssOptions: {
+                  plugins: [
+                    require('postcss-mixins')({
+                      mixinsDir: path.join(__dirname, 'src/styles/mixins'),
+                    }),
+                    require('postcss-nested'),
+                    require('autoprefixer'),
+                  ],
+                },
               },
             },
           ],
@@ -131,13 +142,15 @@ module.exports = (env, argv) => {
       ],
     },
     resolve: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
         react: 'preact/compat',
         'react-dom': 'preact/compat',
-        '@app': `${dirSrc}/app/`,
-        '@comp': `${dirSrc}/app/components/`,
+        '@comp': `${dirSrc}/components/`,
+        '@common': `${dirSrc}/common/`,
+        '@theme': `${dirSrc}/theme/`,
+        '@types': `${dirSrc}/@types/`,
       },
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
   };
 };

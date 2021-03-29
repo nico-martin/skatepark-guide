@@ -10,14 +10,33 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@comp/*": ["src/app/components/*"],
-      "@styles/*": ["src/styles/*"],
-      "@assets/*": ["src/styles/*"],
-      "react": ["node_modules/preact/compat"],
-      "react-dom": ["node_modules/preact/compat"]
+      "@comp/*": [
+        "src/components/*"
+      ],
+      "@common/*": [
+        "src/common/*"
+      ],
+      "@theme": [
+        "src/theme/index.ts"
+      ],
+      "@types/*": [
+        "src/@types/*"
+      ],
+      "react": [
+        "node_modules/preact/compat"
+      ],
+      "react-dom": [
+        "node_modules/preact/compat"
+      ]
     },
-    "typeRoots": ["node_modules/@types", "src/app/@types"]
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ]
   },
-  "include": ["./**/*.tsx", "./**/*.ts", "./**/*.d.ts"]
+  "include": [
+    "./**/*.tsx",
+    "./**/*.ts",
+    "./**/*.d.ts"
+  ]
 }

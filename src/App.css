@@ -71,7 +71,6 @@
     &--settings {
       bottom: var(--spacing);
       right: var(--spacing);
-
       z-index: 210;
 
       .hello-icon:first-child {

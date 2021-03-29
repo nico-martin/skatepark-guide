@@ -1,0 +1,17 @@
+:root {
+  --c-p: #1d1d1b;
+  --c-h: #000;
+  --c-bkg: #f3f3f3;
+
+  --c-primary: #ff5722;
+  --c-primary-dark: #ba4019;
+  --c-secondary: #00796b;
+  --c-secondary-light: #129282;
+  --c-secondary-dark: #116f63;
+
+  --c-feedback-error: #af1616;
+
+  --c-gray: #b9b8b8;
+  --c-gray-light: #e8e7e7;
+  --c-gray-dark: #989898;
+}

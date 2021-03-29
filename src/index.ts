@@ -1,6 +1,5 @@
 import './App';
 import './styles.css';
-import { isDev } from '@app/vendor/helpers';
-import './app/vendor/a11y';
+import './common/utils/a11y';
 
-isDev && document.body.classList.add('dev');
+IS_DEV && document.body.classList.add('dev');
