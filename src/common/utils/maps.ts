@@ -1,4 +1,4 @@
-export const gmapsKey = process.env.GMAPS_KEY || '';
+export const gmapsKey = GMAPS_KEY || '';
 
 export const styles = [
   {

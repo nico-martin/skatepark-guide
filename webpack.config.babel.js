@@ -87,6 +87,7 @@ module.exports = (env, argv) => {
         IS_DEV: JSON.stringify(dev),
         APP_TITLE: JSON.stringify(app.title) || '',
         APP_DESCRIPTION: JSON.stringify(app.description) || '',
+        GMAPS_KEY: JSON.stringify(process.env.GMAPS_KEY || ''),
         API_BASE: JSON.stringify(
           process.env.API_BASE || 'http://localhost:8080/'
         ),
