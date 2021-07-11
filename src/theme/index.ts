@@ -5,3 +5,4 @@ export { default as Iframe } from './Iframe/Iframe';
 export { default as Loader } from './Loader/Loader';
 export { default as Logo } from './Branding/Logo';
 export { default as Message } from './Message/Message';
+export { default as LazyImage } from './Img/LazyImage';

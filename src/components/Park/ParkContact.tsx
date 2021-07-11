@@ -1,8 +1,7 @@
 import React from 'react';
 import { Icon } from '@theme';
-
-import './ParkContact.css';
 import { nl2br } from '@common/utils/helpers';
+import './ParkContact.css';
 
 const mapIconToContact = {
   homepage: 'link',
@@ -41,7 +40,8 @@ const ParkContact = ({
           string = nl2br(string);
           break;
         default:
-          const regex = /(https?:\/\/(?:www\.|(?!www))([a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}))/gm;
+          const regex =
+            /(https?:\/\/(?:www\.|(?!www))([a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}))/gm;
           const match = regex.exec(value);
           if (match) {
             url = match[0];

@@ -1,11 +1,9 @@
-import React from 'react';
 import { VNode } from 'preact';
-import cn from '../../common/utils/classnames';
-
+import React from 'react';
 import { Icon } from '@theme';
 import IntlLink from '@common/intl/IntlLink';
-
-import './Button.css';
+import cn from '@common/utils/classnames';
+import styles from './Button.css';
 
 const Button = ({
   element = 'button',
@@ -26,52 +24,36 @@ const Button = ({
   icon?: string;
   [x: string]: any;
 }) => {
+  const classes = cn(className, styles.root, {
+    [styles.hasIcon]: Boolean(icon),
+    [styles.hasText]: Boolean(children),
+    [styles.isRound]: round,
+    [styles.bkgWhite]: white,
+  });
+
+  const content = (
+    <React.Fragment>
+      {icon && <Icon icon={icon} className={styles.icon} />}
+      {children && <span className={styles.text}>{children}</span>}
+    </React.Fragment>
+  );
+
   if (element === 'router') {
     return (
-      <IntlLink
-        className={cn(className, 'button', {
-          'button--icon': Boolean(icon),
-          'button--round': round,
-          'button--has-text': Boolean(children),
-          'button--bkg-white': white,
-        })}
-        {...props}
-      >
-        {icon && <Icon icon={icon} className="button__icon" />}
-        {children && <span className="button__text">{children}</span>}
+      <IntlLink className={classes} {...props}>
+        {content}
       </IntlLink>
     );
-  } else if (element === 'a') {
-    return (
-      <a
-        className={cn(className, 'button', {
-          'button--icon': Boolean(icon),
-          'button--round': round,
-          'button--has-text': Boolean(children),
-          'button--bkg-white': white,
-        })}
-        onClick={onClick ? () => onClick() : null}
-        {...props}
-      >
-        {icon && <Icon icon={icon} className="button__icon" />}
-        {children && <span className="button__text">{children}</span>}
-      </a>
-    );
   }
-  return (
-    <button
-      className={cn(className, 'button', {
-        'button--icon': Boolean(icon),
-        'button--round': round,
-        'button--has-text': Boolean(children),
-        'button--bkg-white': white,
-      })}
-      onClick={onClick ? () => onClick() : null}
-      {...props}
-    >
-      {icon && <Icon icon={icon} className="button__icon" />}
-      {children && <span className="button__text">{children}</span>}
-    </button>
+
+  return React.createElement(
+    element,
+    {
+      className: classes,
+      onClick: element === 'button' ? () => onClick() : null,
+      ...props,
+    },
+    content
   );
 };
 

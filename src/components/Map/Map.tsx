@@ -1,33 +1,32 @@
-import React from 'react';
 import GoogleMapReact from 'google-map-react';
-
-import { gmapsKey, styles } from '@common/utils/maps';
-
-import { settingsDB } from '@common/idb';
+import React from 'react';
+import { Loader } from '@theme';
 import { getIPLatLng } from '@common/api/park';
-
-//import Marker from './Marker';
-
-import './Map.css';
+import { useMapParks } from '@common/hooks/useMapParks';
+import { settingsDB } from '@common/idb';
+import cn from '@common/utils/classnames';
+import { gmapsKey, styles as mapStyles } from '@common/utils/maps';
+import styles from './Map.css';
+import Marker from './Marker';
 
 const Map = ({ className = '' }: { className?: string }) => {
-  const [center, setCenter] = React.useState<{ lat: number; lng: number }>(
-    null
-  );
+  const [center, setCenter] =
+    React.useState<{ lat: number; lng: number }>(null);
   const [defaultZoom, setDefaultZoom] = React.useState<number>(null);
   const [zoom, setZoom] = React.useState<number>(null);
   const [map, setMap] = React.useState(null);
 
+  const { updateBounds, showLoader, parks } = useMapParks();
+
   const loadParks = () => {
     if (map) {
       const bounds = map.getBounds();
-      /*
-      loadMapParks([
+      updateBounds([
         bounds.getSouthWest().lat(),
         bounds.getNorthEast().lat(),
         bounds.getSouthWest().lng(),
         bounds.getNorthEast().lng(),
-      ]);*/
+      ]);
     }
   };
 
@@ -56,15 +55,17 @@ const Map = ({ className = '' }: { className?: string }) => {
   }
 
   return (
-    <div className={`${className} map`}>
-      <div className="map__loader" aria-hidden={false} />
+    <div className={cn(className, styles.root)}>
+      <div className={styles.loaderContainer} aria-hidden={!showLoader}>
+        <Loader className={styles.loader} />
+      </div>
       <GoogleMapReact
         bootstrapURLKeys={{ key: gmapsKey }}
         defaultCenter={center}
         defaultZoom={defaultZoom}
         options={{
           disableDefaultUI: true,
-          styles,
+          styles: mapStyles,
         }}
         onChange={(v) => {
           settingsDB.set('center', v.center);
@@ -75,7 +76,7 @@ const Map = ({ className = '' }: { className?: string }) => {
         onZoomAnimationEnd={() => loadParks()}
         onGoogleApiLoaded={(maps) => setMap(maps.map)}
       >
-        {/*Object.values(mapParks).map((marker) => (
+        {Object.values(parks).map((marker) => (
           <Marker
             name={marker.title}
             lat={marker.map.lat}
@@ -83,7 +84,7 @@ const Map = ({ className = '' }: { className?: string }) => {
             small={zoom <= 9}
             slug={marker.slug}
           />
-        ))*/}
+        ))}
       </GoogleMapReact>
     </div>
   );

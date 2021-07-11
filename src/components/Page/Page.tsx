@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from '@theme';
-
-import './Page.css';
+import cn from '@common/utils/classnames';
+import styles from './Page.css';
 
 const Page = ({ className = '' }: { className?: string }) => (
-  <div className={`${className} page`}>
+  <div className={cn(styles.root, className)}>
     <Button>Hallo Welt</Button>
     <Button round>Hallo Welt</Button>
     <Button icon="mdi/heart" />

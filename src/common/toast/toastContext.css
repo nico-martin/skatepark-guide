@@ -1,0 +1,63 @@
+.root {
+  position: fixed;
+  bottom: var(--spacing-page);
+  left: 50%;
+  max-width: 60vw;
+  width: 100%;
+}
+
+.toast {
+  transform: translateX(-50%) translateY(50%);
+  opacity: 0;
+  background-color: var(--c-bkg);
+  padding: 0.7em 1em;
+  border-radius: 5px;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  @mixin transition;
+  @mixin box-shadow;
+
+  & + .toast {
+    margin-top: var(--spacing-half);
+  }
+}
+
+.toastFadeIn {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.toastFadeOut {
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 0;
+}
+
+.message {
+}
+
+.controls {
+  margin-left: auto;
+  padding-left: 1em;
+}
+
+.button {
+  cursor: pointer;
+  text-transform: uppercase;
+
+  & + .button {
+    margin-left: 1em;
+  }
+}
+
+.button-success {
+  color: var(--c-feedback-success);
+}
+
+.button-danger {
+  color: var(--c-feedback-danger);
+}
+
+.button-warning {
+  color: var(--c-feedback-warning);
+}

@@ -1,55 +1,42 @@
-.map {
+.root {
   width: 100%;
   height: 100vh;
+}
 
-  &__loader {
-    position: absolute;
-    left: 50%;
-    background-color: #fff;
-    @mixin box-shadow;
-    width: 2rem;
-    height: 2rem;
-    top: 1.5rem;
-    margin-left: -0.75rem;
-    @mixin desktop {
-      top: 4rem;
-      width: 3rem;
-      height: 3rem;
-      margin-left: -1.5rem;
-    }
-    z-index: 100;
-    border-radius: 50%;
-    @mixin transition;
+.loaderContainer {
+  position: absolute;
+  left: 50%;
+  background-color: #fff;
+  width: 1.8rem;
+  height: 1.8rem;
+  top: 1.5rem;
+  margin-left: -0.75rem;
+  z-index: 100;
+  border-radius: 50%;
+  @mixin transition;
+  @mixin box-shadow;
 
-    &:after {
-      content: '';
-      color: var(--c-secondary);
-      @mixin spinner;
-      @mixin desktop {
-        @mixin spinner;
-      }
-      border-width: 0.15rem;
-      top: 20%;
-      left: 20%;
-      width: 60% !important;
-      height: 60% !important;
-      position: absolute;
-    }
-
-    transform: translateY(-200%);
-    opacity: 0;
-
-    &[aria-hidden='false'] {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  @mixin desktop {
+    top: 4rem;
+    width: 3rem;
+    height: 3rem;
+    margin-left: -1.5rem;
   }
 
-  &__map {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: 0;
+  transform: translateY(-200%);
+  opacity: 0;
+
+  &[aria-hidden='false'] {
+    transform: translateY(0);
+    opacity: 1;
   }
+}
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 1.8rem;
+  transform: translateY(-50%) translateX(-50%);
+  color: var(--c-secondary-dark);
 }

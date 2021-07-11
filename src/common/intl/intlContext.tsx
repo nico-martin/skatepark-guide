@@ -1,15 +1,8 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
-import * as enMessages from './en.json';
-import { IntlLocales, IntlMessages } from './types';
+import { locales } from './index';
+import { IntlMessages } from './types';
 
-const locales: IntlLocales = {
-  en: {
-    label: 'English',
-    // @ts-ignore
-    messages: enMessages.default,
-  },
-};
 const localeKeys = Object.keys(locales);
 const defaultLocale: string = localeKeys[0];
 
@@ -29,10 +22,18 @@ const IntlContext = React.createContext<{
 
 export const IntlContextProvider = ({ children }: { children: any }) => {
   const [locale, setLocale] = React.useState<string>(defaultLocale);
-  const [messages, setMessages] = React.useState<IntlMessages>({});
+  //const [messages, setMessages] = React.useState<IntlMessages>({});
   const [messagesPending, setMessagesPending] = React.useState<boolean>(false);
 
+  const messages: IntlMessages = React.useMemo(() => {
+    if (locale in locales) {
+      return locales[locale].messages;
+    }
+    return {};
+  }, [locale]);
+
   const changeLocale = (newLocale: string) => {
+    /*
     if (localeKeys.indexOf(newLocale) === -1) {
       return;
     }
@@ -43,7 +44,7 @@ export const IntlContextProvider = ({ children }: { children: any }) => {
     } else {
       setLocale(newLocale);
       setMessages(newLanguage.messages);
-    }
+    }*/
   };
 
   return (

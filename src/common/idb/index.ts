@@ -16,13 +16,8 @@ const dbPromise = openDB<SettingsDBSchema>(dbName, 1, {
 });
 
 export const settingsDB = {
-  async get(key: string) {
-    return (await dbPromise).get('settings', key);
-  },
-  async set(key: string, val: any) {
-    return (await dbPromise).put('settings', val, key);
-  },
-  async delete(key: string) {
-    return (await dbPromise).delete('settings', key);
-  },
+  get: async (key: string) => (await dbPromise).get('settings', key),
+  set: async (key: string, val: any) =>
+    (await dbPromise).put('settings', val, key),
+  delete: async (key: string) => (await dbPromise).delete('settings', key),
 };

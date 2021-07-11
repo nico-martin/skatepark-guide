@@ -1,12 +1,10 @@
 import React from 'react';
-import './Marker.css';
-
 import IntlLink from '@common/intl/IntlLink';
+import cn from '@common/utils/classnames';
+import styles from './Marker.css';
 
 const Marker = ({
   name,
-  lat,
-  lng,
   slug,
   small = false,
 }: {
@@ -19,7 +17,7 @@ const Marker = ({
   return (
     <IntlLink
       href={`park/${slug}/`}
-      className={`marker ${small ? 'marker--small' : ''}`}
+      className={cn(styles.root, { [styles.isSmall]: small })}
       title={name}
     />
   );

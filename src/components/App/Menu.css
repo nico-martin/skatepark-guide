@@ -1,30 +1,33 @@
-.menu {
-  &__toggler {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.root {
+}
+
+.toggler {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.links {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 0.9rem;
+  z-index: -1;
+  will-change: transform;
+  transform: translate(-50%, -50%);
+  @mixin transition;
+}
+
+.elements[aria-hidden='false'] {
+  .linksAbout {
+    transform: translate(-60%, -210%);
   }
 
-  &__links {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 0.9rem;
-    z-index: -1;
-    will-change: transform;
-    transform: translate(-50%, -50%);
-    @mixin transition;
+  .linksAdd {
+    transform: translate(75%, -170%);
   }
 
-  &__elements[aria-hidden='false'] .menu {
-    &__links {
-      transform: translate(120%, -40%);
-      &--about {
-        transform: translate(-60%, -210%);
-      }
-      &--add {
-        transform: translate(75%, -170%);
-      }
-    }
+  .linksAccount {
+    transform: translate(120%, -40%);
   }
 }

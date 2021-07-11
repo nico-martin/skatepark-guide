@@ -1,19 +1,15 @@
-import path from 'path';
-import fs from 'fs';
-
-require('dotenv').config();
-
-import app from './app.json';
-
-import { DefinePlugin } from 'webpack';
-
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import fs from 'fs';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-
-import TerserJSPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import path from 'path';
+import TerserJSPlugin from 'terser-webpack-plugin';
+import { DefinePlugin } from 'webpack';
+import app from './app.json';
+
+require('dotenv').config();
 
 module.exports = (env, argv) => {
   const dirDist = path.resolve(__dirname, 'dist');
@@ -34,7 +30,7 @@ module.exports = (env, argv) => {
       minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
     },
     entry: {
-      app: `${dirSrc}/index.ts`,
+      app: `${dirSrc}/toastContext.tsx`,
     },
     devServer: {
       contentBase: dirDist,

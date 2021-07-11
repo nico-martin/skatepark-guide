@@ -1,4 +1,4 @@
-.app {
+.root {
   position: fixed;
   bottom: 0;
   right: 0;
@@ -6,8 +6,8 @@
   top: 0;
   overflow: hidden;
 
-  &__content,
-  &__settings {
+  .content,
+  .settings {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -19,12 +19,12 @@
     overflow: auto;
   }
 
-  &__settings {
+  .settings {
     max-width: 400px;
     z-index: 200;
   }
 
-  &__map {
+  .map {
     position: fixed !important;
     bottom: 0;
     right: 0;
@@ -32,59 +32,56 @@
     top: 0;
   }
 
-  &__logo {
+  .logo {
     display: block;
 
     svg {
       display: block;
     }
   }
+}
 
-  &__controls {
-    position: fixed;
-    width: 3rem;
-    height: 3rem;
+.controls {
+  position: fixed;
 
-    &--logo,
-    &--menu,
-    &--settings {
-      display: block;
-      font-size: calc(1.1rem + 1.1vmin);
-      z-index: 200;
+  &.controlsLogo,
+  &.controlsMenu,
+  &.controlsSettings {
+    font-size: calc(1.1rem + 1.1vmin);
+    z-index: 200;
+  }
+
+  &.controlsLogo {
+    font-size: 6rem;
+    width: 6rem;
+    height: 6rem;
+    top: var(--spacing);
+    left: var(--spacing);
+    display: block;
+  }
+
+  &.controlsMenu {
+    bottom: var(--spacing);
+    left: var(--spacing);
+    z-index: 1000;
+  }
+
+  &.controlsSettings {
+    bottom: var(--spacing);
+    right: var(--spacing);
+    z-index: 210;
+
+    .hello-icon:first-child {
+      display: none;
     }
 
-    &--logo {
-      font-size: 6rem;
-      width: 6rem;
-      height: 6rem;
-      top: var(--spacing);
-      left: var(--spacing);
-      display: block;
-    }
-
-    &--menu {
-      bottom: var(--spacing);
-      left: var(--spacing);
-      z-index: 1000;
-    }
-
-    &--settings {
-      bottom: var(--spacing);
-      right: var(--spacing);
-      z-index: 210;
-
-      .hello-icon:first-child {
+    &[data-close='true'] {
+      .hello-icon {
         display: none;
       }
 
-      &[data-close='true'] {
-        .hello-icon {
-          display: none;
-        }
-
-        .hello-icon:first-child {
-          display: block;
-        }
+      .hello-icon:first-child {
+        display: block;
       }
     }
   }

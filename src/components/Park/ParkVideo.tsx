@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Iframe } from '@theme';
 
 const ParkVideo = ({
@@ -9,7 +8,8 @@ const ParkVideo = ({
   videoLink: string;
   className?: string;
 }) => {
-  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i;
+  const regex =
+    /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i;
 
   const r = regex.exec(videoLink);
   if (r === null || !r[1]) {

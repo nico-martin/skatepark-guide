@@ -21,7 +21,7 @@ import { Icon, Loader, Message } from '@app/theme';
 import { getWeather } from '@app/vendor/api/spg';
 
 import './ParkWeather.css';
-import { ApiWeather } from '@app/vendor/types';
+import { ApiWeather } from '@app/vendor/@types';
 
 const ParkWeather = ({
   className = '',

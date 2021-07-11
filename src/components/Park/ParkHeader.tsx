@@ -1,62 +1,50 @@
 import React from 'react';
-
-import { Park } from './static/types';
-
-import './ParkHeader.css';
-import { Button } from '@theme';
 import { useIntl } from 'react-intl';
+import { Button, LazyImage } from '@theme';
+import { ParkI } from '@common/types/parks';
+import cn from '@common/utils/classnames';
+import styles from './ParkHeader.css';
 
 const headerHeight = 260;
 const titleHeght = 60;
 const maxScroll = headerHeight - titleHeght;
 
 const ParkHeader = ({
-  park,
+  park = {},
   scroll,
   className = '',
 }: {
-  park: Partial<Park>;
+  park: Partial<ParkI>;
   scroll: number;
   className?: string;
 }) => {
-  const [opacity, setOpacity] = React.useState<number>(0);
-  const [parkLoved, setParkLoved] = React.useState<boolean>(false);
-
-  const { formatMessage } = useIntl();
-  const { loved } = { loved: [] };
-  const { setLoved, removeLoved } = {
-    setLoved: () => {},
-    removeLoved: () => {},
-  };
-
-  React.useEffect(() => {
-    const o = Math.round((100 / maxScroll) * scroll) / 100;
-    setOpacity(o > 1 ? 1 : o);
+  const opacity = React.useMemo(() => {
+    const opacity = Math.floor((100 / maxScroll) * scroll) / 100;
+    return opacity >= 1 ? 1 : opacity;
   }, [scroll]);
 
-  React.useEffect(() => {
-    setParkLoved(loved ? loved.indexOf(park.slug) !== -1 : false);
-  }, [loved, park]);
+  const { formatMessage } = useIntl();
 
   return (
     <header
-      className={`${className} park-header`}
+      className={cn(className, styles.root)}
       data-scrolled={scroll}
       style={{
-        transform: `translateY(-${scroll > maxScroll ? maxScroll : scroll}px)`,
+        //transform: `translateY(-${scroll > maxScroll ? maxScroll : scroll}px)`,
+        top: `-${headerHeight - titleHeght}px`,
         height: headerHeight,
       }}
     >
       <p
-        className="park-header__title"
+        className={cn(styles.title)}
         style={{
           opacity,
         }}
       >
         {park.title}
       </p>
-      <div className="park-header__controls">
-        <Button
+      <div className={cn(styles.controls)}>
+        {/*<Button
           icon={parkLoved ? 'mdi/heart' : 'mdi/heart-empty'}
           className="park-header__control park-header__control-love"
           role="checkbox"
@@ -70,11 +58,11 @@ const ParkHeader = ({
           }}
           round
           white
-        />
+        />*/}
         {'share' in window.navigator && (
           <Button
             icon="mdi/share"
-            className="park-header__control park-header__control-share"
+            className={cn(styles.control, styles.controlLove)}
             onClick={() =>
               window.navigator
                 .share({
@@ -93,7 +81,7 @@ const ParkHeader = ({
           />
         )}
       </div>
-      {/*park.headImage && (
+      {park.headImage && (
         <LazyImage
           image={park.headImage}
           alt={park.title}
@@ -102,7 +90,7 @@ const ParkHeader = ({
             opacity: 1 - opacity,
           }}
         />
-      )*/}
+      )}
     </header>
   );
 };

@@ -1,4 +1,4 @@
-import { trailingSlashIt } from './helpers';
+import { trailingSlashIt } from '@common/utils/helpers';
 
 export const APP = {
   TITLE: APP_TITLE,
@@ -12,6 +12,10 @@ export const API: {
   PARKS: string;
 } = {
   BASE: APP.API_BASE,
-  REST: `${APP.API_BASE}wp-json/skateparkguide/`,
+  REST: `${APP.API_BASE}wp-json/skateparkguide/v1/`,
   PARKS: `${APP.API_BASE}wp-json/wp/v2/parks/`,
+};
+
+export const MESSAGES = {
+  GENERAL_ERROR: 'Something went wrong',
 };

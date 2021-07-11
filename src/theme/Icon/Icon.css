@@ -1,4 +1,4 @@
-.icon {
+.root {
   display: inline-block;
   line-height: 1;
 
@@ -10,48 +10,31 @@
     width: 1em;
     display: block;
   }
+}
 
-  &--border {
-    border: 1px solid currentColor;
-    height: 1em;
-    line-height: 1em;
-    width: 1em;
-    text-align: center;
+.isRound {
+  border-radius: 9999px;
+}
 
-    svg {
-      height: 0.6em;
-      vertical-align: inherit;
-    }
-  }
+.hasAnimationSpin {
+  animation: spinner 2s infinite linear;
+}
 
-  &--round {
-    border-radius: 9999px;
-  }
+.isRotated-90 {
+  transform: rotate(90deg);
+}
 
-  &--animation-spin {
-    animation: spinner 2s infinite linear;
-  }
+.isRotated-180 {
+  transform: rotate(180deg);
+}
 
-  &--animation-spin-1s {
-    animation: spinner 1s infinite linear;
-  }
+.isRotated-270 {
+  transform: rotate(270deg);
+}
 
-  &--rotate-90 {
-    transform: rotate(90deg);
-  }
-
-  &--rotate-180 {
-    transform: rotate(180deg);
-  }
-
-  &--rotate-270 {
-    transform: rotate(270deg);
-  }
-
-  &--button {
-    background-color: var(--c-secondary);
-    color: #fff;
-    padding: 0.4em;
-    @mixin box-shadow;
-  }
+.isButton {
+  background-color: var(--c-secondary);
+  color: #fff;
+  padding: 0.4em;
+  @mixin box-shadow;
 }

@@ -1,19 +1,16 @@
-import React from 'react';
 import * as H from 'history';
-
+import React from 'react';
 import { Route, useLocation, useHistory } from 'react-router-dom';
-
-import Park from '@comp/Park/Park';
-import Page from '@comp/Page/Page';
-
-import { unleadingSlashIt, untrailingSlashIt } from '@common/utils/helpers';
 import { useLocale } from '@common/intl/intlContext';
-
-import './Content.css';
+import cn from '@common/utils/classnames';
+import { unleadingSlashIt, untrailingSlashIt } from '@common/utils/helpers';
+import Page from '@comp/Page/Page';
+import Park from '@comp/Park/Park';
+import styles from './AppContent.css';
 
 const moveMin = window.innerWidth / 4 > 200 ? 200 : window.innerWidth / 4;
 
-const Content = ({ className = '' }: { className?: string }) => {
+const AppContent = ({ className = '' }: { className?: string }) => {
   const location = useLocation();
   const history = useHistory();
 
@@ -21,9 +18,8 @@ const Content = ({ className = '' }: { className?: string }) => {
   const [dragging, setDragging] = React.useState<boolean>(false);
   const [startX, setStartX] = React.useState<number>(0);
   const [transformX, setTransformX] = React.useState<number>(0);
-  const [delayedLocation, setDelayedLocation] = React.useState<H.Location>(
-    location
-  );
+  const [delayedLocation, setDelayedLocation] =
+    React.useState<H.Location>(location);
 
   const { locale } = useLocale();
 
@@ -72,7 +68,7 @@ const Content = ({ className = '' }: { className?: string }) => {
 
   return (
     <div
-      className={`${className} content`}
+      className={cn(className, styles.root)}
       aria-hidden={!open}
       onTouchStart={start}
       onMouseDown={start}
@@ -95,13 +91,13 @@ const Content = ({ className = '' }: { className?: string }) => {
       }}
     >
       <Route path="/:lang/about/:slug?/" location={delayedLocation}>
-        <Page className="content__page" />
+        <Page className={cn(styles.content)} />
       </Route>
       <Route path="/:lang/park/:slug/" location={delayedLocation}>
-        <Park className="content__park" />
+        <Park className={cn(styles.content)} />
       </Route>
     </div>
   );
 };
 
-export default Content;
+export default AppContent;

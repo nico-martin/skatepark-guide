@@ -1,11 +1,11 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-
-import './Menu.css';
-import MenuToggler from '@comp/App/MenuToggler';
 import { Button } from '@theme';
-import { unleadingSlashIt, untrailingSlashIt } from '@common/utils/helpers';
 import { useLocale } from '@common/intl/intlContext';
+import cn from '@common/utils/classnames';
+import { unleadingSlashIt, untrailingSlashIt } from '@common/utils/helpers';
+import MenuToggler from '@comp/App/MenuToggler';
+import styles from './Menu.css';
 
 const Menu = ({ className = '' }: { className?: string }) => {
   const [buttonState, setButtonState] = React.useState<
@@ -41,31 +41,31 @@ const Menu = ({ className = '' }: { className?: string }) => {
   };
 
   return (
-    <nav className={`${className} menu`} id="menu">
+    <nav className={cn(className, styles.root)} id="menu">
       <MenuToggler
-        className="menu__toggler"
+        className={styles.toggler}
         onClick={onClick}
         buttonState={buttonState}
       />
-      <div className="menu__elements" aria-hidden={buttonState !== 'open'}>
+      <div className={styles.elements} aria-hidden={buttonState !== 'open'}>
         <Button
           element="router"
           href="/about/"
-          className="menu__links menu__links--about"
+          className={cn(styles.links, styles.linksAbout)}
           icon="mdi/information"
           round
         />
         <Button
           element="router"
           href="/park/edit/new/"
-          className="menu__links menu__links--add"
+          className={cn(styles.links, styles.linksAdd)}
           icon="mdi/markerplus"
           round
         />
         <Button
           element="router"
           href="/account/"
-          className="menu__links menu__links--account"
+          className={cn(styles.links, styles.linksAccount)}
           icon="mdi/account"
           round
         />

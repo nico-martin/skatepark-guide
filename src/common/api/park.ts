@@ -1,14 +1,20 @@
-import axios from 'axios';
+import { ApiParkI, MapParkI, ParkI } from '@common/types/parks';
 import { API } from '@common/utils/constants';
+import { apiGet } from './apiFetch';
 
 export type MapBounds = [number, number, number, number];
 
-export const getIPLatLng = () => axios.get(`${API.REST}v1/geo/`);
+export const getIPLatLng = () => apiGet(`${API.REST}v1/geo/`);
 
 export const getMapParks = (bounds: MapBounds) =>
-  axios.get(`${API.REST}v2/map-parks/?bounds=${bounds.join('|')}`);
+  apiGet<{
+    parks: Record<string, MapParkI>;
+    count: number;
+    countTotal: number;
+  }>(`${API.REST}map-parks/?boundse=${bounds.join('|')}`);
 
-export const getPark = (slug: string) => axios.get(`${API.PARKS}?slug=${slug}`);
+export const getPark = (slug: string) =>
+  apiGet<Array<ApiParkI>>(`${API.PARKS}?slug=${slug}`);
 
 export const getWeather = (slug: string, locale: string) =>
-  axios.get(`${API.REST}v1/park-weather/${slug}/?lang=${locale}`);
+  apiGet(`${API.REST}park-weather/${slug}/?lang=${locale}`);

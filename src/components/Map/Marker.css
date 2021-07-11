@@ -1,4 +1,4 @@
-.marker {
+.root {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -9,19 +9,18 @@
   border-radius: 100%;
   user-select: none;
   transform: translate(-50%, -50%);
-  @mixin transition transform, 100ms;
   will-change: transform;
   cursor: pointer;
-
-  &--small {
-    width: 7px;
-    height: 7px;
-    border-width: 1px;
-    //background-color: #00ff00;
-  }
+  @mixin transition transform, 100ms;
 
   &:hover {
     z-index: 1;
     transform: translate(-50%, -50%) scale(1.4);
   }
+}
+
+.isSmall {
+  width: 7px;
+  height: 7px;
+  border-width: 1px;
 }

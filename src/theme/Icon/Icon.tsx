@@ -1,7 +1,6 @@
 import React from 'react';
 import cn from '../../common/utils/classnames';
-
-import './Icon.css';
+import styles from './Icon.css';
 
 interface Props {
   icon: string;
@@ -32,15 +31,15 @@ const Icon = ({
   }, [icon]);
 
   return (
-    <div
+    <figure
       className={cn(
         className,
-        'icon',
-        rotate !== false ? `icon--rotate-${rotate}` : '',
+        styles.root,
+        rotate !== false ? styles[`isRotated-${rotate}`] : '',
         {
-          'icon--animation-spin': spinning,
-          'icon--button': button,
-          'icon--round': round,
+          [styles.hasAnimationSpin]: spinning,
+          [styles.isButton]: button,
+          [styles.isRound]: round,
         }
       )}
       dangerouslySetInnerHTML={{ __html: loadedIcon }}

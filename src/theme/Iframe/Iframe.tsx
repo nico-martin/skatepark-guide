@@ -1,6 +1,6 @@
 import React from 'react';
-
-import './Iframe.css';
+import cn from '@common/utils/classnames';
+import styles from './Iframe.css';
 
 const Iframe = ({
   className = '',
@@ -20,7 +20,9 @@ const Iframe = ({
   [key: string]: any;
 }) => (
   <div
-    className={`iframe ${responsive ? 'responsive-iframe' : ''} ${className}`}
+    className={cn(className, styles.root, {
+      [styles.responsiveIframe]: responsive,
+    })}
     style={{
       ...style,
       ...(responsive

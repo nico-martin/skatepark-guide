@@ -19,7 +19,7 @@
       "@theme": [
         "src/theme/index.ts"
       ],
-      "@types/*": [
+      "@types": [
         "src/@types/*"
       ],
       "react": [
@@ -37,6 +37,7 @@
   "include": [
     "./**/*.tsx",
     "./**/*.ts",
-    "./**/*.d.ts"
+    "./**/*.d.ts",
+    "./**/*.css"
   ]
 }

@@ -4,5 +4,6 @@
   "park.share.text": "Check out \"{parkTitle}\" on skatepark.guide",
   "park.weather": "Weather",
   "park.weather.source": "Source: {source}",
-  "settings.title": "Settings"
+  "settings.title": "Settings",
+  "map.loading.error": "The entries on the map could not be loaded."
 }

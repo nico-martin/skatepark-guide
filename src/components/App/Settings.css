@@ -1,5 +1,6 @@
-.settings {
+.root {
   @mixin transition all;
+
   transform: translateX(100%);
   opacity: 0;
   will-change: transform;

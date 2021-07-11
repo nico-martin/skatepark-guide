@@ -1,10 +1,10 @@
 import React from 'react';
 import { Icon } from '@theme';
-
-import './Logo.css';
+import cn from '@common/utils/classnames';
+import styles from './Logo.css';
 
 const Logo = ({ className = '' }: { className?: string }) => (
-  <Icon icon="logo-portrait" className={`${className} logo`} />
+  <Icon icon="logo-portrait" className={cn(className, styles.logo)} />
 );
 
 export default Logo;

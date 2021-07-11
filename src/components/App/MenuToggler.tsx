@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { Button } from '@theme';
-import './MenuToggler.css';
+import cn from '@common/utils/classnames';
+import styles from './MenuToggler.css';
 
 const MenuToggler = ({
   onClick,
@@ -14,14 +14,16 @@ const MenuToggler = ({
 }) => {
   return (
     <Button
-      className={`${className} menutoggler`}
-      onClick={() => onClick()}
+      className={cn(className, styles.root)}
+      onClick={onClick}
       data-state={buttonState}
       round
     >
-      {[1, 2, 3].map((i) => (
-        <span className={`menutoggler__line menutoggler__line--${i}`} />
-      ))}
+      <span className={styles.lineContainer}>
+        {[1, 2, 3].map((i) => (
+          <span className={cn(styles.line, styles[`line-${i}`])} />
+        ))}
+      </span>
     </Button>
   );
 };

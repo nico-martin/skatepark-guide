@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from '@theme';
 import { useIntl } from 'react-intl';
-
-import './Settings.css';
+import { Button } from '@theme';
+import cn from '@common/utils/classnames';
+import styles from './Settings.css';
 
 const Settings = ({
   className = '',
@@ -15,7 +15,7 @@ const Settings = ({
   const { formatMessage } = useIntl();
   return (
     <React.Fragment>
-      <div className={`${settingsClassName} settings`} aria-hidden={!open}>
+      <div className={cn(settingsClassName, styles.root)} aria-hidden={!open}>
         <h2>{formatMessage({ id: 'settings.title' })}</h2>
       </div>
       <Button
