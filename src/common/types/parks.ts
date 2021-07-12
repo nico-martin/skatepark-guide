@@ -1,4 +1,4 @@
-import { Image } from '@common/types/image';
+import { ApiImageI } from '@common/types/image';
 
 interface ParkFacilitiesI {
   bowl: boolean;
@@ -47,9 +47,9 @@ export interface ApiParkI {
     protected: boolean;
   };
   featured_media: number;
-  parksLogo: Image;
-  headImage: Image;
-  parksGallery: Array<Image>;
+  parksLogo: ApiImageI;
+  headImage: ApiImageI;
+  parksGallery: Array<ApiImageI>;
   parksVideo: string;
   parksAnlage: string;
   parksFacilities: ParkFacilitiesI;
@@ -65,9 +65,9 @@ export interface ParkI {
   title: string;
   content: string;
   slug: string;
-  logo: Image;
-  headImage: Image;
-  gallery: Array<Image>;
+  logo: ApiImageI;
+  headImage: ApiImageI;
+  gallery: Array<ApiImageI>;
   video: string;
   anlage: string;
   facilities: ParkFacilitiesI;

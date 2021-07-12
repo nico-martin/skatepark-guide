@@ -57,6 +57,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.css$/,
+          exclude: [/node_modules/, /photoswipe/],
           use: [
             {
               loader: MiniCssExtractPlugin.loader,
@@ -72,6 +73,21 @@ module.exports = (env, argv) => {
             },
             {
               loader: 'postcss-loader',
+            },
+          ],
+        },
+        {
+          test: /\.css$/,
+          include: [/node_modules/, /photoswipe/],
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                modules: false,
+              },
             },
           ],
         },

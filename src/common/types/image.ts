@@ -1,4 +1,4 @@
-export type Image = {
+export type ApiImageI = {
   url: string;
   width: number;
   height: number;

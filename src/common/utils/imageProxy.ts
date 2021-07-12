@@ -41,6 +41,36 @@ export const createImage = ({
   return imageUrl.replace(IMAGE_HOST, PROXY_HOST + proxyString);
 };
 
+export const heightByWidth = ({
+  orgHeight,
+  orgWidth,
+  newWidth,
+}: {
+  orgHeight: number;
+  orgWidth: number;
+  newWidth: number;
+}): number => {
+  orgWidth = Math.round(orgWidth);
+  orgHeight = Math.round(orgHeight);
+  newWidth = Math.round(newWidth);
+  return Math.round((orgHeight / orgWidth) * newWidth);
+};
+
+export const widthByHeight = ({
+  orgHeight,
+  orgWidth,
+  newHeight,
+}: {
+  orgHeight: number;
+  orgWidth: number;
+  newHeight: number;
+}): number => {
+  orgWidth = Math.round(orgWidth);
+  orgHeight = Math.round(orgHeight);
+  newHeight = Math.round(newHeight);
+  return Math.round((orgWidth / orgHeight) * newHeight);
+};
+
 export const createSrcSet = ({
   imageUrl,
   width,

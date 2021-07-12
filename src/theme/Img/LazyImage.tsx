@@ -3,7 +3,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
 import 'lazysizes/plugins/bgset/ls.bgset';
 import 'lazysizes/plugins/respimg/ls.respimg';
 import React from 'react';
-import { Image } from '@common/types/image';
+import { ApiImageI } from '@common/types/image';
 import cn from '@common/utils/classnames';
 import { createImage, createSrcSet } from '@common/utils/imageProxy';
 import styles from './LazyImage.css';
@@ -32,7 +32,7 @@ const LazyImage = ({
   imageClassName = '',
   ...props
 }: {
-  image: Image;
+  image: ApiImageI;
   background?: boolean;
   alt?: string;
   width?: number;
