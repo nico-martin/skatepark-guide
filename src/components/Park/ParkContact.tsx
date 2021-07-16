@@ -1,7 +1,8 @@
 import React from 'react';
 import { Icon } from '@theme';
+import cn from '@common/utils/classnames';
 import { nl2br } from '@common/utils/helpers';
-import './ParkContact.css';
+import styles from './ParkContact.css';
 
 const mapIconToContact = {
   homepage: 'link',
@@ -20,7 +21,7 @@ const ParkContact = ({
   };
   className?: string;
 }) => (
-  <div className={`${className} park-contact`}>
+  <div className={cn(className, styles.root)}>
     {Object.entries(contacts).map(([key, value]) => {
       if (!value) {
         return;
@@ -50,9 +51,9 @@ const ParkContact = ({
       }
 
       return (
-        <div className="park-contact__element">
+        <div className={cn(styles.element)}>
           <Icon
-            className="park-contact__icon"
+            className={cn(styles.icon)}
             icon={`mdi/${
               key in mapIconToContact ? mapIconToContact[key] : 'link'
             }`}

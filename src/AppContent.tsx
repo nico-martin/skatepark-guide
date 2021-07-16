@@ -90,7 +90,7 @@ const AppContent = ({ className = '' }: { className?: string }) => {
           : {}),
       }}
     >
-      <Route path="/:lang/about/:slug?/" location={delayedLocation}>
+      <Route path="/:lang/:slug?/" location={delayedLocation}>
         <Page className={cn(styles.content)} />
       </Route>
       <Route path="/:lang/park/:slug/" location={delayedLocation}>

@@ -1,4 +1,4 @@
-import { ApiParkI, MapParkI, ParkI } from '@common/types/parks';
+import { ApiParkI, MapParkI, ApiParkWeatherI } from '@common/types/parks';
 import { API } from '@common/utils/constants';
 import { apiGet } from './apiFetch';
 
@@ -17,4 +17,4 @@ export const getPark = (slug: string) =>
   apiGet<Array<ApiParkI>>(`${API.PARKS}?slug=${slug}`);
 
 export const getWeather = (slug: string, locale: string) =>
-  apiGet(`${API.REST}park-weather/${slug}/?lang=${locale}`);
+  apiGet<ApiParkWeatherI>(`${API.REST}park-weather/${slug}/?lang=${locale}`);

@@ -7,12 +7,16 @@
   z-index: 9999;
 }
 
-.title {
-  padding: var(--spacing) var(--spacing) 0 var(--spacing);
+.contentElement {
+  padding: 0 var(--spacing);
+
+  & + .contentElement {
+    margin-top: var(--spacing-page);
+  }
 }
 
-.loader {
-  margin-top: 15vh;
+.title {
+  padding: var(--spacing);
 }
 
 .video {
@@ -60,10 +64,9 @@
   }
 }
 
-.body {
-  padding: var(--spacing);
+.contact {
+}
 
-  & > * + * {
-    margin-top: var(--spacing);
-  }
+.main {
+  margin-bottom: var(--spacing-page);
 }

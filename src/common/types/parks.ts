@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { ApiImageI } from '@common/types/image';
 
 interface ParkFacilitiesI {
@@ -71,10 +72,58 @@ export interface ParkI {
   video: string;
   anlage: string;
   facilities: ParkFacilitiesI;
-  homepage: string;
-  email: string;
-  phone: string;
-  facebook: string;
-  address: string;
+  contact: {
+    homepage: string;
+    email: string;
+    phone: string;
+    facebook: string;
+    address: string;
+  };
   map: GeoDataI;
+}
+
+export interface ApiParkWeatherI {
+  city: {
+    name: string;
+    coord: {
+      lat: number;
+      lon: number;
+    };
+    country: string;
+  };
+  days: Array<{
+    localDateTime: string;
+    icon: string;
+    temp: number;
+    desc: string;
+    weekday: string;
+  }>;
+  source: {
+    url: string;
+    time: string;
+  };
+}
+
+export interface ParkWeatherDayI {
+  localDateTime: dayjs.Dayjs;
+  icon: string;
+  temp: number;
+  desc: string;
+  weekday: string;
+}
+
+export interface ParkWeatherI {
+  city: {
+    name: string;
+    coord: {
+      lat: number;
+      lon: number;
+    };
+    country: string;
+  };
+  days: Array<ParkWeatherDayI>;
+  source: {
+    url: string;
+    time: string;
+  };
 }

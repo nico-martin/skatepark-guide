@@ -30,9 +30,10 @@ module.exports = (env, argv) => {
     },
     output: {
       path: dirDist,
-      filename: 'assets/[name]-[hash].js',
+      filename: dev ? 'assets/[name].js' : 'assets/[name]-[fullhash].js',
       publicPath: '/',
     },
+    target: 'web',
     devtool: dev ? 'source-map' : false,
     mode: dev ? 'development' : 'production',
     devServer: {
@@ -117,6 +118,16 @@ module.exports = (env, argv) => {
         template: 'src/index.html',
         filename: './index.html',
         chunksSortMode: 'none',
+        minify: dev
+          ? false
+          : {
+              collapseWhitespace: true,
+              removeComments: true,
+              removeRedundantAttributes: true,
+              removeScriptTypeAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              useShortDoctype: true,
+            },
       }),
       new DefinePlugin({
         IS_DEV: JSON.stringify(dev),

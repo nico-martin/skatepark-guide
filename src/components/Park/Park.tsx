@@ -1,11 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Loader, Message } from '@theme';
+import { FullLoader, Loader, Message } from '@theme';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
 import cn from '@common/utils/classnames';
 import ParkContact from '@comp/Park/ParkContact';
 import ParkGallery from '@comp/Park/ParkGallery';
-//import { getPark } from '@common/vendor/api/spg';
 import ParkHeader from '@comp/Park/ParkHeader';
 import ParkVideo from '@comp/Park/ParkVideo';
 import ParkWeather from '@comp/Park/ParkWeather';
@@ -23,31 +22,44 @@ const Park = ({ className = '' }: { className?: string }) => {
     >
       <ParkHeader className={cn(styles.header)} park={data} scroll={scroll} />
       <h1 className={cn(styles.title)}>{data?.title || ''}</h1>
-      <div className={cn(styles.content)}>
-        {state === PARK_API_STATES.LOADING && (
-          <Loader className={cn(styles.loader)} />
-        )}
+      <main className={styles.main}>
+        {state === PARK_API_STATES.LOADING && <FullLoader large spacingTop />}
         {state === PARK_API_STATES.ERROR && (
           <Message type="error">error: {error}</Message>
         )}
         {state === PARK_API_STATES.SUCCESS && (
           <React.Fragment>
-            <ParkVideo videoLink={data.video} className={cn(styles.video)} />
-            {Boolean(data.gallery) && (
-              <ParkGallery className={styles.gallery} images={data.gallery} />
+            {Boolean(data.video) && (
+              <ParkVideo
+                videoLink={data.video}
+                className={cn(styles.video, styles.contentElement)}
+              />
             )}
-            <div
-              className={cn(styles.content)}
-              dangerouslySetInnerHTML={{ __html: data.content }}
+            {Boolean(data.gallery) && (
+              <ParkGallery
+                className={cn(styles.gallery, styles.contentElement)}
+                images={data.gallery}
+              />
+            )}
+            {Boolean(data.content) && (
+              <div
+                className={cn(styles.content, styles.contentElement)}
+                dangerouslySetInnerHTML={{ __html: data.content }}
+              />
+            )}
+            {Object.keys(data.contact).length !== 0 && (
+              <ParkContact
+                contacts={data.contact || {}}
+                className={cn(styles.contact, styles.contentElement)}
+              />
+            )}
+            <ParkWeather
+              className={cn(styles.weather, styles.contentElement)}
+              slug={data.slug}
             />
-            {/*<ParkContact
-              contacts={data.contact || {}}
-              className='park__content'
-            />*/}
-            <ParkWeather className={cn(styles.weather)} slug={data.slug} />
           </React.Fragment>
         )}
-      </div>
+      </main>
     </article>
   );
 };

@@ -33,11 +33,13 @@ export const usePark = (
           video: data.parksVideo,
           anlage: data.parksAnlage,
           facilities: data.parksFacilities,
-          homepage: data.parksHomepage,
-          email: data.parksEmail,
-          phone: data.parksPhone,
-          facebook: data.parksFacebook,
-          address: data.parksAddress,
+          contact: {
+            homepage: data.parksHomepage,
+            email: data.parksEmail,
+            phone: data.parksPhone,
+            facebook: data.parksFacebook,
+            address: data.parksAddress,
+          },
           map: data.map,
         });
         setState(PARK_API_STATES.SUCCESS);

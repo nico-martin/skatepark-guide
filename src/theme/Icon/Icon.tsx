@@ -9,6 +9,7 @@ interface Props {
   spinning?: boolean;
   button?: boolean;
   round?: boolean;
+  [key: string]: any;
 }
 
 const Icon = ({
@@ -18,6 +19,7 @@ const Icon = ({
   rotate = false,
   button = false,
   round = false,
+  ...props
 }: Props) => {
   const [loadedIcon, setLoadedIcon] = React.useState('');
 
@@ -27,6 +29,7 @@ const Icon = ({
         /* webpackMode: "eager" */ `../../static/icons/${icon}.svg`
       );
     }
+
     loadIcon().then((loaded) => setLoadedIcon(loaded.default));
   }, [icon]);
 
@@ -43,6 +46,7 @@ const Icon = ({
         }
       )}
       dangerouslySetInnerHTML={{ __html: loadedIcon }}
+      {...props}
     />
   );
 };

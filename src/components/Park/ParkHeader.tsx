@@ -5,6 +5,8 @@ import { ParkI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
 import styles from './ParkHeader.css';
 
+// todo: readd "love" functionality
+
 const headerHeight = 260;
 const titleHeght = 60;
 const maxScroll = headerHeight - titleHeght;

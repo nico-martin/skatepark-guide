@@ -1,27 +1,11 @@
 import React from 'react';
-
-const ParkWeather = ({
-  className = '',
-  slug,
-}: {
-  className?: string;
-  slug: string;
-}) => {
-  return <p>WEATHER: {slug}</p>;
-};
-
-export default ParkWeather;
-
-/*import React, { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import dayjs from 'dayjs';
-
-import { useApi, states as apiStates } from '@app/hooks/useApi';
-import { Icon, Loader, Message } from '@app/theme';
-import { getWeather } from '@app/vendor/api/spg';
-
-import './ParkWeather.css';
-import { ApiWeather } from '@app/vendor/@types';
+import { Icon, Loader } from '@theme';
+import { useWeather, WEATHER_API_STATES } from '@common/hooks/useWeather';
+import { ParkWeatherDayI } from '@common/types/parks';
+import cn from '@common/utils/classnames';
+import dayjs from '@common/utils/dayjs';
+import styles from './ParkWeather.css';
 
 const ParkWeather = ({
   className = '',
@@ -30,70 +14,60 @@ const ParkWeather = ({
   className?: string;
   slug: string;
 }) => {
-  const [days, setDays] = useState<{
-    [key: string]: ApiWeather;
-  }>(null);
-  const { locale } = useIntl();
-  const { data = {}, state, error } = useApi(() => getWeather(slug, locale));
-
+  const { state, data, error } = useWeather(slug);
   const { formatMessage } = useIntl();
+  const days = React.useMemo<Array<ParkWeatherDayI>>(
+    () =>
+      data?.days
+        ? data?.days.filter(
+            (day, i, days) =>
+              day.localDateTime.isAfter(14, 'h') &&
+              !days[i - 1]?.localDateTime.isSame(day.localDateTime, 'day')
+          )
+        : [],
+    [data?.days]
+  );
 
-  useEffect(() => {
-    const daysToSet = {};
-    if (data.list) {
-      data.list.map(weather => {
-        const weatherDate = dayjs(weather['dt_txt']);
-        const day = weatherDate.format('YYYY-MM-DD');
-        if (!(day in days) && parseInt(weatherDate.format('HH')) <= 14) {
-          daysToSet[day] = { ...weather, h: weatherDate.format('HH') };
-        }
-      });
-    }
-    setDays(daysToSet);
-  }, [data]);
+  if (state === WEATHER_API_STATES.ERROR) {
+    return null;
+  }
 
   return (
-    <div className={`${className} park-weather`}>
-      <h2 className="park-weather__title">
-        {formatMessage({ id: 'park.weather' })}
-      </h2>
-      {state === apiStates.LOADING && (
-        <Loader className="park-weather__loader" />
+    <div className={cn(className)}>
+      <h2 className={styles.title}>{formatMessage({ id: 'park.weather' })}</h2>
+      {state === WEATHER_API_STATES.LOADING && (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
       )}
-      {state === apiStates.ERROR && <Message type="error">{error}</Message>}
-      {state === apiStates.SUCCESS && (
+      {state === WEATHER_API_STATES.SUCCESS && (
         <React.Fragment>
-          <p className="park-weather__source">
+          <p className={styles.source}>
             {formatMessage(
               { id: 'park.weather.source' },
               {
                 source: (
-                  <a
-                    href={`https://openweathermap.org/weathermap?zoom=12&lat=${data.city.coord.lat}&lon=${data.city.coord.lon}`}
-                    target="_blank"
-                  >
-                    openweathermap.org
+                  <a href={data.source.url} target="_blank">
+                    openweathermap.org ({dayjs(data.source.time).format('lll')})
                   </a>
                 ),
               }
             )}
           </p>
-          <ul className="park-weather__list">
-            {Object.values(days).map(day => (
-              <li className="park-weather__element">
-                <h4 className="park-weather__heading">
-                  {dayjs(day['dt_txt']).format('ddd')}
+          <ul className={styles.list}>
+            {Object.values(days).map((day) => (
+              <li className={styles.element}>
+                <h4 className={styles.heading}>
+                  {day.localDateTime.format('ddd')}
                 </h4>
                 <Icon
-                  className="park-weather__icon"
-                  icon={`mdi/weather/${day.weather[0].icon}`}
+                  className={styles.icon}
+                  icon={`mdi/weather/${day.icon}`}
+                  title={day.desc}
+                  alt={day.desc}
                 />
-                <span className="park-weather__description">
-                  {day.weather[0].description}
-                </span>
-                <span className="park-weather__temp">
-                  {Math.round(day.main.temp)} °C
-                </span>
+                <span className={styles.description}>{day.desc}</span>
+                <span className={styles.temp}>{day.temp} °C</span>
               </li>
             ))}
           </ul>
@@ -103,4 +77,4 @@ const ParkWeather = ({
   );
 };
 
-export default ParkWeather;*/
+export default ParkWeather;

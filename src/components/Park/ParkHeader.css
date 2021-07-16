@@ -39,5 +39,5 @@
 }
 
 .controlLove[aria-checked='true'] {
-  color: var(--c-feedback-error);
+  color: var(--c-feedback-danger);
 }

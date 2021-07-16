@@ -55,8 +55,10 @@
     "webpack-dev-server": "^3.11.2"
   },
   "browserslist": [
-    "> 1%",
-    "IE 11"
+    "ie >= 11",
+    "chrome >= 30",
+    "iOS >= 8",
+    "Android >= 4"
   ],
   "prettier": {
     "singleQuote": true,

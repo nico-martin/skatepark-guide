@@ -19,3 +19,5 @@ export const API: {
 export const MESSAGES = {
   GENERAL_ERROR: 'Something went wrong',
 };
+
+export const PAGES = ['about', 'impressum', 'privacy'];
