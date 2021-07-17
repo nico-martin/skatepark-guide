@@ -1,0 +1,83 @@
+.container {
+  display: flex;
+  vertical-align: top;
+}
+
+.labelContainer {
+  width: 150px;
+  margin-right: var(--spacing-half);
+  display: block;
+}
+
+.description {
+  color: #676767;
+
+  p {
+    font-size: 0.9em;
+  }
+}
+
+.label {
+  //font-weight: bold;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.input:not([type='checkbox']) {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.error {
+  color: var(--c-feedback-danger);
+  font-size: 0.8em !important;
+}
+
+/*
+ types
+ */
+
+.containerIsStacked {
+  flex-direction: column;
+
+  .labelContainer {
+    margin-right: 0;
+    width: 100%;
+    margin-bottom: var(--spacing-half);
+  }
+}
+
+.containerIsInline {
+  justify-content: flex-end;
+
+  .labelContainer {
+    width: auto;
+  }
+
+  .content {
+    flex: 0 0 auto;
+  }
+}
+
+/*
+ reverse
+ */
+
+.containerOrderReverse {
+  flex-direction: row-reverse;
+
+  .labelContainer {
+    margin-right: 0;
+    margin-left: var(--spacing-half);
+  }
+}
+
+.containerIsStacked.containerOrderReverse {
+  flex-direction: column-reverse;
+
+  .labelContainer {
+    margin-left: 0;
+  }
+}

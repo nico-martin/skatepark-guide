@@ -7,6 +7,12 @@
   "park.share.text": "Check out \"{parkTitle}\" on skatepark.guide",
   "park.weather": "Weather",
   "park.weather.source": "Source: {source}",
+  "park.facility.bowl": "Bowl",
+  "park.facility.mini": "Miniramp",
+  "park.facility.street": "Street",
+  "park.facility.pumptrack": "Pumptrack",
   "settings.filter": "Filter",
+  "settings.location": "Location",
+  "settings.app": "App-Settings",
   "map.loading.error": "The entries on the map could not be loaded."
 }

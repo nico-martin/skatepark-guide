@@ -12,4 +12,24 @@
   }
 
   padding: var(--spacing);
+  display: flex;
+  flex-direction: column;
+}
+
+.filterForm {
+  grid-template-columns: 1fr 1fr;
+  margin-top: var(--spacing);
+}
+
+.filter {
+}
+
+.location {
+  margin-top: var(--spacing-page);
+}
+
+.app {
+  margin-top: auto;
+  padding-top: var(--spacing-page);
+  padding-bottom: calc(var(--spacing) + 1.1rem + 1.1vmin + 2rem);
 }

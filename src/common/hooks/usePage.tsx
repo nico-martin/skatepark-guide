@@ -19,7 +19,6 @@ export const usePage = (
   const [state, setState] = React.useState<string>(PAGE_API_STATES.LOADING);
   const [error, setError] = React.useState<string>('');
   const [data, setData] = React.useState<ApiPageI>();
-  const { locale } = useLocale();
 
   React.useEffect(() => {
     setState(PAGE_API_STATES.LOADING);
