@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Logo } from '@theme';
+import { MapParksContextProvider } from '@common/hooks/mapParksContext';
 import IntlLink from '@common/intl/IntlLink';
 import { IntlContextProvider } from '@common/intl/intlContext';
 import { ToastProvider } from '@common/toast/toastContext';
@@ -33,7 +34,9 @@ ReactDOM.render(
   <Router>
     <IntlContextProvider>
       <ToastProvider>
-        <App />
+        <MapParksContextProvider>
+          <App />
+        </MapParksContextProvider>
       </ToastProvider>
     </IntlContextProvider>
   </Router>,

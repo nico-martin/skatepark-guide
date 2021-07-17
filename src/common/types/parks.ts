@@ -1,12 +1,8 @@
 import dayjs from 'dayjs';
 import { ApiImageI } from '@common/types/image';
+import { PARK_FACILITIES } from '@common/utils/constants';
 
-interface ParkFacilitiesI {
-  bowl: boolean;
-  mini: boolean;
-  street: boolean;
-  pumptrack: boolean;
-}
+export type ParkFacilitiesT = Record<typeof PARK_FACILITIES[number], boolean>;
 
 interface GeoDataI {
   lat: number;
@@ -19,7 +15,7 @@ export interface MapParkI {
   title: string;
   map: GeoDataI;
   headImage: null;
-  parksFacilities: ParkFacilitiesI;
+  parksFacilities: ParkFacilitiesT;
   status: number;
 }
 
@@ -53,7 +49,7 @@ export interface ApiParkI {
   parksGallery: Array<ApiImageI>;
   parksVideo: string;
   parksAnlage: string;
-  parksFacilities: ParkFacilitiesI;
+  parksFacilities: ParkFacilitiesT;
   parksHomepage: string;
   parksEmail: string;
   parksPhone: string;
@@ -71,7 +67,7 @@ export interface ParkI {
   gallery: Array<ApiImageI>;
   video: string;
   anlage: string;
-  facilities: ParkFacilitiesI;
+  facilities: ParkFacilitiesT;
   contact: {
     homepage: string;
     email: string;

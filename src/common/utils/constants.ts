@@ -21,3 +21,5 @@ export const MESSAGES = {
 };
 
 export const PAGES = ['about', 'impressum', 'privacy'];
+
+export const PARK_FACILITIES = ['bowl', 'mini', 'street', 'pumptrack'];

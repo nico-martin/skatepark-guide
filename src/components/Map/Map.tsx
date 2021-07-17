@@ -2,7 +2,7 @@ import GoogleMapReact from 'google-map-react';
 import React from 'react';
 import { Loader } from '@theme';
 import { getIPLatLng } from '@common/api/park';
-import { useMapParks } from '@common/hooks/useMapParks';
+import { useMapParks, useMapBounds } from '@common/hooks/mapParksContext';
 import { settingsDB } from '@common/idb';
 import cn from '@common/utils/classnames';
 import { gmapsKey, styles as mapStyles } from '@common/utils/maps';
@@ -16,12 +16,13 @@ const Map = ({ className = '' }: { className?: string }) => {
   const [zoom, setZoom] = React.useState<number>(null);
   const [map, setMap] = React.useState(null);
 
-  const { updateBounds, showLoader, parks } = useMapParks();
+  const { showLoader, parks } = useMapParks();
+  const { updateMapBounds } = useMapBounds();
 
   const loadParks = () => {
     if (map) {
       const bounds = map.getBounds();
-      updateBounds([
+      updateMapBounds([
         bounds.getSouthWest().lat(),
         bounds.getNorthEast().lat(),
         bounds.getSouthWest().lng(),

@@ -1,3 +1,5 @@
+import { ParkFacilitiesT } from '@common/types/parks';
+
 export const untrailingSlashIt = (str: string): string =>
   str.replace(/\/$/, '');
 
@@ -28,3 +30,10 @@ export const unique = (key: string, scope: string = 'global'): string => {
   ids[scope].push(id);
   return id;
 };
+
+export const getActiveFacilities = (
+  facilities: ParkFacilitiesT
+): Array<string> =>
+  Object.entries(facilities)
+    .map(([item, isSet]) => (isSet ? item : null))
+    .filter(Boolean);
