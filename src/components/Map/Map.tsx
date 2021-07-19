@@ -56,7 +56,6 @@ const Map = ({ className = '' }: { className?: string }) => {
   }, []);
 
   React.useEffect(() => {
-    console.log(prevUserPosition.current);
     if (!Boolean(prevUserPosition?.current) && userPosition) {
       setCenter({ lat: userPosition.lat, lng: userPosition.lng });
       setZoom(14);

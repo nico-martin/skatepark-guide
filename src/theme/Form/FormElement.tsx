@@ -22,14 +22,14 @@ const FormElement = ({
   label?: string;
   name: string;
   rules?: any;
-  Input?: any;
+  Input: any;
   Description?: any;
   className?: string;
   inputClassName?: string;
   sanitizeValue?: Function;
   type?: 'table' | 'stacked' | 'inline';
   reverse?: boolean;
-  onChange: (e: string | boolean) => void;
+  onChange?: (e: string | boolean) => void;
   [key: string]: any;
 }) => {
   const { field } = form
@@ -45,7 +45,10 @@ const FormElement = ({
       };
 
   const error = React.useMemo(
-    () => (form && name in form.errors ? form.errors[name] : null),
+    () =>
+      form?.formState?.errors && form.formState.errors[name]
+        ? form.formState.errors[name]
+        : null,
     [form, name]
   );
 
@@ -70,7 +73,7 @@ const FormElement = ({
           className={cn(styles.input, inputClassName)}
           {...field}
           {...inputProps}
-          //onBlur={(e) => e && field.onChange(sanitizeValue(e.target.value))}
+          onBlur={(e) => e && field.onChange(sanitizeValue(e.target.value))}
         />
         {error && <p className={styles.error}>{error.message}</p>}
       </div>

@@ -13,6 +13,8 @@ const Button = ({
   onClick,
   round = false,
   white = false,
+  isLoading = false,
+  disabled = false,
   icon,
   ...props
 }: {
@@ -23,6 +25,8 @@ const Button = ({
   onClick?: Function;
   round?: boolean;
   white?: boolean;
+  isLoading?: boolean;
+  disabled?: boolean;
   icon?: string;
   [x: string]: any;
 }) => {
@@ -32,6 +36,8 @@ const Button = ({
     [styles.isRound]: round,
     [styles.bkgWhite]: white,
   });
+
+  // todo: add loader if isLoading
 
   const content = (
     <React.Fragment>
@@ -51,8 +57,10 @@ const Button = ({
   return React.createElement(
     element,
     {
+      disabled: isLoading || disabled,
       className: classes,
-      onClick: element === 'button' ? () => onClick() : null,
+      onClick:
+        element === 'button' && Boolean(onClick) ? () => onClick() : null,
       ...props,
     },
     content

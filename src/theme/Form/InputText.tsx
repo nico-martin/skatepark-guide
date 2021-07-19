@@ -1,16 +1,18 @@
 import React from 'react';
+import cn from '@common/utils/classnames';
+import inputStyles from './Input.css';
 
 const InputText = ({
   name,
   value = '',
   className = '',
-  type = 'text',
+  inputType = 'text',
   ...props
 }: {
   name: string;
   value?: string;
   className?: string;
-  type?:
+  inputType?:
     | 'text'
     | 'color'
     | 'date'
@@ -28,10 +30,10 @@ const InputText = ({
 }) => (
   <input
     name={name}
-    className={className}
+    className={cn(className, inputStyles.input)}
     id={name}
     value={value}
-    type={type}
+    type={inputType}
     {...props}
   />
 );

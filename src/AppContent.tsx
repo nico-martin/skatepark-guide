@@ -1,9 +1,10 @@
 import * as H from 'history';
 import React from 'react';
-import { Route, useLocation, useHistory } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import { useLocale } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
 import { unleadingSlashIt, untrailingSlashIt } from '@common/utils/helpers';
+import Account from '@comp/Account/Account';
 import Page from '@comp/Page/Page';
 import Park from '@comp/Park/Park';
 import styles from './AppContent.css';
@@ -90,12 +91,20 @@ const AppContent = ({ className = '' }: { className?: string }) => {
           : {}),
       }}
     >
-      <Route path="/:lang/:slug?/" location={delayedLocation}>
-        <Page className={cn(styles.content)} />
-      </Route>
-      <Route path="/:lang/park/:slug/" location={delayedLocation}>
-        <Park className={cn(styles.content)} />
-      </Route>
+      <Switch>
+        <Route path="/:lang/account/" location={delayedLocation}>
+          <Account className={cn(styles.content)} />
+        </Route>
+        <Route path="/:lang/park/edit/:slug/" location={delayedLocation}>
+          <p>Edit</p>
+        </Route>
+        <Route path="/:lang/park/:slug/" location={delayedLocation}>
+          <Park className={cn(styles.content)} />
+        </Route>
+        <Route path="/:lang/:slug/" location={delayedLocation}>
+          <Page className={cn(styles.content)} />
+        </Route>
+      </Switch>
     </div>
   );
 };

@@ -10,9 +10,7 @@ import styles from './Page.css';
 
 const Page = ({ className = '' }: { className?: string }) => {
   const { slug } = useParams<{ slug: string }>();
-  if (!slug || slug === 'park') {
-    return null;
-  }
+
   const { state, data, error } = usePage(slug);
   const { formatMessage } = useIntl();
 
