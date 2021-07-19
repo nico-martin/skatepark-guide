@@ -4,7 +4,7 @@ import { PARK_FACILITIES } from '@common/utils/constants';
 
 export type ParkFacilitiesT = Record<typeof PARK_FACILITIES[number], boolean>;
 
-interface GeoDataI {
+export interface GeoDataI {
   lat: number;
   lng: number;
 }
@@ -81,10 +81,7 @@ export interface ParkI {
 export interface ApiParkWeatherI {
   city: {
     name: string;
-    coord: {
-      lat: number;
-      lon: number;
-    };
+    coord: GeoDataI;
     country: string;
   };
   days: Array<{
@@ -111,10 +108,7 @@ export interface ParkWeatherDayI {
 export interface ParkWeatherI {
   city: {
     name: string;
-    coord: {
-      lat: number;
-      lon: number;
-    };
+    coord: GeoDataI;
     country: string;
   };
   days: Array<ParkWeatherDayI>;

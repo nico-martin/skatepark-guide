@@ -18,7 +18,11 @@
   "park.facility.pumptrack": "Pumptrack",
   "settings.filter": "Filter",
   "settings.location": "Location",
+  "settings.location.action": "Show my position",
+  "settings.location.active": "Position is displayed..",
+  "settings.location.error": "Geo position could not be loaded",
   "settings.app": "App-Settings",
   "settings.app.install": "Install this app",
-  "settings.app.share": "Share this app"
+  "settings.app.share": "Share this app",
+  "settings.app.share.text": "There is a neat Skatepark App"
 }

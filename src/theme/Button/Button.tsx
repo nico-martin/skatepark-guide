@@ -8,6 +8,7 @@ import styles from './Button.css';
 const Button = ({
   element = 'button',
   className = '',
+  classNameIcon = '',
   children,
   onClick,
   round = false,
@@ -17,6 +18,7 @@ const Button = ({
 }: {
   element?: 'button' | 'router' | 'a';
   className?: string;
+  classNameIcon?: string;
   children?: VNode | VNode[] | string;
   onClick?: Function;
   round?: boolean;
@@ -33,7 +35,7 @@ const Button = ({
 
   const content = (
     <React.Fragment>
-      {icon && <Icon icon={icon} className={styles.icon} />}
+      {icon && <Icon icon={icon} className={cn(styles.icon, classNameIcon)} />}
       {children && <span className={styles.text}>{children}</span>}
     </React.Fragment>
   );

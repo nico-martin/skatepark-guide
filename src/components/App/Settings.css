@@ -28,6 +28,35 @@
   margin-top: var(--spacing-page);
 }
 
+.locationButton {
+  margin-top: var(--spacing);
+}
+
+.locationButtonIcon {
+  opacity: 0.3;
+}
+
+@keyframes pulse {
+  0% {
+    color: var(--c-p);
+    opacity: 0.3;
+  }
+
+  50% {
+    color: var(--c-secondary);
+    opacity: 1;
+  }
+
+  100% {
+    color: var(--c-p);
+    opacity: 0.3;
+  }
+}
+
+.locationButtonActive .locationButtonIcon {
+  animation: pulse 1s infinite;
+}
+
 .app {
   margin-top: auto;
   padding-top: var(--spacing-page);
@@ -68,6 +97,7 @@
   display: flex;
   align-items: center;
   padding: 0.5em 0;
+  cursor: pointer;
 }
 
 .appSettingsButtonIcon {

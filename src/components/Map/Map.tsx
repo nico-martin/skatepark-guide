@@ -2,7 +2,11 @@ import GoogleMapReact from 'google-map-react';
 import React from 'react';
 import { Loader } from '@theme';
 import { getIPLatLng } from '@common/api/park';
-import { useMapParks, useMapBounds } from '@common/hooks/mapParksContext';
+import {
+  useMapParks,
+  useMapBounds,
+  useUserPosition,
+} from '@common/hooks/mapParksContext';
 import { settingsDB } from '@common/idb';
 import cn from '@common/utils/classnames';
 import { gmapsKey, styles as mapStyles } from '@common/utils/maps';
@@ -18,6 +22,8 @@ const Map = ({ className = '' }: { className?: string }) => {
 
   const { showLoader, parks } = useMapParks();
   const { updateMapBounds } = useMapBounds();
+  const { userPosition } = useUserPosition();
+  const prevUserPosition = React.useRef();
 
   const loadParks = () => {
     if (map) {
@@ -49,6 +55,15 @@ const Map = ({ className = '' }: { className?: string }) => {
     });
   }, []);
 
+  React.useEffect(() => {
+    console.log(prevUserPosition.current);
+    if (!Boolean(prevUserPosition?.current) && userPosition) {
+      setCenter({ lat: userPosition.lat, lng: userPosition.lng });
+      setZoom(14);
+    }
+    prevUserPosition.current = userPosition;
+  }, [userPosition]);
+
   React.useEffect(() => loadParks(), [map]);
 
   if (!center || !defaultZoom) {
@@ -63,7 +78,9 @@ const Map = ({ className = '' }: { className?: string }) => {
       <GoogleMapReact
         bootstrapURLKeys={{ key: gmapsKey }}
         defaultCenter={center}
+        center={center}
         defaultZoom={defaultZoom}
+        zoom={zoom}
         options={{
           disableDefaultUI: true,
           styles: mapStyles,
@@ -72,6 +89,7 @@ const Map = ({ className = '' }: { className?: string }) => {
           settingsDB.set('center', v.center);
           settingsDB.set('zoom', v.zoom);
           setZoom(v.zoom);
+          setCenter(v.center);
         }}
         onDragEnd={() => loadParks()}
         onZoomAnimationEnd={() => loadParks()}
@@ -86,6 +104,14 @@ const Map = ({ className = '' }: { className?: string }) => {
             slug={marker.slug}
           />
         ))}
+        {userPosition && (
+          <Marker
+            name="User"
+            lat={userPosition.lat}
+            lng={userPosition.lng}
+            small={zoom <= 9}
+          />
+        )}
       </GoogleMapReact>
     </div>
   );

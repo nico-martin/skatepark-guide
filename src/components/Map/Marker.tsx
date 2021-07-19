@@ -11,13 +11,18 @@ const Marker = ({
   name: string;
   lat: number;
   lng: number;
-  slug: string;
+  slug?: string;
   small?: boolean;
 }) => {
-  return (
+  return slug ? (
     <IntlLink
       href={`park/${slug}/`}
       className={cn(styles.root, { [styles.isSmall]: small })}
+      title={name}
+    />
+  ) : (
+    <span
+      className={cn(styles.root, styles.user, { [styles.isSmall]: small })}
       title={name}
     />
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { getMapParks, MapBounds } from '@common/api/park';
 import { TOAST_BUTTON_TYPES, useToast } from '@common/toast/toastContext';
-import { MapParkI, ParkFacilitiesT } from '@common/types/parks';
+import { GeoDataI, MapParkI, ParkFacilitiesT } from '@common/types/parks';
 import { PARK_FACILITIES } from '@common/utils/constants';
 import { getActiveFacilities } from '@common/utils/helpers';
 
@@ -17,12 +17,16 @@ const MapParksContext = React.createContext<{
   updateBounds: (bounds: MapBounds) => void;
   updateFilter: (filter: Partial<ParkFacilitiesT>) => void;
   filter: ParkFacilitiesT;
+  userPosition: GeoDataI;
+  setUserPosition: (data: GeoDataI) => void;
 }>({
   parks: {},
   showLoader: false,
   updateBounds: () => {},
   updateFilter: () => {},
   filter: initialFilterState,
+  userPosition: null,
+  setUserPosition: () => {},
 });
 
 export const MapParksContextProvider = ({ children }: { children: any }) => {
@@ -30,6 +34,7 @@ export const MapParksContextProvider = ({ children }: { children: any }) => {
   const [showLoader, setShowLoader] = React.useState<boolean>(false);
   const [filter, setFilter] =
     React.useState<ParkFacilitiesT>(initialFilterState);
+  const [userPosition, setUserPosition] = React.useState<GeoDataI>();
 
   const { formatMessage } = useIntl();
   const { addToast } = useToast();
@@ -72,6 +77,8 @@ export const MapParksContextProvider = ({ children }: { children: any }) => {
         updateBounds,
         updateFilter: (newFilter) => setFilter({ ...filter, ...newFilter }),
         filter,
+        userPosition,
+        setUserPosition,
       }}
     >
       {children}
@@ -100,4 +107,42 @@ export const useMapFilter = (): {
 } => {
   const { updateFilter, filter } = React.useContext(MapParksContext);
   return { filter, updateFilter };
+};
+
+export const useUserPosition = (): {
+  watchPosition: () => void;
+  clearPosition: () => void;
+  userPosition: GeoDataI;
+} => {
+  const [watchId, setWatchId] = React.useState<number>(null);
+  const { userPosition, setUserPosition } = React.useContext(MapParksContext);
+  const { formatMessage } = useIntl();
+
+  const watchPosition = () => {
+    watchId && navigator.geolocation.clearWatch(watchId);
+    setWatchId(
+      navigator.geolocation.watchPosition(
+        (position) =>
+          setUserPosition({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }),
+        () => {
+          alert(formatMessage({ id: 'settings.location.error' }));
+          setUserPosition(null);
+        }
+      )
+    );
+  };
+
+  const clearPosition = () => {
+    watchId && navigator.geolocation.clearWatch(watchId);
+    setWatchId(null);
+    setUserPosition(null);
+  };
+  return {
+    watchPosition,
+    clearPosition,
+    userPosition,
+  };
 };

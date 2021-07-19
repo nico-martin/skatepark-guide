@@ -8,7 +8,7 @@ import {
   InputCheckbox,
   InputSelect,
 } from '@theme';
-import { useMapFilter } from '@common/hooks/mapParksContext';
+import { useMapFilter, useUserPosition } from '@common/hooks/mapParksContext';
 import { useLocale } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
 import styles from './Settings.css';
@@ -25,6 +25,8 @@ const Settings = ({
   const { updateFilter, filter } = useMapFilter();
   const { activeLocale, localeKeys, changeLocale, changeLocalePending } =
     useLocale();
+  const { watchPosition, clearPosition, userPosition } = useUserPosition();
+
   return (
     <React.Fragment>
       <div className={cn(settingsClassName, styles.root)} aria-hidden={!open}>
@@ -48,10 +50,34 @@ const Settings = ({
             ))}
           </Form>
         </div>
-        {/* todo: add location button
-        <div className={cn(styles.location)}>
-          <h2>{formatMessage({ id: 'settings.location' })}</h2>
-        </div>*/}
+        {'geolocation' in window.navigator && (
+          <div className={cn(styles.location)}>
+            <h2>{formatMessage({ id: 'settings.location' })}</h2>
+            <Button
+              className={cn(styles.locationButton, {
+                [styles.locationButtonActive]: Boolean(userPosition),
+              })}
+              classNameIcon={styles.locationButtonIcon}
+              icon="mdi/location-full"
+              onClick={() => {
+                if (userPosition) {
+                  clearPosition();
+                } else {
+                  watchPosition();
+                  setOpen(false);
+                }
+              }}
+              white
+              round
+            >
+              {formatMessage({
+                id: userPosition
+                  ? 'settings.location.active'
+                  : 'settings.location.action',
+              })}
+            </Button>
+          </div>
+        )}
         <div className={cn(styles.app)}>
           <h2 className={styles.appHeading}>
             {formatMessage({ id: 'settings.app' })}
@@ -73,18 +99,40 @@ const Settings = ({
               disabled={changeLocalePending}
             />
           </div>
-          <div className={styles.appSettings}>
-            <button className={styles.appSettingsButton}>
-              <Icon icon="mdi/a2h" className={styles.appSettingsButtonIcon} />
-              {formatMessage({ id: 'settings.app.install' })}
-            </button>
-          </div>
-          <div className={styles.appSettings}>
-            <button className={styles.appSettingsButton}>
-              <Icon icon="mdi/share" className={styles.appSettingsButtonIcon} />
-              {formatMessage({ id: 'settings.app.share' })}
-            </button>
-          </div>
+          {window.installEvent !== null && (
+            <div className={styles.appSettings}>
+              <button
+                className={styles.appSettingsButton}
+                onClick={() => window.installEvent.prompt()}
+              >
+                <Icon icon="mdi/a2h" className={styles.appSettingsButtonIcon} />
+                {formatMessage({ id: 'settings.app.install' })}
+              </button>
+            </div>
+          )}
+          {'share' in window.navigator && (
+            <div className={styles.appSettings}>
+              <button
+                className={styles.appSettingsButton}
+                onClick={() =>
+                  window.navigator
+                    .share({
+                      title: formatMessage({ id: 'settings.app.share' }),
+                      text: formatMessage({ id: 'settings.app.share.text' }),
+                      url: window.location.href,
+                    })
+                    .then(() => console.log('Successful share'))
+                    .catch((error) => console.log('Error sharing', error))
+                }
+              >
+                <Icon
+                  icon="mdi/share"
+                  className={styles.appSettingsButtonIcon}
+                />
+                {formatMessage({ id: 'settings.app.share' })}
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <Button
