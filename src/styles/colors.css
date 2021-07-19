@@ -11,8 +11,9 @@
   --c-feedback-success: var(--c-secondary-dark);
   --c-feedback-warning: var(--c-primary);
   --c-gray: #b9b8b8;
-  --c-gray-light: #e8e7e7;
+  --c-gray-light: #eeeded;
   --c-gray-dark: #989898;
-  --c-form-border-color: var(--c-gray-dark);
+  --c-form-background: var(--c-gray-light);
+  --c-form-border: var(--c-gray-dark);
   --c-form-border-focus: var(--c-p);
 }

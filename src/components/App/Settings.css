@@ -33,3 +33,43 @@
   padding-top: var(--spacing-page);
   padding-bottom: calc(var(--spacing) + 1.1rem + 1.1vmin + 2rem);
 }
+
+.appHeading {
+  margin-bottom: var(--spacing);
+}
+
+.appSettings {
+  position: relative;
+  padding: 0.8em 0;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: calc(var(--spacing) * -1);
+    left: calc(var(--spacing) * -1);
+    height: 1px;
+    background-color: var(--c-gray);
+  }
+
+  &::after {
+    top: inherit;
+    bottom: 0;
+    display: none;
+  }
+
+  &:last-child::after {
+    display: block;
+  }
+}
+
+.appSettingsButton {
+  display: flex;
+  align-items: center;
+  padding: 0.5em 0;
+}
+
+.appSettingsButtonIcon {
+  margin-right: 0.5rem;
+}

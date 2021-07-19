@@ -1,7 +1,15 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Button, Form, FormElement, InputCheckbox } from '@theme';
+import {
+  Button,
+  Form,
+  FormElement,
+  Icon,
+  InputCheckbox,
+  InputSelect,
+} from '@theme';
 import { useMapFilter } from '@common/hooks/mapParksContext';
+import { useLocale } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
 import styles from './Settings.css';
 
@@ -12,9 +20,11 @@ const Settings = ({
   className: string;
   settingsClassName: string;
 }) => {
-  const [open, setOpen] = React.useState<boolean>(true);
+  const [open, setOpen] = React.useState<boolean>(false);
   const { formatMessage } = useIntl();
   const { updateFilter, filter } = useMapFilter();
+  const { activeLocale, localeKeys, changeLocale, changeLocalePending } =
+    useLocale();
   return (
     <React.Fragment>
       <div className={cn(settingsClassName, styles.root)} aria-hidden={!open}>
@@ -28,7 +38,7 @@ const Settings = ({
                 value={state}
                 onChange={(newState) =>
                   updateFilter({
-                    [item]: newState,
+                    [item]: Boolean(newState),
                   })
                 }
                 type="inline"
@@ -38,11 +48,43 @@ const Settings = ({
             ))}
           </Form>
         </div>
+        {/* todo: add location button
         <div className={cn(styles.location)}>
           <h2>{formatMessage({ id: 'settings.location' })}</h2>
-        </div>
+        </div>*/}
         <div className={cn(styles.app)}>
-          <h2>{formatMessage({ id: 'settings.app' })}</h2>
+          <h2 className={styles.appHeading}>
+            {formatMessage({ id: 'settings.app' })}
+          </h2>
+          <div className={styles.appSettings}>
+            <FormElement
+              name="app-language"
+              label={formatMessage({ id: 'language' }) + ':'}
+              value={activeLocale}
+              onChange={(newLocale) => changeLocale(String(newLocale))}
+              Input={InputSelect}
+              options={localeKeys.reduce(
+                (acc, key) => ({
+                  ...acc,
+                  [key]: formatMessage({ id: `language.${key}` }),
+                }),
+                {}
+              )}
+              disabled={changeLocalePending}
+            />
+          </div>
+          <div className={styles.appSettings}>
+            <button className={styles.appSettingsButton}>
+              <Icon icon="mdi/a2h" className={styles.appSettingsButtonIcon} />
+              {formatMessage({ id: 'settings.app.install' })}
+            </button>
+          </div>
+          <div className={styles.appSettings}>
+            <button className={styles.appSettingsButton}>
+              <Icon icon="mdi/share" className={styles.appSettingsButtonIcon} />
+              {formatMessage({ id: 'settings.app.share' })}
+            </button>
+          </div>
         </div>
       </div>
       <Button

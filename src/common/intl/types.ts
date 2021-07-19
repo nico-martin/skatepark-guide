@@ -5,3 +5,5 @@ export type IntlLocale = {
   messages: IntlMessages;
 };
 export type IntlLocales = Record<string, IntlLocale>;
+
+export type ApiOverviewI = Record<string, string>;

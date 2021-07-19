@@ -12,7 +12,7 @@ const Menu = ({ className = '' }: { className?: string }) => {
     'open' | 'back' | 'closed'
   >('closed');
 
-  const { locale } = useLocale();
+  const { activeLocale } = useLocale();
   const location = useLocation();
   const history = useHistory();
 
@@ -29,7 +29,7 @@ const Menu = ({ className = '' }: { className?: string }) => {
   const onClick = () => {
     switch (buttonState) {
       case 'back':
-        history.push(`/${locale}/`);
+        history.push(`/${activeLocale}/`);
         break;
       case 'closed':
         setButtonState('open');

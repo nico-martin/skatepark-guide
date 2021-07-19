@@ -1,0 +1,6 @@
+.input {
+  background-color: var(--c-form-background);
+  border: none;
+  border-bottom: 1px solid var(--c-form-border);
+  padding: 0.2em 0.5em 0.1em 0.5em;
+}

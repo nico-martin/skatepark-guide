@@ -15,10 +15,11 @@ const IntlLink = ({
   children?: any;
   [x: string]: any;
 }) => {
-  const { locale } = useLocale();
+  const { activeLocale } = useLocale();
   const link: string = React.useMemo(
-    () => leadingSlashIt(trailingSlashIt(locale) + unleadingSlashIt(href)),
-    [locale, href]
+    () =>
+      leadingSlashIt(trailingSlashIt(activeLocale) + unleadingSlashIt(href)),
+    [activeLocale, href]
   );
   // @ts-ignore
   return <Link to={link} {...props} />;

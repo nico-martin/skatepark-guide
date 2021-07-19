@@ -1,11 +1,5 @@
 import * as enMessages from './en.json';
-import { IntlLocales } from './types';
+import { IntlMessages } from './types';
 
-export const locales: IntlLocales = {
-  en: {
-    locale: 'en-US',
-    label: 'English',
-    messages: enMessages,
-  },
-};
-export const defaultLocale: string = Object.keys(locales)[0];
+export const defaultLocale: string = 'en';
+export const defaultMessages: IntlMessages = enMessages;

@@ -21,7 +21,7 @@ const AppContent = ({ className = '' }: { className?: string }) => {
   const [delayedLocation, setDelayedLocation] =
     React.useState<H.Location>(location);
 
-  const { locale } = useLocale();
+  const { activeLocale } = useLocale();
 
   React.useEffect(() => {
     const path = untrailingSlashIt(unleadingSlashIt(location.pathname));
@@ -52,7 +52,7 @@ const AppContent = ({ className = '' }: { className?: string }) => {
     setDragging(false);
     setStartX(0);
     setTransformX(0);
-    transformX > moveMin && history.push(`/${locale}/`);
+    transformX > moveMin && history.push(`/${activeLocale}/`);
   };
 
   const move = (x: number) => {

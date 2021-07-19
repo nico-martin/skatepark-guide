@@ -20,11 +20,11 @@ export const useWeather = (
   const [state, setState] = React.useState<string>(WEATHER_API_STATES.LOADING);
   const [error, setError] = React.useState<string>('');
   const [data, setData] = React.useState<ParkWeatherI>();
-  const { locale } = useLocale();
+  const { activeLocale } = useLocale();
 
   React.useEffect(() => {
     setState(WEATHER_API_STATES.LOADING);
-    getWeather(slug, locale)
+    getWeather(slug, activeLocale)
       .then(({ city, days, source }) => {
         setData({
           city,

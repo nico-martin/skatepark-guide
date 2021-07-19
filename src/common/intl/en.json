@@ -2,6 +2,11 @@
   "about.about": "About",
   "about.impressum": "Legal",
   "about.privacy": "Privacy",
+  "language": "Language",
+  "language.en": "English",
+  "language.de": "Deutsch",
+  "language.it": "Italiano",
+  "map.loading.error": "The entries on the map could not be loaded.",
   "park.gallery": "Gallery",
   "park.share.title": "Share this park",
   "park.share.text": "Check out \"{parkTitle}\" on skatepark.guide",
@@ -14,5 +19,6 @@
   "settings.filter": "Filter",
   "settings.location": "Location",
   "settings.app": "App-Settings",
-  "map.loading.error": "The entries on the map could not be loaded."
+  "settings.app.install": "Install this app",
+  "settings.app.share": "Share this app"
 }

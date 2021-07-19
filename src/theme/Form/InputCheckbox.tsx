@@ -34,10 +34,7 @@ const InputCheckbox = ({
       className={cn(className, styles.input)}
       type="checkbox"
       checked={Boolean(value)}
-      onChange={(e) => {
-        console.log('click', (e.target as HTMLInputElement).checked);
-        onChange((e.target as HTMLInputElement).checked);
-      }}
+      onChange={(e) => onChange((e.target as HTMLInputElement).checked)}
       tabIndex={-1}
     />
   </div>
