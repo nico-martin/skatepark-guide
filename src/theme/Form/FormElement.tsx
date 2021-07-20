@@ -57,6 +57,7 @@ const FormElement = ({
       className={cn(styles.container, className, {
         [styles.containerIsStacked]: type === 'stacked',
         [styles.containerIsInline]: type === 'inline',
+        [styles.containerIsHidden]: Input.displayName === 'InputHidden',
         [styles.containerOrderReverse]: reverse,
       })}
     >

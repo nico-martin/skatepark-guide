@@ -8,3 +8,24 @@
   max-width: 400px;
   margin: 0 auto;
 }
+
+.links {
+  width: 100%;
+  max-width: 400px;
+  margin: var(--spacing-page) auto;
+}
+
+.linkElement {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--c-secondary);
+  }
+}
+
+.linkElement + .linkElement {
+  margin-left: var(--spacing-half);
+  padding-left: var(--spacing-half);
+  border-left: 1px solid var(--c-gray);
+  cursor: pointer;
+}

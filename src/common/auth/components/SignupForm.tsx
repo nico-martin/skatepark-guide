@@ -6,48 +6,60 @@ import {
   FormControls,
   FormElement,
   FormFeedback,
-  MESSAGE_TYPES,
   InputText,
+  MESSAGE_TYPES,
 } from '@theme';
-import { postLogin } from '@common/api/auth';
+import { postSignup } from '@common/api/auth';
 import { useAuth } from '@common/auth/authContext';
 import { useToast } from '@common/toast/toastContext';
 import cn from '@common/utils/classnames';
 import styles from './Form.css';
 
-const LoginForm = ({ className = '' }: { className?: string }) => {
+const SignupForm = ({ className = '' }: { className?: string }) => {
   const { formatMessage } = useIntl();
   const [pending, setPending] = React.useState<boolean>(false);
-  const { setJwt, email } = useAuth();
+  const { setJwt } = useAuth();
   const [formError, setFormError] = React.useState<string>('');
   const { addToast } = useToast();
 
   const form = useForm<{
     email: string;
     password: string;
+    repeatPassword: string;
   }>({
     defaultValues: {
-      email,
+      email: '',
       password: '',
+      repeatPassword: '',
     },
   });
 
   return (
     <div className={cn(className, styles.root)}>
-      <h2 className={styles.title}>{formatMessage({ id: 'auth.login' })}</h2>
+      <h2 className={styles.title}>{formatMessage({ id: 'auth.signup' })}</h2>
       <Form
         className={cn(styles.form)}
         onSubmit={form.handleSubmit((data) => {
+          setFormError('');
           setPending(true);
-          postLogin(data.email, data.password)
+          postSignup(data.email, data.password)
             .then((data) => {
               setJwt(data.token);
               addToast({
-                message: formatMessage({ id: 'auth.login.success' }),
+                message: formatMessage({ id: 'auth.signup.success' }),
               });
             })
             .catch((e) => {
-              setFormError(e.message);
+              if (e.code === 'spg_create_user_failed') {
+                form.setError('email', {
+                  type: 'focus',
+                  message: formatMessage({
+                    id: 'auth.signup.error.duplicate',
+                  }),
+                });
+              } else {
+                setFormError(formatMessage({ id: 'error.general' }));
+              }
             })
             .finally(() => setPending(false));
         })}
@@ -81,6 +93,22 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
             ),
           }}
         />
+        <FormElement
+          name="repeatPassword"
+          label={formatMessage({ id: 'auth.repeatPassword' })}
+          Input={InputText}
+          inputType="password"
+          form={form}
+          rules={{
+            required: formatMessage(
+              { id: 'form.required' },
+              { field: formatMessage({ id: 'auth.repeatPassword' }) }
+            ),
+            validate: (value) =>
+              value === form.getValues('password') ||
+              formatMessage({ id: 'auth.signup.error.repeatPassword' }),
+          }}
+        />
         {formError !== '' && (
           <FormFeedback type={MESSAGE_TYPES.ERROR}>{formError}</FormFeedback>
         )}
@@ -90,4 +118,4 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

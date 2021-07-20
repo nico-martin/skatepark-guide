@@ -1,5 +1,11 @@
 .root {
-  .error {
+  font-size: var(--fs-small);
+  border: 1px solid var(--c-feedback-success);
+  color: var(--c-feedback-success);
+  padding: 0.3em 1em;
+
+  &.error {
     color: var(--c-feedback-danger);
+    border-color: var(--c-feedback-danger);
   }
 }

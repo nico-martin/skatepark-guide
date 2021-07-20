@@ -3,7 +3,7 @@ import { ApiOverviewI, IntlMessages } from '@common/intl/types';
 import { API } from '@common/utils/constants';
 
 export const getLanguageOverview = () =>
-  apiGet<ApiOverviewI>(`${API.REST}lang/`);
+  apiGet<ApiOverviewI>(`${API.SPG}lang/`);
 
 export const getLanguageMessages = (language: string) =>
-  apiGet<IntlMessages>(`${API.REST}lang/${language}/`);
+  apiGet<IntlMessages>(`${API.SPG}lang/${language}/`);

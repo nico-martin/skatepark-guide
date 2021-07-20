@@ -8,12 +8,12 @@ export const APP = {
 
 export const API: {
   BASE: string;
-  REST: string;
+  SPG: string;
   PARKS: string;
   JWT: string;
 } = {
   BASE: APP.API_BASE,
-  REST: `${APP.API_BASE}wp-json/skateparkguide/v1/`,
+  SPG: `${APP.API_BASE}wp-json/skateparkguide/v1/`,
   PARKS: `${APP.API_BASE}wp-json/wp/v2/parks/`,
   JWT: `${APP.API_BASE}wp-json/jwt-auth/v1/`,
 };

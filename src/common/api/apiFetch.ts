@@ -42,7 +42,7 @@ const apiFetch = <T>({
         if (resp.status < 300) {
           resolve(data);
         } else {
-          reject(data.message);
+          reject(data);
         }
       })
       .catch((e) => {

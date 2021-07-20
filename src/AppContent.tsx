@@ -5,6 +5,7 @@ import { useLocale } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
 import { unleadingSlashIt, untrailingSlashIt } from '@common/utils/helpers';
 import Account from '@comp/Account/Account';
+import PasswordReset from '@comp/Account/PasswortReset';
 import Page from '@comp/Page/Page';
 import Park from '@comp/Park/Park';
 import styles from './AppContent.css';
@@ -92,6 +93,12 @@ const AppContent = ({ className = '' }: { className?: string }) => {
       }}
     >
       <Switch>
+        <Route
+          path="/:lang/account/password-reset/:key/"
+          location={delayedLocation}
+        >
+          <PasswordReset className={cn(styles.content)} />
+        </Route>
         <Route path="/:lang/account/" location={delayedLocation}>
           <Account className={cn(styles.content)} />
         </Route>
