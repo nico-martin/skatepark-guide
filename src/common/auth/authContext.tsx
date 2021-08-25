@@ -27,6 +27,7 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
   const [email, setEmail] = React.useState<string>('');
 
   React.useEffect(() => {
+    window.jwt = jwt || '';
     init && settingsDB.set('jwt', jwt);
   }, [jwt]);
 

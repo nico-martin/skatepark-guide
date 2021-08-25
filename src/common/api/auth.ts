@@ -13,8 +13,6 @@ export const updateMe = (data: ApiUpdateUserI) =>
 
 export const getMe = () => apiGet<ApiGetUserI>(`${API.SPG}user/`);
 
-console.log(location.protocol + '//' + location.host);
-
 export const postPasswordReset = (
   email: string,
   urlTemplate: string = '',

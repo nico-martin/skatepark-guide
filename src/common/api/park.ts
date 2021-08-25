@@ -4,7 +4,23 @@ import { apiGet } from './apiFetch';
 
 export type MapBounds = [number, number, number, number];
 
-export const getIPLatLng = () => apiGet(`${API.SPG}v1/geo/`);
+export const getIPLatLng = () =>
+  apiGet<{
+    status: string;
+    country: string;
+    countryCode: string;
+    region: string;
+    regionName: string;
+    city: string;
+    zip: string;
+    lat: number;
+    lon: number;
+    timezone: string;
+    isp: string;
+    org: string;
+    as: string;
+    query: string;
+  }>(`${API.SPG}geo/`);
 
 export const getMapParks = (bounds: MapBounds) =>
   apiGet<{

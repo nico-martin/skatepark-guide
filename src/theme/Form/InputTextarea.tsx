@@ -1,4 +1,6 @@
 import React from 'react';
+import cn from '@common/utils/classnames';
+import inputStyles from './Input.css';
 
 const InputTextarea = ({
   name,
@@ -14,7 +16,7 @@ const InputTextarea = ({
 }) => (
   <textarea
     name={name}
-    className={className}
+    className={cn(className, inputStyles.input, inputStyles.textarea)}
     id={name}
     value={value}
     rows={rows}

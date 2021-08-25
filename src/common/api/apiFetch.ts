@@ -35,6 +35,11 @@ const apiFetch = <T>({
       headers: {
         ...headers,
         'Content-Type': 'application/json',
+        ...(Boolean(window.jwt)
+          ? {
+              Authorization: `Bearer ${window.jwt}`,
+            }
+          : {}),
       },
     })
       .then((resp) => Promise.all([resp, resp.json()]))

@@ -8,13 +8,14 @@ export interface ApiPostLoginI {
 }
 
 export interface ApiGetUserI {
+  user_email: string;
   user_display_name: string;
   user_firstname: string;
   user_lastname: string;
   user_url: string;
   sportart: string;
   description: string;
-  parks: Record<
+  parks?: Record<
     string,
     {
       title: string;

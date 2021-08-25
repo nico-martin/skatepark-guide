@@ -45,7 +45,7 @@ const Map = ({ className = '' }: { className?: string }) => {
       if (center) {
         setCenter(center);
       } else {
-        getIPLatLng().then(({ data }) =>
+        getIPLatLng().then((data) =>
           setCenter({
             lat: data.lat,
             lng: data.lon,

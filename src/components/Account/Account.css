@@ -1,4 +1,9 @@
 .root {
+  padding: var(--spacing);
+}
+
+.title {
+  margin-bottom: var(--spacing);
 }
 
 .form {
