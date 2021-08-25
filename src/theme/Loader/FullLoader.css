@@ -1,0 +1,16 @@
+.root {
+  width: 100%;
+  text-align: center;
+}
+
+.loader {
+  color: var(--c-secondary-dark);
+}
+
+.loaderLarge {
+  font-size: 2rem;
+}
+
+.loaderSpacingTop {
+  padding-top: 5vh;
+}

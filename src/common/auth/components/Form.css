@@ -1,0 +1,13 @@
+.root {
+}
+
+.title {
+}
+
+.form {
+  margin-top: var(--spacing);
+}
+
+.success {
+  margin-top: var(--spacing);
+}

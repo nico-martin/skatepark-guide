@@ -1,0 +1,48 @@
+.root {
+  position: relative;
+  width: 1em;
+  height: 100%;
+}
+
+.spanInput,
+.input {
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+}
+
+.input {
+  transform: translateY(-55%);
+  opacity: 0;
+}
+
+.spanInput {
+  display: block;
+  width: 1em;
+  height: 1em;
+  background-color: var(--c-form-background);
+  z-index: 2;
+  @mixin transition background-color;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    left: 50%;
+    top: -0.1em;
+    border-bottom: 0.2em solid #fff;
+    border-right: 0.2em solid #fff;
+    transform: translateX(-55%) scale(0.6) rotate(45deg);
+    opacity: 0;
+    @mixin transition opacity;
+  }
+
+  &.isActive {
+    background-color: var(--c-secondary);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}

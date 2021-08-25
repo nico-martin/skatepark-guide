@@ -1,0 +1,16 @@
+.root {
+}
+
+.element {
+  display: flex;
+  align-items: center;
+
+  & + .element {
+    margin-top: 0.5em;
+  }
+}
+
+.icon {
+  margin-right: 1em;
+  font-size: 0.9rem;
+}

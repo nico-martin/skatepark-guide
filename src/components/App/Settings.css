@@ -1,0 +1,105 @@
+.root {
+  @mixin transition all;
+
+  transform: translateX(100%);
+  opacity: 0;
+  will-change: transform;
+
+  &[aria-hidden='false'] {
+    transform: translateX(0);
+    opacity: 1;
+    @mixin box-shadow;
+  }
+
+  padding: var(--spacing);
+  display: flex;
+  flex-direction: column;
+}
+
+.filterForm {
+  grid-template-columns: 1fr 1fr;
+  margin-top: var(--spacing);
+}
+
+.filter {
+}
+
+.location {
+  margin-top: var(--spacing-page);
+}
+
+.locationButton {
+  margin-top: var(--spacing);
+}
+
+.locationButtonIcon {
+  opacity: 0.3;
+}
+
+@keyframes pulse {
+  0% {
+    color: var(--c-p);
+    opacity: 0.3;
+  }
+
+  50% {
+    color: var(--c-secondary);
+    opacity: 1;
+  }
+
+  100% {
+    color: var(--c-p);
+    opacity: 0.3;
+  }
+}
+
+.locationButtonActive .locationButtonIcon {
+  animation: pulse 1s infinite;
+}
+
+.app {
+  margin-top: auto;
+  padding-top: var(--spacing-page);
+  padding-bottom: calc(var(--spacing) + 1.1rem + 1.1vmin + 2rem);
+}
+
+.appHeading {
+  margin-bottom: var(--spacing);
+}
+
+.appSettings {
+  position: relative;
+  padding: 0.8em 0;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: calc(var(--spacing) * -1);
+    left: calc(var(--spacing) * -1);
+    height: 1px;
+    background-color: var(--c-gray);
+  }
+
+  &::after {
+    top: inherit;
+    bottom: 0;
+    display: none;
+  }
+
+  &:last-child::after {
+    display: block;
+  }
+}
+
+.appSettingsButton {
+  display: flex;
+  align-items: center;
+  padding: 0.5em 0;
+  cursor: pointer;
+}
+
+.appSettingsButtonIcon {
+  margin-right: 0.5rem;
+}

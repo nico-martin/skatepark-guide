@@ -1,9 +1,0 @@
-.form-controls {
-  margin-top: var(--spacing);
-  display: flex;
-  justify-content: flex-end;
-
-  & * + * {
-    margin-left: var(--spacing);
-  }
-}

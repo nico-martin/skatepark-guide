@@ -1,10 +1,11 @@
-@import 'font.css';
+@import 'fonts/cairo.css';
 
 :root {
   --fs: 1rem;
-  --fs-s: 0.8rem;
-  --fs-xs: 0.6rem;
-  --fs-l: 1.5rem;
+  --fs-small: 0.9rem;
+  --fs-xsmall: 0.7rem;
+  --fs-large: 1.2rem;
+  --fs-xlarge: 1.6rem;
 }
 
 html {
@@ -23,13 +24,11 @@ a {
   color: var(--c-p);
 }
 
+/* button reset */
 button {
-  border: none;
   background-color: transparent;
+  border: none;
   padding: 0;
-  cursor: pointer;
-  color: var(--c-p);
-  font-size: var(--fs);
 }
 
 ::selection {
@@ -45,9 +44,9 @@ h4 {
 }
 
 h1 {
-  font-size: 1.8rem;
+  font-size: var(--fs-xlarge);
 }
 
 h2 {
-  font-size: 1.4rem;
+  font-size: var(--fs-large);
 }

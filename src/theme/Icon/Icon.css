@@ -1,0 +1,40 @@
+.root {
+  display: inline-block;
+  line-height: 1;
+
+  svg {
+    text-align: center;
+    vertical-align: middle;
+    fill: currentColor;
+    height: 1em;
+    width: 1em;
+    display: block;
+  }
+}
+
+.isRound {
+  border-radius: 9999px;
+}
+
+.hasAnimationSpin {
+  animation: spinner 2s infinite linear;
+}
+
+.isRotated-90 {
+  transform: rotate(90deg);
+}
+
+.isRotated-180 {
+  transform: rotate(180deg);
+}
+
+.isRotated-270 {
+  transform: rotate(270deg);
+}
+
+.isButton {
+  background-color: var(--c-secondary);
+  color: #fff;
+  padding: 0.4em;
+  @mixin box-shadow;
+}

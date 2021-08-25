@@ -1,6 +1,16 @@
 import './App';
 import './styles.css';
-import { isDev } from '@app/vendor/helpers';
-import './app/vendor/a11y';
 
-isDev && document.body.classList.add('dev');
+declare global {
+  interface Window {
+    installEvent: any;
+    jwt: string;
+  }
+}
+
+window.jwt = '';
+window.installEvent = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  window.installEvent = e;
+});

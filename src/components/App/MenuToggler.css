@@ -1,0 +1,68 @@
+.root {
+}
+
+.lineContainer {
+  width: 1em;
+  height: 1em;
+  display: block;
+  position: relative;
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 6%;
+  transform: translateY(-50%);
+  background-color: currentColor;
+  display: block;
+  will-change: transform;
+  @mixin transition;
+
+  &.line-1 {
+    top: 20%;
+  }
+
+  &.line-3 {
+    top: 80%;
+  }
+}
+
+.root[data-state='open'] {
+  .line-1 {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .line-2 {
+    left: 50%;
+    right: 50%;
+  }
+
+  .line-3 {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}
+
+.root[data-state='back'] {
+  .line-1 {
+    top: 32%;
+    right: 50%;
+    left: 0;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  .line-2 {
+    left: 5%;
+    right: 5%;
+  }
+
+  .line-3 {
+    top: 68%;
+    right: 50%;
+    left: 0;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}

@@ -1,0 +1,29 @@
+.root {
+}
+
+.title {
+  margin-bottom: var(--spacing-half);
+}
+
+.list {
+  display: flex;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-gray) transparent;
+}
+
+.element {
+  scroll-snap-align: center;
+
+  & + .element {
+    margin-left: var(--spacing-half);
+  }
+}
+
+.img {
+  height: 150px;
+  width: auto;
+  display: block;
+  max-width: none;
+}
