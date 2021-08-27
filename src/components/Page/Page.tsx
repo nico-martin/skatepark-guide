@@ -1,9 +1,8 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { FullLoader, Message } from '@theme';
+import { FullLoader, Menu, Message } from '@theme';
 import { usePage, PAGE_API_STATES } from '@common/hooks/usePage';
-import IntlLink from '@common/intl/IntlLink';
 import cn from '@common/utils/classnames';
 import { PAGES } from '@common/utils/constants';
 import styles from './Page.css';
@@ -16,18 +15,19 @@ const Page = ({ className = '' }: { className?: string }) => {
 
   return (
     <div className={cn(styles.root, className)}>
-      <nav className={styles.navigation}>
-        {PAGES.map((menuSlug) => (
-          <IntlLink
-            href={menuSlug}
-            className={cn(styles.navigationElement, {
-              [styles.navigationElementActive]: menuSlug === slug,
-            })}
-          >
-            {formatMessage({ id: `about.${menuSlug}` })}
-          </IntlLink>
-        ))}
-      </nav>
+      <Menu
+        className={styles.navigation}
+        menu={PAGES.reduce(
+          (acc, menuSlug) => ({
+            ...acc,
+            [menuSlug]: {
+              title: formatMessage({ id: `about.${menuSlug}` }),
+              active: slug === menuSlug,
+            },
+          }),
+          {}
+        )}
+      />
       {state === PAGE_API_STATES.LOADING && (
         <FullLoader className={cn(styles.loader)} large spacingTop />
       )}

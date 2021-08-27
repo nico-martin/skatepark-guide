@@ -99,7 +99,7 @@ const AppContent = ({ className = '' }: { className?: string }) => {
         >
           <PasswordReset className={cn(styles.content)} />
         </Route>
-        <Route path="/:lang/account/" location={delayedLocation}>
+        <Route path="/:lang/account/:slug?" location={delayedLocation}>
           <Account className={cn(styles.content)} />
         </Route>
         <Route path="/:lang/park/edit/:slug/" location={delayedLocation}>

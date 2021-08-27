@@ -138,7 +138,7 @@ const Settings = ({
       <Button
         className={className}
         onClick={() => setOpen(!open)}
-        icon="mdi/settings"
+        icon={open ? 'mdi/close' : 'mdi/settings'}
         round
       />
     </React.Fragment>

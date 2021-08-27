@@ -1,6 +1,6 @@
 import { VNode } from 'preact';
 import React from 'react';
-import { Icon } from '@theme';
+import { Icon, Loader } from '@theme';
 import IntlLink from '@common/intl/IntlLink';
 import cn from '@common/utils/classnames';
 import styles from './Button.css';
@@ -33,6 +33,7 @@ const Button = ({
   const classes = cn(className, styles.root, {
     [styles.hasIcon]: Boolean(icon),
     [styles.hasText]: Boolean(children),
+    [styles.isLoading]: isLoading,
     [styles.isRound]: round,
     [styles.bkgWhite]: white,
   });
@@ -43,6 +44,7 @@ const Button = ({
     <React.Fragment>
       {icon && <Icon icon={icon} className={cn(styles.icon, classNameIcon)} />}
       {children && <span className={styles.text}>{children}</span>}
+      <Loader className={styles.loader} />
     </React.Fragment>
   );
 

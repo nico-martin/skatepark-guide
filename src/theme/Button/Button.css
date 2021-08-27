@@ -9,6 +9,7 @@ button {
   padding: 0.5em;
   display: flex;
   align-items: center;
+  position: relative;
   @mixin box-shadow;
   @mixin transition;
 
@@ -19,6 +20,12 @@ button {
 
   .text {
     display: inline-block;
+    will-change: opacity;
+    transition: opacity 200ms;
+  }
+
+  .icon {
+    transition: opacity 200ms;
   }
 
   &.hasIcon .icon {
@@ -41,6 +48,25 @@ button {
     background-color: #fff;
     color: var(--c-p);
     border: 1px solid #fff;
+  }
+
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    opacity: 0;
+  }
+
+  &.isLoading {
+    .loader {
+      opacity: 1;
+    }
+
+    .text,
+    .icon {
+      opacity: 0;
+    }
   }
 
   /*

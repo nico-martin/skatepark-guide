@@ -6,10 +6,12 @@ import {
   Form,
   FormControls,
   FormElement,
+  InputSelect,
   InputText,
   InputTextarea,
+  Message,
 } from '@theme';
-import { getMe } from '@common/api/auth';
+import { getMe, postLogin, updateMe } from '@common/api/auth';
 import { AuthWrapper, useAuth } from '@common/auth/authContext';
 import { ApiGetUserI } from '@common/auth/types';
 import cn from '@common/utils/classnames';
@@ -24,6 +26,8 @@ const AccountSettings = ({
 }) => {
   const { formatMessage } = useIntl();
   const { isLoggedIn, email } = useAuth();
+  const [pending, setPending] = React.useState<boolean>(false);
+  const [formError, setFormError] = React.useState<string>('');
 
   const form = useForm<{
     user_email: string;
@@ -49,7 +53,18 @@ const AccountSettings = ({
 
   return (
     <div className={cn(styles.root, className)}>
-      <Form>
+      {formError && <Message className={styles.error}>{formError}</Message>}
+      <Form
+        onSubmit={form.handleSubmit((data) => {
+          setPending(true);
+          updateMe(data)
+            .then(() => {})
+            .catch((e) => {
+              setFormError(e.message);
+            })
+            .finally(() => setPending(false));
+        })}
+      >
         <FormElement
           name="user_email"
           Input={InputText}
@@ -77,9 +92,15 @@ const AccountSettings = ({
         />
         <FormElement
           name="sportart"
-          Input={InputText}
+          Input={InputSelect}
           label={formatMessage({ id: 'account.sport' })}
           form={form}
+          options={{
+            all: formatMessage({ id: 'account.sport.all' }),
+            skateboard: formatMessage({ id: 'account.sport.skateboard' }),
+            inline: formatMessage({ id: 'account.sport.inline' }),
+            scooter: formatMessage({ id: 'account.sport.scooter' }),
+          }}
         />
         <FormElement
           name="description"
@@ -87,7 +108,7 @@ const AccountSettings = ({
           label={formatMessage({ id: 'account.description' })}
           form={form}
         />
-        <FormControls />
+        <FormControls isLoading={pending} />
       </Form>
     </div>
   );

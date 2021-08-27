@@ -1,0 +1,12 @@
+.root {
+}
+
+.navigationElement {
+  & + .navigationElement {
+    margin-left: 1em;
+  }
+}
+
+.navigationElementActive {
+  font-weight: bold;
+}

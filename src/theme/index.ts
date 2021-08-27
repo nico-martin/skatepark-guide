@@ -7,6 +7,7 @@ export { default as FullLoader } from './Loader/FullLoader';
 export { default as Logo } from './Branding/Logo';
 export { default as Message, MESSAGE_TYPES } from './Message/Message';
 export { default as LazyImage } from './Img/LazyImage';
+export { default as Menu } from './Menu/Menu';
 
 export { default as Form } from './Form/Form';
 export { default as FormControls } from './Form/FormControls';

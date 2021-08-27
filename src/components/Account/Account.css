@@ -9,3 +9,10 @@
 .form {
   margin-top: 10vh;
 }
+
+.navigation {
+  margin-bottom: var(--spacing-page);
+}
+
+.content {
+}

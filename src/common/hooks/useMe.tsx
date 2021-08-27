@@ -11,7 +11,9 @@ export const ME_API_STATES = {
   SUCCESS: 'SUCCESS',
 };
 
-export const useMe = (): {
+export const useMe = (
+  setJwt: (jwt: string) => void
+): {
   state: string;
   data: ApiGetUserI;
   error: string;
@@ -19,7 +21,7 @@ export const useMe = (): {
 } => {
   const [state, setState] = React.useState<string>(PAGE_API_STATES.LOADING);
   const [error, setError] = React.useState<string>('');
-  const [data, setData] = React.useState<ApiGetUserI>();
+  const [data, setData] = React.useState<ApiGetUserI>(null);
   const { isLoggedIn } = useAuth();
 
   const load = () => {
@@ -33,8 +35,9 @@ export const useMe = (): {
           setState(PAGE_API_STATES.SUCCESS);
         })
         .catch((e) => {
-          setError(e.toString());
+          setError(e?.message || e.toString());
           setState(PAGE_API_STATES.ERROR);
+          setJwt(null);
         });
     }
   };
