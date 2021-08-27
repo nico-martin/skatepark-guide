@@ -58,14 +58,16 @@ export const MapParksContextProvider = ({ children }: { children: any }) => {
 
   const parksFiltered = React.useMemo<Record<string, MapParkI>>(
     () =>
-      Object.values(parks)
-        .filter(
-          (park) =>
-            getActiveFacilities(park.parksFacilities).filter((value) =>
-              getActiveFacilities(filter).includes(value)
-            ).length !== 0
-        )
-        .reduce((acc, park) => ({ ...acc, [park.slug]: park }), {}),
+      Object.values(filter).filter((e) => !Boolean(e)).length === 0
+        ? parks
+        : Object.values(parks)
+            .filter(
+              (park) =>
+                getActiveFacilities(park.parksFacilities).filter((value) =>
+                  getActiveFacilities(filter).includes(value)
+                ).length !== 0
+            )
+            .reduce((acc, park) => ({ ...acc, [park.slug]: park }), {}),
     [parks, filter]
   );
 

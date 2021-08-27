@@ -27,7 +27,7 @@ export const getMapParks = (bounds: MapBounds) =>
     parks: Record<string, MapParkI>;
     count: number;
     countTotal: number;
-  }>(`${API.SPG}map-parks/?boundse=${bounds.join('|')}`);
+  }>(`${API.SPG}map-parks/?bounds=${bounds.join('|')}`);
 
 export const getPark = (slug: string) =>
   apiGet<Array<ApiParkI>>(`${API.PARKS}?slug=${slug}`);
