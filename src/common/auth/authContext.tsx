@@ -59,7 +59,7 @@ export const useAuth = (): {
 } => {
   const { jwt, setJwt, email, setEmail } = React.useContext(AuthContext);
   return {
-    isLoggedIn: Boolean(jwt),
+    isLoggedIn: jwt === null ? null : Boolean(jwt),
     jwt,
     setJwt,
     email,

@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from '@theme';
 import cn from '@common/utils/classnames';
 import { nl2br } from '@common/utils/helpers';
+import { formatContact } from '@common/utils/parks';
 import styles from './ParkContact.css';
 
 const mapIconToContact = {
@@ -27,28 +28,7 @@ const ParkContact = ({
         return;
       }
 
-      let url = '';
-      let string = value;
-      switch (key) {
-        case 'email':
-          url = 'mailto:' + value;
-          break;
-        case 'phone':
-          url = 'tel:' + value;
-          break;
-        case 'address':
-          url = `https://www.google.com/maps?q=${string}`;
-          string = nl2br(string);
-          break;
-        default:
-          const regex =
-            /(https?:\/\/(?:www\.|(?!www))([a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}))/gm;
-          const match = regex.exec(value);
-          if (match) {
-            url = match[0];
-            string = match[2];
-          }
-      }
+      const { url, formattedValue } = formatContact(key, value);
 
       return (
         <div className={cn(styles.element)}>
@@ -63,11 +43,11 @@ const ParkContact = ({
           {url ? (
             <a
               href={url}
-              dangerouslySetInnerHTML={{ __html: string }}
+              dangerouslySetInnerHTML={{ __html: formattedValue }}
               target="_blank"
             />
           ) : (
-            <span dangerouslySetInnerHTML={{ __html: string }} />
+            <span dangerouslySetInnerHTML={{ __html: formattedValue }} />
           )}
         </div>
       );

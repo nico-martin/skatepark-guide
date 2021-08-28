@@ -13,12 +13,7 @@ import styles from './Account.css';
 const Account = ({ className = '' }: { className?: string }) => {
   const { slug } = useParams<{ slug: string }>();
   const { formatMessage } = useIntl();
-  const { setJwt, isLoggedIn } = useAuth();
-  const { state, data, error, reload } = useMe(setJwt);
-
-  React.useEffect(() => {
-    reload();
-  }, [isLoggedIn]);
+  const { state, data, error } = useMe();
 
   const activeMenuElement = React.useMemo(
     () => (slug === 'parks' ? 'parks' : 'profile'),
@@ -53,7 +48,7 @@ const Account = ({ className = '' }: { className?: string }) => {
           ME_API_STATES.LOADING ? (
           <FullLoader />
         ) : slug === 'parks' ? (
-          <AccountParks className={styles.content} />
+          <AccountParks user={data} className={styles.content} />
         ) : (
           <AccountSettings user={data} className={styles.content} />
         )}

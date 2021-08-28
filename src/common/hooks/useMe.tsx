@@ -11,9 +11,7 @@ export const ME_API_STATES = {
   SUCCESS: 'SUCCESS',
 };
 
-export const useMe = (
-  setJwt: (jwt: string) => void
-): {
+export const useMe = (): {
   state: string;
   data: ApiGetUserI;
   error: string;
@@ -22,7 +20,7 @@ export const useMe = (
   const [state, setState] = React.useState<string>(PAGE_API_STATES.LOADING);
   const [error, setError] = React.useState<string>('');
   const [data, setData] = React.useState<ApiGetUserI>(null);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, setJwt } = useAuth();
 
   const load = () => {
     if (!isLoggedIn) {
@@ -44,7 +42,7 @@ export const useMe = (
 
   React.useEffect(() => {
     load();
-  }, []);
+  }, [isLoggedIn]);
 
   return {
     state,

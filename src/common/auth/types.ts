@@ -7,6 +7,13 @@ export interface ApiPostLoginI {
   user_nicename: string;
 }
 
+export interface ApiParkList {
+  slug: string;
+  title: string;
+  image: ApiImageI;
+  parksAddress: string;
+}
+
 export interface ApiGetUserI {
   user_email: string;
   user_display_name: string;
@@ -15,13 +22,7 @@ export interface ApiGetUserI {
   user_url: string;
   sportart: string;
   description: string;
-  parks?: Record<
-    string,
-    {
-      title: string;
-      image: ApiImageI;
-    }
-  >;
+  parks: Array<ApiParkList>;
 }
 
 export interface ApiUpdateUserI {
