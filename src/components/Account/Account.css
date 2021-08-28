@@ -2,8 +2,14 @@
   padding: var(--spacing);
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-page);
+}
+
 .title {
-  margin-bottom: var(--spacing);
 }
 
 .form {

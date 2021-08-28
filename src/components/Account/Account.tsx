@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { FullLoader, Menu, Message, MESSAGE_TYPES } from '@theme';
+import { Button, FullLoader, Menu, Message, MESSAGE_TYPES } from '@theme';
 import { AuthWrapper, useAuth } from '@common/auth/authContext';
 import { useMe, ME_API_STATES } from '@common/hooks/useMe';
 import cn from '@common/utils/classnames';
@@ -13,6 +13,7 @@ import styles from './Account.css';
 const Account = ({ className = '' }: { className?: string }) => {
   const { slug } = useParams<{ slug: string }>();
   const { formatMessage } = useIntl();
+  const { setJwt } = useAuth();
   const { state, data, error } = useMe();
 
   const activeMenuElement = React.useMemo(
@@ -36,11 +37,16 @@ const Account = ({ className = '' }: { className?: string }) => {
             {}
           )}
         />
-        <h1 className={styles.title}>
-          {slug === 'parks'
-            ? formatMessage({ id: 'account.myparks' })
-            : formatMessage({ id: 'account.title' })}
-        </h1>
+        <header className={styles.header}>
+          <h1 className={styles.title}>
+            {slug === 'parks'
+              ? formatMessage({ id: 'account.myparks' })
+              : formatMessage({ id: 'account.title' })}
+          </h1>
+          <Button onClick={() => setJwt(null)} white round>
+            {formatMessage({ id: 'auth.logout' })}
+          </Button>
+        </header>
         {state === ME_API_STATES.ERROR && (
           <Message type={MESSAGE_TYPES.ERROR}>{error}</Message>
         )}

@@ -6,7 +6,7 @@ button {
   cursor: pointer;
   background-color: var(--c-secondary);
   color: #fff;
-  padding: 0.5em;
+  padding: 0.5em 0.8em;
   display: flex;
   align-items: center;
   position: relative;
@@ -38,6 +38,10 @@ button {
 
   &.hasText .icon {
     margin-right: 0.6em;
+  }
+
+  &.isSquare {
+    padding: 0.5em;
   }
 
   &.isRound {

@@ -1,5 +1,37 @@
 .root {
   display: flex;
   align-items: center;
-  border-radius: 20px;
+  border: 1px solid var(--c-form-border);
+  position: relative;
+}
+
+.image {
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.content {
+  padding: var(--spacing-half);
+}
+
+.address {
+  font-size: var(--fs-small);
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.controls {
+  top: 0;
+  transform: translateY(-40%);
+  right: var(--spacing-half);
+  position: absolute;
+  display: flex;
+}
+
+.controlElement {
+  & + .controlElement {
+    margin-left: var(--spacing-half);
+  }
 }

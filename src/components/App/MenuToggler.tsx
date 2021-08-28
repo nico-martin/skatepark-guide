@@ -18,6 +18,7 @@ const MenuToggler = ({
       onClick={onClick}
       data-state={buttonState}
       round
+      square
     >
       <span className={styles.lineContainer}>
         {[1, 2, 3].map((i) => (

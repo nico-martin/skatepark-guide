@@ -16,6 +16,7 @@ const Button = ({
   isLoading = false,
   disabled = false,
   icon,
+  square = false,
   ...props
 }: {
   element?: 'button' | 'router' | 'a';
@@ -28,17 +29,17 @@ const Button = ({
   isLoading?: boolean;
   disabled?: boolean;
   icon?: string;
+  square?: boolean;
   [x: string]: any;
 }) => {
   const classes = cn(className, styles.root, {
     [styles.hasIcon]: Boolean(icon),
     [styles.hasText]: Boolean(children),
+    [styles.isSquare]: square || (Boolean(icon) && !Boolean(children)),
     [styles.isLoading]: isLoading,
     [styles.isRound]: round,
     [styles.bkgWhite]: white,
   });
-
-  // todo: add loader if isLoading
 
   const content = (
     <React.Fragment>
@@ -48,24 +49,22 @@ const Button = ({
     </React.Fragment>
   );
 
-  if (element === 'router') {
-    return (
-      <IntlLink className={classes} {...props}>
-        {content}
-      </IntlLink>
-    );
-  }
-
-  return React.createElement(
-    element,
-    {
-      disabled: isLoading || disabled,
-      className: classes,
-      onClick:
-        element === 'button' && Boolean(onClick) ? () => onClick() : null,
-      ...props,
-    },
-    content
+  return element === 'router' ? (
+    <IntlLink className={classes} {...props}>
+      {content}
+    </IntlLink>
+  ) : (
+    React.createElement(
+      element,
+      {
+        disabled: isLoading || disabled,
+        className: classes,
+        onClick:
+          element === 'button' && Boolean(onClick) ? () => onClick() : null,
+        ...props,
+      },
+      content
+    )
   );
 };
 
