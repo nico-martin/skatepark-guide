@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Message } from '@theme';
+import { Message, Button } from '@theme';
 import LoginForm from '@common/auth/components/LoginForm';
 import PasswordForm from '@common/auth/components/PasswordForm';
 import PasswordResetForm from '@common/auth/components/PasswordResetForm';
@@ -32,28 +32,34 @@ const AuthForm = ({
       )}
       <p className={cn(styles.links)}>
         {formType !== 'login' && (
-          <button
+          <Button
             onClick={() => setFormType('login')}
             className={cn(styles.linkElement)}
+            type="text"
+            color="white"
           >
             {formatMessage({ id: 'auth.login' })}
-          </button>
+          </Button>
         )}
         {formType !== 'signup' && (
-          <button
+          <Button
             onClick={() => setFormType('signup')}
             className={cn(styles.linkElement)}
+            type="text"
+            color="white"
           >
             {formatMessage({ id: 'auth.signup' })}
-          </button>
+          </Button>
         )}
         {formType !== 'password' && (
-          <button
+          <Button
             onClick={() => setFormType('password')}
             className={cn(styles.linkElement)}
+            type="text"
+            color="white"
           >
             {formatMessage({ id: 'auth.password.forgot' })}
-          </button>
+          </Button>
         )}
       </p>
     </div>

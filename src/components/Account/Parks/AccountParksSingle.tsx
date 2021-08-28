@@ -27,6 +27,7 @@ const AccountParkSingle = ({ park }: { park: ApiParkList }) => {
           href={`park/edit/${park.slug}`}
           round
           title={formatMessage({ id: 'account.park.edit' })}
+          color="white"
         />
         <Button
           className={styles.controlElement}
@@ -35,6 +36,7 @@ const AccountParkSingle = ({ park }: { park: ApiParkList }) => {
           href={`park/${park.slug}`}
           round
           title={formatMessage({ id: 'account.park.view' })}
+          color="white"
         />
       </div>
     </div>

@@ -1,19 +1,50 @@
 :root {
-  --c-p: #1d1d1b;
-  --c-h: #000;
-  --c-bkg: #f3f3f3;
-  --c-primary: #ff5722;
-  --c-primary-dark: #ba4019;
-  --c-secondary: #00796b;
-  --c-secondary-light: #129282;
-  --c-secondary-dark: #116f63;
-  --c-feedback-danger: #af1616;
-  --c-feedback-success: var(--c-secondary-dark);
-  --c-feedback-warning: var(--c-primary);
-  --c-gray: #b9b8b8;
-  --c-gray-light: #eeeded;
-  --c-gray-dark: #989898;
-  --c-form-background: var(--c-gray-light);
-  --c-form-border: var(--c-gray-dark);
-  --c-form-border-focus: var(--c-p);
+  /* color palette */
+  --c-white: #fff;
+  --c-gray-01: #f9fafb;
+  --c-gray-02: #f3f4f6;
+  --c-gray-03: #e5e7eb;
+  --c-gray-04: #d1d5db;
+  --c-gray-05: #9ca3af;
+  --c-gray-06: #6b7280;
+  --c-gray-07: #4b5563;
+  --c-gray-08: #374151;
+  --c-gray-09: #1f2937;
+  --c-gray-10: #111827;
+  --c-black: #000;
+  --c-red: #b00020;
+  --c-red-light: #e94948;
+  --c-red-dark: #790000;
+  --c-teal: #00796b;
+  --c-teal-light: #48a999;
+  --c-teal-dark: #004c40;
+  --c-orange: #ff5722;
+  --c-orange-light: #ff8a50;
+  --c-orange-dark: #c41c00;
+
+  /* theme colors */
+  --c-p: var(--c-gray-10);
+  --c-h: var(--c-black);
+  --c-bkg: var(--c-gray-03);
+  --c-bkg-reverse: var(--c-gray-09);
+  --c-p-reverse: var(--c-gray-01);
+  --c-primary: var(--c-teal);
+  --c-primary-light: var(--c-teal-light);
+  --c-primary-dark: var(--c-teal-dark);
+  --c-secondary: var(--c-orange);
+  --c-secondary-light: var(--c-orange-light);
+  --c-secondary-dark: var(--c-orange-dark);
+  --c-feedback-danger: var(--c-red);
+  --c-feedback-danger-light: var(--c-red-light);
+  --c-feedback-success: var(--c-teal);
+  --c-feedback-success-light: var(--c-teal-light);
+  --c-feedback-warning: var(--c-orange);
+  --c-feedback-warning-light: var(--c-orange-light);
+  --c-form-bkg: var(--c-gray-02);
+  --c-form-bkg-focus: var(--c-gray-03);
+  --c-form-border: var(--c-gray-05);
+  --c-form-border-light: var(--c-gray-03);
+  --c-form-border-focus: var(--c-gray-07);
+  --c-button-color: var(--c-white);
+  --c-button-bkg: var(--c-primary);
 }

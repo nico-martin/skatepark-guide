@@ -12,7 +12,8 @@ const Button = ({
   children,
   onClick,
   round = false,
-  white = false,
+  color = 'primary',
+  type = 'contained',
   isLoading = false,
   disabled = false,
   icon,
@@ -25,21 +26,29 @@ const Button = ({
   children?: VNode | VNode[] | string;
   onClick?: Function;
   round?: boolean;
-  white?: boolean;
+  color?: 'primary' | 'secondary' | 'white';
+  type?: 'contained' | 'text';
   isLoading?: boolean;
   disabled?: boolean;
   icon?: string;
   square?: boolean;
   [x: string]: any;
 }) => {
-  const classes = cn(className, styles.root, {
-    [styles.hasIcon]: Boolean(icon),
-    [styles.hasText]: Boolean(children),
-    [styles.isSquare]: square || (Boolean(icon) && !Boolean(children)),
-    [styles.isLoading]: isLoading,
-    [styles.isRound]: round,
-    [styles.bkgWhite]: white,
-  });
+  const classes = cn(
+    className,
+    styles.root,
+    {
+      [styles.hasIcon]: Boolean(icon),
+      [styles.hasText]: Boolean(children),
+      [styles.isSquare]: square || (Boolean(icon) && !Boolean(children)),
+      [styles.isLoading]: isLoading,
+      [styles.isDisabled]: disabled && !isLoading,
+      [styles.isRound]: round,
+      //[styles.bkgWhite]: white,
+    },
+    styles[`color-${color}`],
+    styles[`type-${type}`]
+  );
 
   const content = (
     <React.Fragment>

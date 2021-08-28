@@ -67,7 +67,7 @@ const Settings = ({
                   setOpen(false);
                 }
               }}
-              white
+              color="white"
               round
             >
               {formatMessage({
@@ -101,18 +101,21 @@ const Settings = ({
           </div>
           {window.installEvent !== null && (
             <div className={styles.appSettings}>
-              <button
+              <Button
                 className={styles.appSettingsButton}
                 onClick={() => window.installEvent.prompt()}
+                icon="mdi/a2h"
+                color="white"
+                type="text"
               >
-                <Icon icon="mdi/a2h" className={styles.appSettingsButtonIcon} />
                 {formatMessage({ id: 'settings.app.install' })}
-              </button>
+              </Button>
             </div>
           )}
           {'share' in window.navigator && (
             <div className={styles.appSettings}>
-              <button
+              <Button
+                icon="mdi/share"
                 className={styles.appSettingsButton}
                 onClick={() =>
                   window.navigator
@@ -124,13 +127,11 @@ const Settings = ({
                     .then(() => console.log('Successful share'))
                     .catch((error) => console.log('Error sharing', error))
                 }
+                color="white"
+                type="text"
               >
-                <Icon
-                  icon="mdi/share"
-                  className={styles.appSettingsButtonIcon}
-                />
                 {formatMessage({ id: 'settings.app.share' })}
-              </button>
+              </Button>
             </div>
           )}
         </div>

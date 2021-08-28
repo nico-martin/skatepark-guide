@@ -33,7 +33,7 @@
 }
 
 .isButton {
-  background-color: var(--c-secondary);
+  background-color: var(--c-primary);
   color: #fff;
   padding: 0.4em;
   @mixin box-shadow;

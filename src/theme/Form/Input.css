@@ -1,10 +1,16 @@
 .input {
-  background-color: var(--c-form-background);
+  background-color: var(--c-form-bkg);
   border: none;
-  border-bottom: 1px solid var(--c-form-border);
-  padding: 0.2em 0.5em 0.1em 0.5em;
+  border-bottom: 2px solid var(--c-form-border);
+  padding: 0.4em 0.5em 0.3em 0.5em;
   box-sizing: border-box;
-  height: 2em;
+  height: 2.4em;
+
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid var(--c-form-border-focus);
+    background-color: var(--c-form-bkg-focus);
+  }
 }
 
 .textarea {

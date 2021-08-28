@@ -43,7 +43,7 @@ const Account = ({ className = '' }: { className?: string }) => {
               ? formatMessage({ id: 'account.myparks' })
               : formatMessage({ id: 'account.title' })}
           </h1>
-          <Button onClick={() => setJwt(null)} white round>
+          <Button onClick={() => setJwt(null)} color="white" round>
             {formatMessage({ id: 'auth.logout' })}
           </Button>
         </header>

@@ -15,19 +15,25 @@ const Menu = ({
       active: boolean;
     }
   >;
-}) => (
-  <nav className={cn(className, styles.navigation)}>
-    {Object.entries(menu).map(([menuSlug, menuItem]) => (
-      <IntlLink
-        href={menuSlug}
-        className={cn(styles.navigationElement, {
-          [styles.navigationElementActive]: menuItem.active,
-        })}
-      >
-        {menuItem.title}
-      </IntlLink>
-    ))}
-  </nav>
-);
+}) => {
+  return (
+    <nav className={cn(className, styles.root)}>
+      {/*
+      todo: active border bottom animation
+      <span className={styles.line} style={{ left: 0, width: 100 }} />
+      */}
+      {Object.entries(menu).map(([menuSlug, menuItem]) => (
+        <IntlLink
+          href={menuSlug}
+          className={cn(styles.navigationElement, {
+            [styles.navigationElementActive]: menuItem.active,
+          })}
+        >
+          {menuItem.title}
+        </IntlLink>
+      ))}
+    </nav>
+  );
+};
 
 export default Menu;

@@ -39,7 +39,7 @@
   }
 
   &.isActive {
-    background-color: var(--c-secondary);
+    background-color: var(--c-primary);
 
     &::before {
       opacity: 1;

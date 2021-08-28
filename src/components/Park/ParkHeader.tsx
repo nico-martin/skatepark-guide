@@ -79,7 +79,7 @@ const ParkHeader = ({
                 .catch((error) => console.log('Error sharing', error))
             }
             round
-            white
+            color="white"
           />
         )}
       </div>

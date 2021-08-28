@@ -9,7 +9,8 @@
 .toast {
   transform: translateX(-50%) translateY(50%);
   opacity: 0;
-  background-color: var(--c-bkg);
+  background-color: var(--c-bkg-reverse);
+  color: var(--c-p-reverse);
   padding: 0.7em 1em;
   border-radius: 5px;
   display: flex;
@@ -51,13 +52,13 @@
 }
 
 .button-success {
-  color: var(--c-feedback-success);
+  color: var(--c-feedback-success-light);
 }
 
 .button-danger {
-  color: var(--c-feedback-danger);
+  color: var(--c-feedback-danger-light);
 }
 
 .button-warning {
-  color: var(--c-feedback-warning);
+  color: var(--c-feedback-warning-light);
 }

@@ -4,12 +4,15 @@ button {
 
 .root {
   cursor: pointer;
-  background-color: var(--c-secondary);
-  color: #fff;
-  padding: 0.5em 0.8em;
-  display: flex;
+  background-color: var(--c-button-bkg);
+  color: var(--c-button-color);
+  padding: 0.7em 0.9em;
+  display: inline-flex;
   align-items: center;
   position: relative;
+  border-radius: 0.2em;
+  line-height: 1;
+
   @mixin box-shadow;
   @mixin transition;
 
@@ -17,6 +20,39 @@ button {
     transform: translateY(-1%);
     @mixin box-shadow-hover;
   }
+
+  /* colors */
+
+  &.color-secondary {
+    --c-button-color: var(--c-white);
+    --c-button-bkg: var(--c-secondary);
+  }
+
+  &.color-white {
+    --c-button-color: var(--c-p);
+    --c-button-bkg: var(--c-white);
+  }
+
+  /* types */
+
+  &.type-text {
+    padding: 0 0;
+    background-color: transparent;
+    color: var(--c-button-bkg);
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+      transform: translateY(0);
+      text-decoration: underline;
+    }
+
+    &.color-white {
+      color: var(--c-p);
+    }
+  }
+
+  /* elements */
 
   .text {
     display: inline-block;
@@ -26,21 +62,37 @@ button {
 
   .icon {
     transition: opacity 200ms;
-  }
-
-  &.hasIcon .icon {
     transform: scale(1.2);
+    font-size: 1em;
 
     svg {
       display: block;
     }
   }
 
-  &.hasText .icon {
-    margin-right: 0.6em;
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 1.4em;
+    opacity: 0;
   }
 
-  &.isSquare {
+  /* states */
+
+  &.isDisabled {
+    opacity: 0.8;
+    pointer-events: none;
+    cursor: initial;
+    --c-button-color: var(--c-gray-06);
+    --c-button-bkg: var(--c-gray-03);
+  }
+
+  &.hasText .icon {
+    margin-right: 0.5em;
+  }
+
+  &.isSquare:not(.type-text) {
     padding: 0.5em;
   }
 
@@ -48,21 +100,11 @@ button {
     border-radius: 1000px;
   }
 
-  &.bkgWhite {
-    background-color: #fff;
-    color: var(--c-p);
-    border: 1px solid #fff;
-  }
-
-  .loader {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    opacity: 0;
-  }
-
   &.isLoading {
+    opacity: 0.8;
+    pointer-events: none;
+    cursor: initial;
+
     .loader {
       opacity: 1;
     }
@@ -72,81 +114,4 @@ button {
       opacity: 0;
     }
   }
-
-  /*
-  // Color
-  &--white {
-    background-color: #fff;
-    color: var(--c-p);
-    border: 1px solid #fff;
-  }
-
-  &--none {
-    background-color: transparent;
-    color: var(--c-p);
-    border: 1px solid transparent;
-    box-shadow: none;
-    padding: 0;
-    &:hover {
-      box-shadow: none;
-      color: var(--c-secondary);
-    }
-  }
-
-  &--danger {
-    background-color: #fff;
-    color: var(--c-feedback-error);
-    border: 1px solid #fff;
-  }
-
-  &--transparent {
-    background-color: transparent;
-    color: var(--c-p);
-    border: none;
-    box-shadow: none;
-    margin-left: -1em;
-    &:hover {
-      box-shadow: none;
-      transform: translateY(0);
-    }
-  }
-
-  &--link {
-    color: var(--c-secondary);
-    background-color: transparent;
-    text-align: left;
-    display: inline-block;
-    box-shadow: none;
-    border: none;
-    padding: 0 0;
-    &:hover {
-      box-shadow: none;
-      transform: translateY(0);
-      color: var(--c-secondary);
-    }
-  }
-
-  position: relative;
-  &:after {
-    @include transition();
-    content: '';
-    opacity: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -0.6em;
-    margin-left: -0.6em;
-    @include spinner(3px solid #fff, 1.2em);
-  }
-
-  &:disabled,
-  &--loading {
-    color: transparent !important;
-    cursor: default;
-    pointer-events: none;
-    &:after {
-      opacity: 1;
-    }
-  }
-   */
 }

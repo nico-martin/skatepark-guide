@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { FullLoader, Menu, Message } from '@theme';
+import { Button, FullLoader, Menu, Message } from '@theme';
 import { usePage, PAGE_API_STATES } from '@common/hooks/usePage';
 import cn from '@common/utils/classnames';
 import { PAGES } from '@common/utils/constants';

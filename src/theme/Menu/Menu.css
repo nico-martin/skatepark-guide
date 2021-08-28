@@ -1,12 +1,25 @@
 .root {
+  border-bottom: 1px solid var(--c-gray-04);
+  position: relative;
 }
 
 .navigationElement {
-  & + .navigationElement {
-    margin-left: 1em;
-  }
+  display: inline-block;
+  padding: 1em;
+  text-decoration: none;
 }
 
 .navigationElementActive {
   font-weight: bold;
+  color: var(--c-primary);
+  border-bottom: 3px solid var(--c-primary);
 }
+/*
+.line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--c-primary);
+  height: 3px;
+}
+*/

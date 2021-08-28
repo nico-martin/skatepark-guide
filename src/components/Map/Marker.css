@@ -1,3 +1,9 @@
+:root {
+  --c-marker-bkg: var(--c-secondary);
+  --c-marker-border: var(--c-secondary-dark);
+  --c-marker-me-bkg: var(--c-primary);
+}
+
 .root {
   position: absolute;
   display: block;
@@ -5,8 +11,8 @@
   left: 50%;
   width: 15px;
   height: 15px;
-  background-color: var(--c-primary);
-  border: 2px solid var(--c-primary-dark);
+  background-color: var(--c-marker-bkg);
+  border: 2px solid var(--c-marker-border);
   border-radius: 100%;
   user-select: none;
   transform: translate(-50%, -50%);
@@ -38,7 +44,7 @@
 }
 
 .user {
-  background-color: var(--c-secondary);
+  background-color: var(--c-marker-me-bkg);
   border-color: #fff;
   position: relative;
   width: 20px;
@@ -59,7 +65,7 @@
 
   &::before {
     animation: pulse 2s infinite;
-    background-color: var(--c-secondary);
+    background-color: var(--c-marker-me-bkg);
   }
 }
 
