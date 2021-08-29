@@ -25,6 +25,12 @@ const ParkHeader = ({
     return opacity >= 1 ? 1 : opacity;
   }, [scroll]);
 
+  const logoScale = React.useMemo(() => {
+    const min = 0.6;
+    const scale = 1 - opacity;
+    return scale <= min ? min : scale;
+  }, [opacity]);
+
   const { formatMessage } = useIntl();
 
   return (
@@ -37,14 +43,33 @@ const ParkHeader = ({
         height: headerHeight,
       }}
     >
-      <p
-        className={cn(styles.title)}
-        style={{
-          opacity,
-        }}
-      >
-        {park.title}
-      </p>
+      <div className={cn(styles.title)}>
+        {Boolean(park?.logo) && (
+          <LazyImage
+            image={park.logo}
+            width={180}
+            height={180}
+            className={cn(styles.titleImage)}
+            style={{
+              transform: `translateY(20%) scale(${logoScale})`,
+            }}
+          />
+        )}
+        <p
+          className={cn(styles.titleHeading)}
+          style={{
+            opacity,
+            ...(Boolean(park?.logo)
+              ? {
+                  transform: `translateX(${100 * logoScale * 1.5}px)`,
+                  marginLeft: -140,
+                }
+              : {}),
+          }}
+        >
+          {park.title}
+        </p>
+      </div>
       <div className={cn(styles.controls)}>
         {/*<Button
           icon={parkLoved ? 'mdi/heart' : 'mdi/heart-empty'}

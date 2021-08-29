@@ -50,9 +50,9 @@ const Account = ({ className = '' }: { className?: string }) => {
         {state === ME_API_STATES.ERROR && (
           <Message type={MESSAGE_TYPES.ERROR}>{error}</Message>
         )}
-        {state === ME_API_STATES.LOGGED_OUT || !Boolean(data) ? null : state ===
+        {state === ME_API_STATES.LOGGED_OUT ? null : state ===
           ME_API_STATES.LOADING ? (
-          <FullLoader />
+          <FullLoader large spacingTop />
         ) : slug === 'parks' ? (
           <AccountParks user={data} className={styles.content} />
         ) : (

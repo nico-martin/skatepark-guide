@@ -5,12 +5,26 @@
   position: absolute;
   bottom: var(--spacing-half);
   left: var(--spacing);
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+}
+
+.titleHeading {
   font-size: 1.2rem;
   font-weight: 900;
   color: #fff;
-  z-index: 10;
   opacity: 0;
   will-change: opacity;
+}
+
+.titleImage {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--c-white);
+  transform-origin: bottom left;
+  will-change: transform;
+  @mixin box-shadow-hover;
 }
 
 .controls {
@@ -31,9 +45,10 @@
   font-size: 1.2rem;
   @mixin transition background-color;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    background-color: var(--c-gray-03);
     transform: none;
-    background-color: var(--c-gray-light);
     @mixin box-shadow;
   }
 }

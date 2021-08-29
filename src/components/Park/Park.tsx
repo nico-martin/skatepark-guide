@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { FullLoader, Loader, Message } from '@theme';
+import { FullLoader, LazyImage, Loader, Message } from '@theme';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
 import cn from '@common/utils/classnames';
 import ParkContact from '@comp/Park/ParkContact';

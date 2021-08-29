@@ -16,7 +16,7 @@
 }
 
 .title {
-  padding: var(--spacing);
+  padding: var(--spacing-page) var(--spacing);
 }
 
 .video {
