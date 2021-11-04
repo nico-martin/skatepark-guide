@@ -7,11 +7,13 @@ const InputText = ({
   value = '',
   className = '',
   inputType = 'text',
+  onChange = () => '',
   ...props
 }: {
   name: string;
   value?: string;
   className?: string;
+  onChange?: (value: string) => void;
   inputType?:
     | 'text'
     | 'color'
@@ -34,6 +36,7 @@ const InputText = ({
     id={name}
     value={value}
     type={inputType}
+    onChange={(e) => onChange((e.target as HTMLInputElement).value)}
     {...props}
   />
 );

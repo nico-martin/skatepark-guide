@@ -16,6 +16,7 @@ const FormElement = ({
   type = 'table',
   reverse = false,
   onChange = null,
+  propError = '',
   ...inputProps
 }: {
   form?: any;
@@ -30,6 +31,7 @@ const FormElement = ({
   type?: 'table' | 'stacked' | 'inline';
   reverse?: boolean;
   onChange?: (e: string | boolean) => void;
+  propError?: string;
   [key: string]: any;
 }) => {
   const { field } = form
@@ -46,10 +48,12 @@ const FormElement = ({
 
   const error = React.useMemo(
     () =>
-      form?.formState?.errors && form.formState.errors[name]
+      propError !== ''
+        ? { message: propError }
+        : form?.formState?.errors && form.formState.errors[name]
         ? form.formState.errors[name]
         : null,
-    [form, name]
+    [form, name, propError]
   );
 
   return (

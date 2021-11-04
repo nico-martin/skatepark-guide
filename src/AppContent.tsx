@@ -103,7 +103,7 @@ const AppContent = ({ className = '' }: { className?: string }) => {
           <Account className={cn(styles.content)} />
         </Route>
         <Route path="/:lang/park/edit/:slug/" location={delayedLocation}>
-          <p>Edit</p>
+          <Park className={cn(styles.content)} edit />
         </Route>
         <Route path="/:lang/park/:slug/" location={delayedLocation}>
           <Park className={cn(styles.content)} />

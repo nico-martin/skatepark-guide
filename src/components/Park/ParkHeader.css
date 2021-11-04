@@ -24,6 +24,7 @@
   border: 1px solid var(--c-white);
   transform-origin: bottom left;
   will-change: transform;
+  background-color: var(--c-bkg);
   @mixin box-shadow-hover;
 }
 

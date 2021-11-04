@@ -52,6 +52,8 @@
   "park.facility.mini": "Miniramp",
   "park.facility.street": "Street",
   "park.facility.pumptrack": "Pumptrack",
+  "park.video": "Park Video",
+  "park.video.invalid": "Invalid Youtube Link",
   "settings.filter": "Filter",
   "settings.location": "Location",
   "settings.location.action": "Show my position",

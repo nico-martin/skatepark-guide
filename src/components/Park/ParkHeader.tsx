@@ -15,10 +15,12 @@ const ParkHeader = ({
   park = {},
   scroll,
   className = '',
+  edit = false,
 }: {
   park: Partial<ParkI>;
   scroll: number;
   className?: string;
+  edit?: boolean;
 }) => {
   const opacity = React.useMemo(() => {
     const opacity = Math.floor((100 / maxScroll) * scroll) / 100;
