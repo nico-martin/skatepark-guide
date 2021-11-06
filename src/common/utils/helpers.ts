@@ -38,5 +38,21 @@ export const getActiveFacilities = (
     .map(([item, isSet]) => (isSet ? item : null))
     .filter(Boolean);
 
-export const shallowEqual = (object1: Object, object2: Object): boolean =>
-  JSON.stringify(object1) !== JSON.stringify(object2);
+export const objectShallowEqual = (object1: Object, object2: Object): boolean =>
+  Object.keys(objectDiff(object1, object2)).length !== 0;
+
+export const objectDiff = (
+  oldObject: Object = {},
+  newObject: Object = {}
+): Object =>
+  Object.entries(oldObject).reduce((acc, [key, oldValue]) => {
+    const newValue = newObject[key] || null;
+    return {
+      ...acc,
+      ...(JSON.stringify(newValue) !== JSON.stringify(oldValue) && newValue
+        ? {
+            [key]: newValue,
+          }
+        : {}),
+    };
+  }, {});

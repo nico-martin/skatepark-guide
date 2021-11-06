@@ -35,7 +35,12 @@ const ParkVideo = ({
   );
 
   React.useEffect(() => {
-    videoId && onUpdate(`https://www.youtube.com/watch?v=${videoId}`);
+    if (videoId) {
+      onUpdate(`https://www.youtube.com/watch?v=${videoId}`);
+      setLink(`https://www.youtube.com/watch?v=${videoId}`);
+    } else if (!videoId && link === '') {
+      onUpdate('');
+    }
   }, [videoId]);
 
   return (

@@ -54,6 +54,8 @@
   "park.facility.pumptrack": "Pumptrack",
   "park.video": "Park Video",
   "park.video.invalid": "Invalid Youtube Link",
+  "park.edit.saveChanges": "Save",
+  "park.edit.permission": "You are not allowed to edit this Park",
   "settings.filter": "Filter",
   "settings.location": "Location",
   "settings.location.action": "Show my position",

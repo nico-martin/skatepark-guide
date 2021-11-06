@@ -1,7 +1,7 @@
 import React from 'react';
 import { getPark, postPark } from '@common/api/park';
 import { ParkI } from '@common/types/parks';
-import { shallowEqual } from '@common/utils/helpers';
+import { objectDiff, objectShallowEqual } from '@common/utils/helpers';
 
 export enum PARK_API_STATES {
   LOADING = 'LOADING',
@@ -28,28 +28,9 @@ export const usePark = (
   React.useEffect(() => {
     setState(PARK_API_STATES.LOADING);
     getPark(slug)
-      .then(([data]) => {
-        const newData = {
-          title: data.title.rendered,
-          content: data.content.rendered,
-          slug: data.slug,
-          logo: data.parksLogo,
-          headImage: data.headImage,
-          gallery: data.parksGallery,
-          video: data.parksVideo,
-          anlage: data.parksAnlage,
-          facilities: data.parksFacilities,
-          contact: {
-            homepage: data.parksHomepage,
-            email: data.parksEmail,
-            phone: data.parksPhone,
-            facebook: data.parksFacebook,
-            address: data.parksAddress,
-          },
-          map: data.map,
-        };
-        setInitialData(newData);
-        setData(newData);
+      .then((data) => {
+        setInitialData(data);
+        setData(data);
         setState(PARK_API_STATES.SUCCESS);
       })
       .catch((e) => {
@@ -60,14 +41,15 @@ export const usePark = (
 
   const updatePark = () => {
     setState(PARK_API_STATES.UPDATING);
-    postPark(slug, data)
+    postPark(slug, objectDiff(initialData, data))
       .then((data) => {
-        console.log(data);
+        setInitialData(data);
+        setData(data);
         setState(PARK_API_STATES.SUCCESS);
       })
       .catch((e) => {
-        setError(e.toString());
-        setState(PARK_API_STATES.ERROR);
+        //setError(e.toString());
+        //setState(PARK_API_STATES.ERROR);
       });
   };
 
@@ -77,6 +59,6 @@ export const usePark = (
     error,
     updatePark,
     setPark: (partData) => setData((data) => ({ ...data, ...partData })),
-    hasUnsavedChanges: shallowEqual(data, initialData),
+    hasUnsavedChanges: objectShallowEqual(initialData, data),
   };
 };

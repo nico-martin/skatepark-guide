@@ -1,9 +1,4 @@
-import {
-  ApiParkI,
-  MapParkI,
-  ApiParkWeatherI,
-  ParkI,
-} from '@common/types/parks';
+import { MapParkI, ApiParkWeatherI, ParkI } from '@common/types/parks';
 import { API } from '@common/utils/constants';
 import { apiGet, apiPost } from './apiFetch';
 
@@ -35,10 +30,10 @@ export const getMapParks = (bounds: MapBounds) =>
   }>(`${API.SPG}map-parks/?bounds=${bounds.join('|')}`);
 
 export const getPark = (slug: string) =>
-  apiGet<Array<ApiParkI>>(`${API.PARKS}?slug=${slug}`);
+  apiGet<ParkI>(`${API.SPG}park/${slug}`);
 
-export const postPark = (slug: string, data: ParkI) =>
-  apiPost<Array<ApiParkI>>(`${API.PARKS}?slug=${slug}`, data);
+export const postPark = (slug: string, data: Partial<ParkI>) =>
+  apiPost<ParkI>(`${API.SPG}park/${slug}`, data);
 
 export const getWeather = (slug: string, locale: string) =>
   apiGet<ApiParkWeatherI>(`${API.SPG}park-weather/${slug}/?lang=${locale}`);

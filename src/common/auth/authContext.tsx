@@ -32,20 +32,22 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
   }, [jwt]);
 
   React.useEffect(() => {
-    settingsDB.get('jwt').then((jwt) => {
-      if (jwt) {
-        const decoded = jwtDecode<JwtPayload>(jwt);
-        if (dayjs(decoded.exp).isBefore(dayjs())) {
-          setJwt(jwt);
+    settingsDB
+      .get('jwt')
+      .then((jwt) => {
+        if (jwt) {
+          const decoded = jwtDecode<JwtPayload>(jwt);
+          if (dayjs(decoded.exp).isBefore(dayjs())) {
+            setJwt(jwt);
+          }
         }
-      }
-      setInit(true);
-    });
+      })
+      .finally(() => setInit(true));
   }, []);
 
   return (
     <AuthContext.Provider value={{ jwt, setJwt, email, setEmail }}>
-      {children}
+      {init ? children : null}
     </AuthContext.Provider>
   );
 };

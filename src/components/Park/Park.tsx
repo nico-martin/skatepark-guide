@@ -1,6 +1,7 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { FullLoader, LazyImage, Loader, Message } from '@theme';
+import { Button, FullLoader, LazyImage, Loader, Message } from '@theme';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
 import cn from '@common/utils/classnames';
 import ParkContact from '@comp/Park/ParkContact';
@@ -19,7 +20,9 @@ const Park = ({
 }) => {
   const [scroll, setScroll] = React.useState<number>(0);
   const { slug } = useParams<{ slug: string }>();
-  const { data, state, error, setPark, hasUnsavedChanges } = usePark(slug);
+  const { data, state, error, setPark, hasUnsavedChanges, updatePark } =
+    usePark(slug);
+  const { formatMessage } = useIntl();
 
   return (
     <article
@@ -30,10 +33,10 @@ const Park = ({
         className={cn(styles.header)}
         park={data}
         scroll={scroll}
-        edit={edit}
+        edit={edit && data?.canEdit}
       />
       <div className={cn(styles.title)}>
-        {edit ? (
+        {edit && data?.canEdit ? (
           <input
             className={cn(styles.titleEdit)}
             type="text"
@@ -50,11 +53,19 @@ const Park = ({
         )}
       </div>
       <main className={styles.main}>
-        {state === PARK_API_STATES.LOADING && <FullLoader large spacingTop />}
-        {state === PARK_API_STATES.ERROR && (
-          <Message type="error">error: {error}</Message>
-        )}
-        {state === PARK_API_STATES.SUCCESS && (
+        {state === PARK_API_STATES.LOADING ? (
+          <FullLoader large spacingTop />
+        ) : state === PARK_API_STATES.ERROR ? (
+          <div className={cn(styles.contentElement)}>
+            <Message type="error">error: {error}</Message>
+          </div>
+        ) : edit && !data.canEdit ? (
+          <div className={cn(styles.contentElement)}>
+            <Message type="error">
+              {formatMessage({ id: 'park.edit.permission' })}
+            </Message>
+          </div>
+        ) : (
           <React.Fragment>
             {(edit || Boolean(data.video)) && (
               <ParkVideo
@@ -86,10 +97,25 @@ const Park = ({
                 className={cn(styles.contact, styles.contentElement)}
               />
             )}
-            <ParkWeather
-              className={cn(styles.weather, styles.contentElement)}
-              slug={data.slug}
-            />
+            {!edit && (
+              <ParkWeather
+                className={cn(styles.weather, styles.contentElement)}
+                slug={data.slug}
+              />
+            )}
+            {edit && (
+              <div className={cn(styles.contentElement)}>
+                <Button
+                  disabled={
+                    state === PARK_API_STATES.UPDATING || !hasUnsavedChanges
+                  }
+                  isLoading={state === PARK_API_STATES.UPDATING}
+                  onClick={updatePark}
+                >
+                  {formatMessage({ id: 'park.saveChanges' })}
+                </Button>
+              </div>
+            )}
           </React.Fragment>
         )}
       </main>
