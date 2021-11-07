@@ -5,13 +5,11 @@ import { FormElement, Iframe, InputText } from '@theme';
 const ParkVideo = ({
   videoLink,
   className = '',
-  edit,
-  onUpdate,
+  setVideoLink,
 }: {
   videoLink: string;
   className?: string;
-  edit: boolean;
-  onUpdate: (value: string) => void;
+  setVideoLink: (value: string) => void;
 }) => {
   const [link, setLink] = React.useState<string>(videoLink);
   const { formatMessage } = useIntl();
@@ -36,16 +34,16 @@ const ParkVideo = ({
 
   React.useEffect(() => {
     if (videoId) {
-      onUpdate(`https://www.youtube.com/watch?v=${videoId}`);
+      setVideoLink(`https://www.youtube.com/watch?v=${videoId}`);
       setLink(`https://www.youtube.com/watch?v=${videoId}`);
     } else if (!videoId && link === '') {
-      onUpdate('');
+      setVideoLink('');
     }
   }, [videoId]);
 
   return (
     <div className={className}>
-      {edit ? (
+      {setVideoLink ? (
         <FormElement
           name="parkvideo"
           Input={InputText}

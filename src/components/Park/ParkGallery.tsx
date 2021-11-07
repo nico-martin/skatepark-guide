@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { LazyImage } from '@theme';
+import { LazyImage, UploadModal } from '@theme';
 import PhotoSwipeLightbox from '@common/modules/photoswipe/photoswipe-lightbox.esm.js';
 import '@common/modules/photoswipe/photoswipe.css';
 import PhotoSwipe from '@common/modules/photoswipe/photoswipe.esm.js';
@@ -47,19 +47,24 @@ const ParkGalleryImage = ({ image }: { image: ApiImageI }) => {
 
 const ParkGallery = ({
   images,
+  setImages,
   className = '',
 }: {
   images: Array<ApiImageI>;
+  setImages: (images: Array<ApiImageI>) => void;
   className?: string;
 }) => {
+  const edit = setImages !== null;
   React.useEffect(() => {
-    const options = {
-      gallerySelector: '#park-gallery',
-      childSelector: 'a',
-      pswpModule: PhotoSwipe,
-    };
-    const lightbox = new PhotoSwipeLightbox(options);
-    lightbox.init();
+    if (!edit) {
+      const options = {
+        gallerySelector: '#park-gallery',
+        childSelector: 'a',
+        pswpModule: PhotoSwipe,
+      };
+      const lightbox = new PhotoSwipeLightbox(options);
+      lightbox.init();
+    }
   }, []);
 
   const { formatMessage } = useIntl();
@@ -73,6 +78,8 @@ const ParkGallery = ({
         {images.map((image) => (
           <ParkGalleryImage image={image} />
         ))}
+        {edit && <button>add image</button>}
+        {edit && <UploadModal />}
       </div>
     </div>
   );

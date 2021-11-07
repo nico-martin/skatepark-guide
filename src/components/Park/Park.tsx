@@ -7,6 +7,7 @@ import cn from '@common/utils/classnames';
 import ParkContact from '@comp/Park/ParkContact';
 import ParkGallery from '@comp/Park/ParkGallery';
 import ParkHeader from '@comp/Park/ParkHeader';
+import ParkTitle from '@comp/Park/ParkTitle';
 import ParkVideo from '@comp/Park/ParkVideo';
 import ParkWeather from '@comp/Park/ParkWeather';
 import styles from './Park.css';
@@ -23,6 +24,7 @@ const Park = ({
   const { data, state, error, setPark, hasUnsavedChanges, updatePark } =
     usePark(slug);
   const { formatMessage } = useIntl();
+  const isEdtitable: boolean = edit && data?.canEdit;
 
   return (
     <article
@@ -33,25 +35,20 @@ const Park = ({
         className={cn(styles.header)}
         park={data}
         scroll={scroll}
-        edit={edit && data?.canEdit}
+        edit={isEdtitable}
       />
-      <div className={cn(styles.title)}>
-        {edit && data?.canEdit ? (
-          <input
-            className={cn(styles.titleEdit)}
-            type="text"
-            placeholder="Title"
-            value={data?.title || ''}
-            onChange={(e) =>
-              setPark({
-                title: (e.target as HTMLInputElement).value,
-              })
-            }
-          />
-        ) : (
-          <h1>{data?.title || ''}</h1>
-        )}
-      </div>
+      <ParkTitle
+        title={data?.title || ''}
+        setTitle={
+          isEdtitable
+            ? (title) =>
+                setPark({
+                  title,
+                })
+            : null
+        }
+        className={cn(styles.title)}
+      />
       <main className={styles.main}>
         {state === PARK_API_STATES.LOADING ? (
           <FullLoader large spacingTop />
@@ -69,13 +66,15 @@ const Park = ({
           <React.Fragment>
             {(edit || Boolean(data.video)) && (
               <ParkVideo
-                videoLink={data.video}
                 className={cn(styles.video, styles.contentElement)}
-                edit={edit}
-                onUpdate={(value) =>
-                  setPark({
-                    video: value,
-                  })
+                videoLink={data.video}
+                setVideoLink={
+                  isEdtitable
+                    ? (value) =>
+                        setPark({
+                          video: value,
+                        })
+                    : null
                 }
               />
             )}
@@ -83,6 +82,14 @@ const Park = ({
               <ParkGallery
                 className={cn(styles.gallery, styles.contentElement)}
                 images={data.gallery}
+                setImages={
+                  isEdtitable
+                    ? (gallery) =>
+                        setPark({
+                          gallery,
+                        })
+                    : null
+                }
               />
             )}
             {Boolean(data.content) && (
@@ -112,7 +119,7 @@ const Park = ({
                   isLoading={state === PARK_API_STATES.UPDATING}
                   onClick={updatePark}
                 >
-                  {formatMessage({ id: 'park.saveChanges' })}
+                  {formatMessage({ id: 'park.edit.saveChanges' })}
                 </Button>
               </div>
             )}
