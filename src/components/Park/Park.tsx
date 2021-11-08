@@ -78,10 +78,10 @@ const Park = ({
                 }
               />
             )}
-            {Boolean(data.gallery) && (
+            {(edit || Boolean(data.gallery)) && (
               <ParkGallery
                 className={cn(styles.gallery, styles.contentElement)}
-                images={data.gallery}
+                images={data.gallery || []}
                 setImages={
                   isEdtitable
                     ? (gallery) =>

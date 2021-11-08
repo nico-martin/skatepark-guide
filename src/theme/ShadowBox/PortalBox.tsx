@@ -8,16 +8,24 @@ const Portal = ({ children }: { children?: React.JSX.Element }) =>
 
 export default ({
   children,
-  close,
+  show,
+  setShow,
   size,
   ...props
 }: {
   children?: React.JSX.Element | React.JSX.Element[] | string;
-  close: Function;
+  show: boolean;
+  setShow: (show: boolean) => void;
   size?: SHADOW_BOX_SIZES;
   [key: string]: any;
 }) => (
   <Portal>
-    <ShadowBox children={children} close={close} size={size} {...props} />
+    <ShadowBox
+      children={children}
+      show={show}
+      setShow={setShow}
+      size={size}
+      {...props}
+    />
   </Portal>
 );

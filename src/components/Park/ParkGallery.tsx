@@ -54,6 +54,7 @@ const ParkGallery = ({
   setImages: (images: Array<ApiImageI>) => void;
   className?: string;
 }) => {
+  const [model, setModal] = React.useState<boolean>(false);
   const edit = setImages !== null;
   React.useEffect(() => {
     if (!edit) {
@@ -78,8 +79,8 @@ const ParkGallery = ({
         {images.map((image) => (
           <ParkGalleryImage image={image} />
         ))}
-        {edit && <button>add image</button>}
-        {edit && <UploadModal />}
+        {edit && <button onClick={() => setModal(true)}>add image</button>}
+        <UploadModal show={model} setShow={setModal} />
       </div>
     </div>
   );
