@@ -1,6 +1,7 @@
+import { ApiImageI } from '@common/types/image';
 import { MapParkI, ApiParkWeatherI, ParkI } from '@common/types/parks';
 import { API } from '@common/utils/constants';
-import { apiGet, apiPost } from './apiFetch';
+import { apiGet, apiPost, apiPut } from './apiFetch';
 
 export type MapBounds = [number, number, number, number];
 
@@ -37,3 +38,6 @@ export const postPark = (slug: string, data: Partial<ParkI>) =>
 
 export const getWeather = (slug: string, locale: string) =>
   apiGet<ApiParkWeatherI>(`${API.SPG}park-weather/${slug}/?lang=${locale}`);
+
+export const getImages = (slug: string) =>
+  apiGet<Array<ApiImageI>>(`${API.SPG}park-images/${slug}/`);

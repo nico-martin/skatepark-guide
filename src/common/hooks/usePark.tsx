@@ -34,7 +34,8 @@ export const usePark = (
         setState(PARK_API_STATES.SUCCESS);
       })
       .catch((e) => {
-        setError(e.toString());
+        console.log(e);
+        setError(e);
         setState(PARK_API_STATES.ERROR);
       });
   }, [slug]);

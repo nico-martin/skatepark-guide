@@ -82,6 +82,7 @@ const Park = ({
               <ParkGallery
                 className={cn(styles.gallery, styles.contentElement)}
                 images={data.gallery || []}
+                slug={data.slug || null}
                 setImages={
                   isEdtitable
                     ? (gallery) =>

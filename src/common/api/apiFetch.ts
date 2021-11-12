@@ -24,17 +24,19 @@ const apiFetch = <T>({
   url: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   headers?: Record<string, any>;
-  body?: Record<string, any>;
-}): Promise<T> =>
-  new Promise((resolve, reject) => {
+  body?: Record<string, any> | FormData;
+}): Promise<T> => {
+  return new Promise((resolve, reject) => {
     fetch(url, {
       method,
       ...(method === 'POST' || method === 'PUT'
-        ? { body: JSON.stringify(body) }
+        ? { body: body instanceof FormData ? body : JSON.stringify(body) }
         : {}),
       headers: {
         ...headers,
-        'Content-Type': 'application/json',
+        ...(body instanceof FormData
+          ? {}
+          : { 'Content-Type': 'application/json' }),
         ...(Boolean(window.jwt)
           ? {
               Authorization: `Bearer ${window.jwt}`,
@@ -47,10 +49,17 @@ const apiFetch = <T>({
         if (resp.status < 300) {
           resolve(data);
         } else {
-          reject(data);
+          reject(
+            typeof data === 'string'
+              ? data
+              : data?.message
+              ? data.message
+              : data.toString()
+          );
         }
       })
       .catch((e) => {
         reject(MESSAGES.GENERAL_ERROR);
       });
   });
+};

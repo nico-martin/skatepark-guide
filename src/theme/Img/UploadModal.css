@@ -1,2 +1,9 @@
 .root {
 }
+
+.image {
+}
+
+.imageChosen {
+  border-color: var(--c-primary);
+}

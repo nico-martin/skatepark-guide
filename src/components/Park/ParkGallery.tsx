@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { LazyImage, UploadModal } from '@theme';
+import { getImages } from '@common/api/park';
 import PhotoSwipeLightbox from '@common/modules/photoswipe/photoswipe-lightbox.esm.js';
 import '@common/modules/photoswipe/photoswipe.css';
 import PhotoSwipe from '@common/modules/photoswipe/photoswipe.esm.js';
@@ -49,12 +50,14 @@ const ParkGallery = ({
   images,
   setImages,
   className = '',
+  slug = null,
 }: {
   images: Array<ApiImageI>;
   setImages: (images: Array<ApiImageI>) => void;
   className?: string;
+  slug?: string;
 }) => {
-  const [model, setModal] = React.useState<boolean>(false);
+  const [model, setModal] = React.useState<boolean>(true);
   const edit = setImages !== null;
   React.useEffect(() => {
     if (!edit) {
@@ -80,7 +83,12 @@ const ParkGallery = ({
           <ParkGalleryImage image={image} />
         ))}
         {edit && <button onClick={() => setModal(true)}>add image</button>}
-        <UploadModal show={model} setShow={setModal} />
+        <UploadModal
+          show={model}
+          setShow={setModal}
+          getImages={!slug ? null : () => getImages(slug)}
+          uploadParams={{ parkSlug: slug }}
+        />
       </div>
     </div>
   );

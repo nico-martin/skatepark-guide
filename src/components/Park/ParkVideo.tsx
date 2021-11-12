@@ -33,10 +33,10 @@ const ParkVideo = ({
   );
 
   React.useEffect(() => {
-    if (videoId) {
+    if (videoId && setVideoLink) {
       setVideoLink(`https://www.youtube.com/watch?v=${videoId}`);
       setLink(`https://www.youtube.com/watch?v=${videoId}`);
-    } else if (!videoId && link === '') {
+    } else if (!videoId && link === '' && setVideoLink) {
       setVideoLink('');
     }
   }, [videoId]);
