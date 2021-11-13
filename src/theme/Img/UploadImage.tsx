@@ -1,24 +1,40 @@
 import React from 'react';
-import { postAttachment } from '@common/api/attachment';
-import { API } from '@common/utils/constants';
+import { Loader } from '@theme';
+import { postImage } from '@common/api/attachment';
+import { ApiImageI } from '@common/types/image';
+import cn from '@common/utils/classnames';
+import styles from './UploadImage.css';
 
 const UploadImage = ({
   file,
+  params = {},
+  onUpload,
+  className = '',
   width = 100,
   height = 100,
-  params = {},
 }: {
   file: File;
+  params?: Record<string, string>;
+  onUpload: (image: ApiImageI) => void;
+  className?: string;
   width?: number;
   height?: number;
-  params?: Record<string, string>;
 }) => {
+  const [loading, setLoading] = React.useState<boolean>(false);
+
   React.useEffect(() => {
-    postAttachment(file, params)
-      .then((r) => console.log(r))
-      .catch((e) => console.log('ERROR', e));
+    setLoading(true);
+    postImage(file, params)
+      .then((r) => onUpload(r))
+      .catch((e) => console.log('ERROR', e))
+      .finally(() => setLoading(false));
   }, []);
-  return <p>{file.name}</p>;
+
+  return (
+    <div className={cn(className, styles.root)} style={{ width, height }}>
+      <Loader className={styles.loader} />
+    </div>
+  );
 };
 
 export default UploadImage;

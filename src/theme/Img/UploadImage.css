@@ -1,0 +1,15 @@
+.root {
+  position: relative;
+  background-color: var(--c-form-bkg);
+  border: 3px dashed var(--c-form-border);
+}
+
+.loader {
+  position: absolute;
+  font-size: 1.8rem;
+  color: var(--c-form-border);
+  top: 50%;
+  left: 50%;
+  margin-left: -0.9rem;
+  margin-top: -0.9rem;
+}

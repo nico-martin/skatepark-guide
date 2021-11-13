@@ -1,5 +1,4 @@
 import { MESSAGES } from '@common/utils/constants';
-import { trailingSlashIt } from '@common/utils/helpers';
 
 export const apiGet = <T>(url: string): Promise<T> =>
   apiFetch({ url, method: 'GET' });

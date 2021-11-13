@@ -1,0 +1,15 @@
+.root {
+  border: 5px solid var(--c-bkg);
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.isSelected {
+  border-color: var(--c-form-border);
+}
+
+.isActive {
+  border-color: var(--c-primary);
+}

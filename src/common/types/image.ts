@@ -3,5 +3,7 @@ export type ApiImageI = {
   width: number;
   height: number;
   alt?: string;
-  id?: number;
+  id?: ImageId;
 };
+
+export type ImageId = number;

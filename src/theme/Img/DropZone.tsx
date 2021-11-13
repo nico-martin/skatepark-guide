@@ -2,6 +2,8 @@ import React from 'react';
 import cn from '@common/utils/classnames';
 import styles from './DropZone.css';
 
+// todo: check mime types
+
 const DropZone = ({
   className = '',
   disabled = false,

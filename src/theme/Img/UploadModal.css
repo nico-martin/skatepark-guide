@@ -1,9 +1,25 @@
 .root {
 }
 
-.image {
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--spacing) -0.4rem -0.4rem -0.4rem;
 }
 
-.imageChosen {
-  border-color: var(--c-primary);
+.image {
+  margin: 0.4rem;
+  box-sizing: content-box;
+
+  button,
+  figure,
+  img {
+    display: block;
+  }
+}
+
+.imageButton {
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 }

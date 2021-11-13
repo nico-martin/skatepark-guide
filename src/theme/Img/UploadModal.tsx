@@ -1,31 +1,32 @@
 import React from 'react';
-import { FullLoader, LazyImage, PortalBox, SHADOW_BOX_SIZES } from '@theme';
-import { ApiImageI } from '@common/types/image';
-import cn from '@common/utils/classnames';
+import { FullLoader, PortalBox, SHADOW_BOX_SIZES } from '@theme';
+import { ApiImageI, ImageId } from '@common/types/image';
 import DropZone from './DropZone';
-import UploadImage from './UploadImage';
+import UploadImageImage from './UploadImageImage';
 import styles from './UploadModal.css';
+import UploadModalImage from './UploadModalImage';
 
 const UploadModal = ({
   title = 'Upload Image',
   show,
   setShow,
   getImages = null,
-  activeImages: initialActiveImages = [],
+  selectedImages: initialSelectedImages = [],
   uploadParams = {},
 }: {
   title?: string;
   show: boolean;
   setShow: (show: boolean) => void;
   getImages?: () => Promise<Array<ApiImageI>>;
-  activeImages?: Array<number>;
+  selectedImages?: Array<number>;
   uploadParams?: Record<string, string>;
 }) => {
   const [images, setImages] = React.useState<Array<ApiImageI | File>>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [activeImages, setActiveImages] =
-    React.useState<Array<number>>(initialActiveImages);
-  const [filesToUpload, setFilesToUpload] = React.useState<Array<File>>([]);
+  const [activeImage, setActiveImage] = React.useState<ApiImageI>(null);
+  const [selectedImages, setSelectedImages] = React.useState<Array<ImageId>>(
+    initialSelectedImages
+  );
 
   React.useEffect(() => {
     if (getImages && show) {
@@ -51,34 +52,30 @@ const UploadModal = ({
         }
       />
       <div className={styles.images}>
-        {filesToUpload.map((file) => (
-          <span>{file.name}</span>
-        ))}
         {loading ? (
           <FullLoader spacingTop large />
         ) : (
           images.map((image, i) => (
-            <div key={i}>
-              {image instanceof File ? (
-                <UploadImage
-                  file={image}
-                  width={100}
-                  height={100}
-                  params={uploadParams}
-                />
-              ) : (
-                <button
-                  className={cn(styles.image, {
-                    [styles.imageChosen]: activeImages.indexOf(image.id) !== -1,
-                  })}
-                >
-                  <LazyImage image={image} width={100} height={100} />
-                </button>
-              )}
-            </div>
+            <UploadModalImage
+              className={styles.image}
+              key={image instanceof File ? image.name : image.id}
+              image={image}
+              width={100}
+              height={100}
+              uploadParams={uploadParams}
+              selectedImages={selectedImages}
+              activeImage={activeImage}
+              onSelectImage={(image) => {
+                if (!(image instanceof File)) {
+                  setActiveImage(image);
+                  // todo: also set selected image
+                }
+              }}
+            />
           ))
         )}
       </div>
+      <UploadImageImage image={activeImage} />
       <button onClick={() => setShow(false)}>close</button>
     </PortalBox>
   );
