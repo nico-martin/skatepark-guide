@@ -1,6 +1,6 @@
 import React from 'react';
 import { LazyImage } from '@theme';
-import { ApiImageI, ImageId, ListFileI, ListImageI } from '@common/types/image';
+import { ImageId, ListFileI, ListImageI } from '@common/types/image';
 import cn from '@common/utils/classnames';
 import UploadImage from './UploadImage';
 import styles from './UploadModalImage.css';
@@ -17,13 +17,13 @@ const UploadModalImage = ({
   className = '',
 }: {
   image: ListFileI | ListImageI;
-  setImage: (image: ApiImageI) => void;
+  setImage: (image: ListImageI) => void;
   width?: number;
   height?: number;
   uploadParams?: Record<string, string>;
-  selectedImages: Array<ImageId>;
-  activeImage: ApiImageI;
-  onSelectImage: (image: ApiImageI) => void;
+  selectedImages: Array<ListImageI>;
+  activeImage: ListImageI;
+  onSelectImage: (image: ListImageI) => void;
   className?: string;
 }) => {
   //const [image, setImage] = React.useState<File | ApiImageI>(imageProp);
@@ -31,8 +31,9 @@ const UploadModalImage = ({
   return (
     <button
       className={cn(className, styles.root, {
-        [styles.isSelected]:
-          'id' in image && selectedImages.indexOf(image.id) !== -1,
+        [styles.isSelected]: Boolean(
+          selectedImages.find((i) => i.listKey === image.listKey)
+        ),
         [styles.isActive]: 'id' in image && activeImage?.id === image.id,
       })}
       disabled={!('url' in image)}

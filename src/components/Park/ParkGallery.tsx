@@ -89,6 +89,7 @@ const ParkGallery = ({
           setShow={setModal}
           getImages={!slug ? null : () => getImages(slug)}
           uploadParams={{ parkSlug: slug }}
+          onSelectImages={(images) => console.log('IMAGES', images)}
         />
       </div>
     </div>

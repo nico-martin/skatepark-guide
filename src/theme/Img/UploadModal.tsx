@@ -21,24 +21,29 @@ const UploadModal = ({
   getImages = null,
   selectedImages: initialSelectedImages = [],
   uploadParams = {},
+  selectMultiple = false,
+  onSelectImages,
 }: {
   title?: string;
   show: boolean;
   setShow: (show: boolean) => void;
   getImages?: () => Promise<Array<ApiImageI>>;
-  selectedImages?: Array<number>;
+  selectedImages?: Array<ApiImageI>;
   uploadParams?: Record<string, string>;
+  selectMultiple?: boolean;
+  onSelectImages: (images: Array<ApiImageI>) => void;
 }) => {
   const [images, setImages] = React.useState<Array<ListImageI | ListFileI>>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [activeImage, setActiveImage] = React.useState<ApiImageI>(null);
-  const [selectedImages, setSelectedImages] = React.useState<Array<ImageId>>(
-    initialSelectedImages
+  const [activeImage, setActiveImage] = React.useState<ListImageI>(null);
+  const [selectedImages, setSelectedImages] = React.useState<Array<ListImageI>>(
+    initialSelectedImages.map((image) => ({
+      ...image,
+      listKey: String(image.id),
+    }))
   );
 
   const { formatMessage } = useIntl();
-
-  // todo: ich muss einen besseren weg finden, die bilder anzuordnen, so dass ich sie einzeln updaten kann egal ob File oder ApiImageI (Array mit append [fixe reihenfolge])
 
   React.useEffect(() => {
     if (getImages && show) {
@@ -99,7 +104,10 @@ const UploadModal = ({
                   onSelectImage={(image) => {
                     if (image.url) {
                       setActiveImage(image);
-                      // todo: also set selected image
+                      if (selectMultiple) {
+                      } else {
+                        setSelectedImages([image]);
+                      }
                     }
                   }}
                 />
@@ -119,7 +127,15 @@ const UploadModal = ({
               <Button
                 color="primary"
                 disabled={selectedImages.length === 0}
-                onClick={() => setShow(false)}
+                onClick={() => {
+                  onSelectImages(
+                    selectedImages.map((image) => {
+                      const { listKey, ...imageData } = image;
+                      return imageData;
+                    })
+                  );
+                  setShow(false);
+                }}
               >
                 {formatMessage({ id: 'park.edit.upload.selectImage' })}
               </Button>

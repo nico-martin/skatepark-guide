@@ -24,4 +24,5 @@
 }
 
 .imageEdit {
+  margin-bottom: var(--spacing);
 }
