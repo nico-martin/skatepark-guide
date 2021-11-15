@@ -1,7 +1,7 @@
 import React from 'react';
 import { Loader } from '@theme';
 import { postImage } from '@common/api/attachment';
-import { ApiImageI } from '@common/types/image';
+import { ApiImageI, ListFileI, ListImageI } from '@common/types/image';
 import cn from '@common/utils/classnames';
 import styles from './UploadImage.css';
 
@@ -13,9 +13,9 @@ const UploadImage = ({
   width = 100,
   height = 100,
 }: {
-  file: File;
+  file: ListFileI;
   params?: Record<string, string>;
-  onUpload: (image: ApiImageI) => void;
+  onUpload: (image: ListImageI) => void;
   className?: string;
   width?: number;
   height?: number;
@@ -24,8 +24,8 @@ const UploadImage = ({
 
   React.useEffect(() => {
     setLoading(true);
-    postImage(file, params)
-      .then((r) => onUpload(r))
+    postImage(file.file, params)
+      .then((r) => onUpload({ ...r, listKey: file.listKey }))
       .catch((e) => console.log('ERROR', e))
       .finally(() => setLoading(false));
   }, []);

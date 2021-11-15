@@ -1,6 +1,7 @@
 :root {
   --spacing: 1rem;
   --spacing-half: 0.5rem;
+  --spacing-quarter: 0.25rem;
   --spacing-page: 2.2rem;
 
   @mixin desktop {

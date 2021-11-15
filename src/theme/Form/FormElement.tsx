@@ -16,7 +16,10 @@ const FormElement = ({
   type = 'table',
   reverse = false,
   onChange = null,
+  onBlur = null,
   propError = '',
+  small = false,
+  disabled = false,
   ...inputProps
 }: {
   form?: any;
@@ -31,9 +34,14 @@ const FormElement = ({
   type?: 'table' | 'stacked' | 'inline';
   reverse?: boolean;
   onChange?: (e: string | boolean) => void;
+  onBlur?: (e: string | boolean) => void;
   propError?: string;
+  small?: boolean;
+  disabled?: boolean;
   [key: string]: any;
 }) => {
+  const [hasFocus, setHasFocus] = React.useState<boolean>(false);
+
   const { field } = form
     ? useController({
         control: form.control,
@@ -56,6 +64,13 @@ const FormElement = ({
     [form, name, propError]
   );
 
+  const hasValue: boolean = React.useMemo(
+    () =>
+      ('value' in inputProps && String(inputProps.value) !== '') ||
+      ('value' in field && String(field.value) !== ''),
+    [inputProps, field]
+  );
+
   return (
     <div
       className={cn(styles.container, className, {
@@ -63,6 +78,9 @@ const FormElement = ({
         [styles.containerIsInline]: type === 'inline',
         [styles.containerIsHidden]: Input.displayName === 'InputHidden',
         [styles.containerOrderReverse]: reverse,
+        [styles.containerIsSmall]: small,
+        [styles.containerIsActive]: hasValue || hasFocus,
+        [styles.containerIsDisabled]: disabled,
       })}
     >
       <div className={styles.labelContainer}>
@@ -78,7 +96,15 @@ const FormElement = ({
           className={cn(styles.input, inputClassName)}
           {...field}
           {...inputProps}
-          onBlur={(e) => e && field.onChange(sanitizeValue(e.target.value))}
+          onFocus={() => setHasFocus(true)}
+          onBlur={(e) => {
+            setHasFocus(false);
+            if (e) {
+              field.onChange(sanitizeValue(e.target.value));
+              onBlur && onBlur(sanitizeValue(e.target.value));
+            }
+          }}
+          disabled={disabled}
         />
         {error && <p className={styles.error}>{error.message}</p>}
       </div>

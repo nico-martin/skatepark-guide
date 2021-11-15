@@ -1,12 +1,13 @@
 import React from 'react';
 import { LazyImage } from '@theme';
-import { ApiImageI, ImageId } from '@common/types/image';
+import { ApiImageI, ImageId, ListFileI, ListImageI } from '@common/types/image';
 import cn from '@common/utils/classnames';
 import UploadImage from './UploadImage';
 import styles from './UploadModalImage.css';
 
 const UploadModalImage = ({
-  image: imageProp,
+  image,
+  setImage,
   width = 100,
   height = 100,
   uploadParams = {},
@@ -15,7 +16,8 @@ const UploadModalImage = ({
   onSelectImage,
   className = '',
 }: {
-  image: File | ApiImageI;
+  image: ListFileI | ListImageI;
+  setImage: (image: ApiImageI) => void;
   width?: number;
   height?: number;
   uploadParams?: Record<string, string>;
@@ -24,20 +26,21 @@ const UploadModalImage = ({
   onSelectImage: (image: ApiImageI) => void;
   className?: string;
 }) => {
-  const [image, setImage] = React.useState<File | ApiImageI>(imageProp);
+  //const [image, setImage] = React.useState<File | ApiImageI>(imageProp);
 
   return (
     <button
       className={cn(className, styles.root, {
         [styles.isSelected]:
-          !(image instanceof File) && selectedImages.indexOf(image?.id) !== -1,
-        [styles.isActive]:
-          !(image instanceof File) && activeImage?.id === image.id,
+          'id' in image && selectedImages.indexOf(image.id) !== -1,
+        [styles.isActive]: 'id' in image && activeImage?.id === image.id,
       })}
-      disabled={image instanceof File}
-      onClick={() => (!(image instanceof File) ? onSelectImage(image) : null)}
+      disabled={!('url' in image)}
+      onClick={() => ('url' in image ? onSelectImage(image) : null)}
     >
-      {image instanceof File ? (
+      {'id' in image ? (
+        <LazyImage image={image} width={width} height={height} />
+      ) : (
         <UploadImage
           className={cn(styles.uploadModal)}
           file={image}
@@ -46,8 +49,6 @@ const UploadModalImage = ({
           width={width}
           height={height}
         />
-      ) : (
-        <LazyImage image={image} width={width} height={height} />
       )}
     </button>
   );

@@ -68,6 +68,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
               message: formatMessage({ id: 'auth.email.validate' }),
             },
           }}
+          type="stacked"
         />
         <FormElement
           name="password"
@@ -81,6 +82,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
               { field: formatMessage({ id: 'auth.password' }) }
             ),
           }}
+          type="stacked"
         />
         {formError !== '' && (
           <FormFeedback type={MESSAGE_TYPES.ERROR}>{formError}</FormFeedback>

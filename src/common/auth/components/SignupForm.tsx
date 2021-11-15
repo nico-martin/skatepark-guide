@@ -79,6 +79,7 @@ const SignupForm = ({ className = '' }: { className?: string }) => {
               message: formatMessage({ id: 'auth.email.validate' }),
             },
           }}
+          type="stacked"
         />
         <FormElement
           name="password"
@@ -92,6 +93,7 @@ const SignupForm = ({ className = '' }: { className?: string }) => {
               { field: formatMessage({ id: 'auth.password' }) }
             ),
           }}
+          type="stacked"
         />
         <FormElement
           name="repeatPassword"
@@ -108,6 +110,7 @@ const SignupForm = ({ className = '' }: { className?: string }) => {
               value === form.getValues('password') ||
               formatMessage({ id: 'auth.signup.error.repeatPassword' }),
           }}
+          type="stacked"
         />
         {formError !== '' && (
           <FormFeedback type={MESSAGE_TYPES.ERROR}>{formError}</FormFeedback>

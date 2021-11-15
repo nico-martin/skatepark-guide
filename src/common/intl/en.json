@@ -1,4 +1,5 @@
 {
+  "_close": "close",
   "about.about": "About",
   "about.impressum": "Legal",
   "about.privacy": "Privacy",
@@ -56,6 +57,12 @@
   "park.video.invalid": "Invalid Youtube Link",
   "park.edit.saveChanges": "Save",
   "park.edit.permission": "You are not allowed to edit this Park",
+  "park.edit.upload.clickImageHint": "Click on image to select",
+  "park.edit.upload.selectImage": "select image",
+  "park.edit.upload.imageTitle": "Title",
+  "park.edit.upload.imageAlt": "Alt text",
+  "park.edit.upload.imageCredits": "Credits",
+  "park.edit.upload.imageCreditsUrl": "Credits URL",
   "settings.filter": "Filter",
   "settings.location": "Location",
   "settings.location.action": "Show my position",

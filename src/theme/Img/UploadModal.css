@@ -1,25 +1,27 @@
 .root {
+  display: grid;
+  grid-template-columns: auto 200px;
+  grid-template-rows: auto auto auto;
+  grid-gap: var(--spacing) var(--spacing-half);
+}
+
+.dropzone,
+.controls,
+.loader {
+  grid-column-start: 1;
+  grid-column-end: span 2;
 }
 
 .images {
   display: flex;
   flex-wrap: wrap;
-  margin: var(--spacing) -0.4rem -0.4rem -0.4rem;
+  margin: -0.4rem;
+  align-items: flex-start;
 }
 
 .image {
   margin: 0.4rem;
-  box-sizing: content-box;
-
-  button,
-  figure,
-  img {
-    display: block;
-  }
 }
 
-.imageButton {
-  &:not(:disabled) {
-    cursor: pointer;
-  }
+.imageEdit {
 }

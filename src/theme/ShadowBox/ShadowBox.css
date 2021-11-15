@@ -31,7 +31,7 @@
   align-items: center;
   position: sticky;
   top: 0;
-  background-color: var(--c-bkg);
+  background-color: var(--c-bkg-light);
   padding: var(--spacing);
   z-index: 10;
 }
@@ -53,13 +53,13 @@
   max-height: calc(100vh - (var(--spacing) * 2));
   width: 900px;
   max-width: calc(100vw - (var(--spacing) * 2));
-  background-color: var(--c-bkg);
+  background-color: var(--c-bkg-light);
   will-change: transform;
   overflow: auto;
 }
 
 .content {
-  padding: 0 var(--spacing) calc(var(--spacing) * 2) var(--spacing);
+  padding: 0 var(--spacing) var(--spacing) var(--spacing);
 }
 
 .box,

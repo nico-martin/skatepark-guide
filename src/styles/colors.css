@@ -24,8 +24,10 @@
 
   /* theme colors */
   --c-p: var(--c-gray-10);
+  --c-p-light: var(--c-gray-07);
   --c-h: var(--c-black);
   --c-bkg: var(--c-gray-03);
+  --c-bkg-light: var(--c-white);
   --c-bkg-reverse: var(--c-gray-09);
   --c-p-reverse: var(--c-gray-01);
   --c-primary: var(--c-teal);
@@ -45,6 +47,7 @@
   --c-form-border: var(--c-gray-05);
   --c-form-border-light: var(--c-gray-03);
   --c-form-border-focus: var(--c-gray-07);
+  --c-form-bkg-disabled: var(--c-gray-01);
   --c-button-color: var(--c-white);
   --c-button-bkg: var(--c-primary);
 }

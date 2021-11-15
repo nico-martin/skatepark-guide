@@ -1,0 +1,14 @@
+.root {
+}
+
+.form {
+  & > * + * {
+    margin-top: var(--spacing);
+  }
+}
+
+.clickToSelect {
+  text-align: center;
+  font-size: var(--fs-xsmall);
+  color: var(--c-p-light);
+}

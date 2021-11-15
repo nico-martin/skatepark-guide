@@ -10,12 +10,14 @@ const DropZone = ({
   id,
   onChange,
   label = 'Drop files here or click to upload',
+  height = 100,
 }: {
   className?: string;
   disabled?: boolean;
   id: string;
   onChange: (files: FileList) => void;
   label?: string;
+  height?: number;
 }) => {
   const [dragging, setDragging] = React.useState<boolean>(false);
   const uploadArea = React.useRef<HTMLButtonElement>(null);
@@ -87,6 +89,9 @@ const DropZone = ({
         [styles.isDragging]: dragging,
         [styles.isDisabled]: disabled,
       })}
+      style={{
+        height,
+      }}
       onClick={() => (input.current ? input.current.click() : null)}
     >
       <input

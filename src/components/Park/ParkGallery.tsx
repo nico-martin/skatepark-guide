@@ -59,6 +59,7 @@ const ParkGallery = ({
 }) => {
   const [model, setModal] = React.useState<boolean>(true);
   const edit = setImages !== null;
+
   React.useEffect(() => {
     if (!edit) {
       const options = {

@@ -88,6 +88,7 @@ const PasswordForm = ({ className = '' }: { className?: string }) => {
                   message: formatMessage({ id: 'auth.email.validate' }),
                 },
               }}
+              type="stacked"
             />
             {formError !== '' && (
               <FormFeedback type={MESSAGE_TYPES.ERROR}>

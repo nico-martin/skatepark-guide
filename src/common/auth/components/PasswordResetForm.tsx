@@ -80,6 +80,7 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
               { field: formatMessage({ id: 'auth.password' }) }
             ),
           }}
+          type="stacked"
         />
         <FormElement
           name="repeatPassword"
@@ -96,6 +97,7 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
               value === form.getValues('password') ||
               formatMessage({ id: 'auth.signup.error.repeatPassword' }),
           }}
+          type="stacked"
         />
         <FormElement
           name="key"
@@ -103,6 +105,7 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
           Input={InputHidden}
           inputType="text"
           form={form}
+          type="stacked"
         />
         {formError !== '' && (
           <FormFeedback type={MESSAGE_TYPES.ERROR}>{formError}</FormFeedback>

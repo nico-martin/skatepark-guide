@@ -1,5 +1,11 @@
 .root {
-  border: 5px solid var(--c-bkg);
+  border: 5px solid var(--c-bkg-light);
+
+  button,
+  figure,
+  img {
+    display: block;
+  }
 
   &:not(:disabled) {
     cursor: pointer;
