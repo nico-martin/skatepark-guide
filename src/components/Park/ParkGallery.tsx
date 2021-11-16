@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { LazyImage, UploadModal } from '@theme';
+import { Icon, LazyImage, UploadModal } from '@theme';
 import { getImages } from '@common/api/park';
 import PhotoSwipeLightbox from '@common/modules/photoswipe/photoswipe-lightbox.esm.js';
 import '@common/modules/photoswipe/photoswipe.css';
@@ -57,7 +57,7 @@ const ParkGallery = ({
   className?: string;
   slug?: string;
 }) => {
-  const [model, setModal] = React.useState<boolean>(true);
+  const [model, setModal] = React.useState<boolean>(false);
   const edit = setImages !== null;
 
   React.useEffect(() => {
@@ -80,16 +80,26 @@ const ParkGallery = ({
         {formatMessage({ id: 'park.gallery' })}
       </h2>
       <div className={cn(styles.list)} id="park-gallery">
+        {edit && (
+          <button
+            title={formatMessage({ id: 'park.edit.gallery.add' })}
+            onClick={() => setModal(true)}
+            className={styles.addImage}
+          >
+            <Icon icon="mdi/plus" className={styles.addImageIcon} />
+          </button>
+        )}
         {images.map((image) => (
           <ParkGalleryImage image={image} />
         ))}
-        {edit && <button onClick={() => setModal(true)}>add image</button>}
         <UploadModal
           show={model}
           setShow={setModal}
           getImages={!slug ? null : () => getImages(slug)}
           uploadParams={{ parkSlug: slug }}
-          onSelectImages={(images) => console.log('IMAGES', images)}
+          onSelectImages={(images) => setImages(images)}
+          selectedImages={images}
+          selectMultiple
         />
       </div>
     </div>

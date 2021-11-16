@@ -10,7 +10,7 @@
   overflow: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
-  scrollbar-color: var(--c-gray) transparent;
+  scrollbar-color: var(--c-form-border) transparent;
 }
 
 .element {
@@ -26,4 +26,26 @@
   width: auto;
   display: block;
   max-width: none;
+}
+
+.addImage {
+  height: 150px;
+  width: 150px;
+  flex: 150px 1 0;
+  border: 3px dashed var(--c-form-border-light);
+  cursor: pointer;
+  font-size: 2.5rem;
+  color: var(--c-form-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-half);
+
+  &:hover {
+    transition: all 200ms ease-in-out;
+    border-color: var(--c-form-border);
+  }
+}
+
+.addImageIcon {
 }

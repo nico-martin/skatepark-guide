@@ -13,9 +13,9 @@
 }
 
 .isSelected {
-  border-color: var(--c-form-border);
+  border-color: var(--c-primary);
 }
 
 .isActive {
-  border-color: var(--c-primary);
+  border-color: var(--c-secondary);
 }

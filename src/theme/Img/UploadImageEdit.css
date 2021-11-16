@@ -2,9 +2,16 @@
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
+
   & > * + * {
     margin-top: var(--spacing);
   }
+}
+
+.delete {
+  align-self: flex-end;
 }
 
 .clickToSelect {

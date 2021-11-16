@@ -7,6 +7,7 @@ import styles from './Button.css';
 
 const Button = ({
   element = 'button',
+  size = 'medium',
   className = '',
   classNameIcon = '',
   children,
@@ -21,12 +22,13 @@ const Button = ({
   ...props
 }: {
   element?: 'button' | 'router' | 'a';
+  size?: 'small' | 'medium';
   className?: string;
   classNameIcon?: string;
   children?: VNode | VNode[] | string;
   onClick?: Function;
   round?: boolean;
-  color?: 'primary' | 'secondary' | 'white';
+  color?: 'primary' | 'secondary' | 'white' | 'danger';
   type?: 'contained' | 'text';
   isLoading?: boolean;
   disabled?: boolean;
@@ -44,10 +46,10 @@ const Button = ({
       [styles.isLoading]: isLoading,
       [styles.isDisabled]: disabled && !isLoading,
       [styles.isRound]: round,
-      //[styles.bkgWhite]: white,
     },
     styles[`color-${color}`],
-    styles[`type-${type}`]
+    styles[`type-${type}`],
+    styles[`size-${size}`]
   );
 
   const content = (

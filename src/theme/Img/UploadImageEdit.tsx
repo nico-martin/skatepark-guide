@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { FormElement, InputText } from '@theme';
-import { updateImage } from '@common/api/attachment';
+import { Button, FormElement, InputText } from '@theme';
+import { deleteImage, updateImage } from '@common/api/attachment';
 import { ApiImageI, ImageCredits } from '@common/types/image';
 import cn from '@common/utils/classnames';
 import styles from './UploadImageEdit.css';
@@ -9,10 +9,12 @@ import styles from './UploadImageEdit.css';
 const UploadImageEdit = ({
   image,
   setImage,
+  removeImage,
   className = '',
 }: {
   image: ApiImageI;
   setImage: (image: ApiImageI) => void;
+  removeImage: (image: ApiImageI) => void;
   className?: string;
 }) => {
   const [title, setTitle] = React.useState<string>();
@@ -35,7 +37,7 @@ const UploadImageEdit = ({
   const sync = () => {
     const newImage = { ...image, title, alt, credits };
     setImage(newImage);
-    updateImage(newImage);
+    updateImage(newImage).catch((e) => alert(e));
   };
 
   return (
@@ -84,6 +86,20 @@ const UploadImageEdit = ({
               small
             />
           )}
+          <Button
+            color="danger"
+            type="text"
+            size="small"
+            className={styles.delete}
+            onClick={() =>
+              confirm(formatMessage({ id: 'park.edit.upload.imageDelete' })) &&
+              deleteImage(image.id)
+                .then(() => removeImage(image))
+                .catch((e) => alert(e))
+            }
+          >
+            {formatMessage({ id: '_delete' })}
+          </Button>
         </div>
       ) : (
         <p className={styles.clickToSelect}>

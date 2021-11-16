@@ -8,7 +8,7 @@ import {
   Button,
   ButtonGroup,
 } from '@theme';
-import { ApiImageI, ImageId, ListImageI, ListFileI } from '@common/types/image';
+import { ApiImageI, ListImageI, ListFileI } from '@common/types/image';
 import DropZone from './DropZone';
 import UploadImageEdit from './UploadImageEdit';
 import styles from './UploadModal.css';
@@ -63,6 +63,11 @@ const UploadModal = ({
       images.map((i) => (i.listKey !== image.listKey ? i : image))
     );
 
+  const removeImage = (image: ListImageI): void =>
+    setImages((images) => images.filter((i) => i.listKey !== image.listKey));
+
+  // todo: wenn selectMultiple, besseres UI zum an- und abwählen.
+
   return (
     <PortalBox
       show={show}
@@ -102,12 +107,18 @@ const UploadModal = ({
                   selectedImages={selectedImages}
                   activeImage={activeImage}
                   onSelectImage={(image) => {
-                    if (image.url) {
-                      setActiveImage(image);
-                      if (selectMultiple) {
-                      } else {
-                        setSelectedImages([image]);
-                      }
+                    const isSelected = Boolean(
+                      selectedImages.find((i) => i.id == image.id)
+                    );
+                    setActiveImage(image);
+                    if (selectMultiple) {
+                      setSelectedImages((images) =>
+                        isSelected
+                          ? images.filter((i) => i.id !== image.id)
+                          : [...images, image]
+                      );
+                    } else {
+                      setSelectedImages([image]);
                     }
                   }}
                 />
@@ -117,6 +128,7 @@ const UploadModal = ({
               <UploadImageEdit
                 image={activeImage}
                 setImage={setImage}
+                removeImage={removeImage}
                 className={styles.imageEdit}
               />
             )}

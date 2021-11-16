@@ -26,8 +26,6 @@ const UploadModalImage = ({
   onSelectImage: (image: ListImageI) => void;
   className?: string;
 }) => {
-  //const [image, setImage] = React.useState<File | ApiImageI>(imageProp);
-
   return (
     <button
       className={cn(className, styles.root, {

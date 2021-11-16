@@ -21,6 +21,12 @@ button {
     @mixin box-shadow-hover;
   }
 
+  /* size */
+
+  &.size-small {
+    font-size: var(--fs-xsmall);
+  }
+
   /* colors */
 
   &.color-secondary {
@@ -31,6 +37,11 @@ button {
   &.color-white {
     --c-button-color: var(--c-p);
     --c-button-bkg: var(--c-white);
+  }
+
+  &.color-danger {
+    --c-button-color: var(--c-white);
+    --c-button-bkg: var(--c-feedback-danger);
   }
 
   /* types */
