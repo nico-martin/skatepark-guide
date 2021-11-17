@@ -81,6 +81,7 @@ const FormElement = ({
         [styles.containerIsSmall]: small,
         [styles.containerIsActive]: hasValue || hasFocus,
         [styles.containerIsDisabled]: disabled,
+        [styles.containerIsCheckBox]: Input.displayName === 'InputCheckbox',
       })}
     >
       <div className={styles.labelContainer}>

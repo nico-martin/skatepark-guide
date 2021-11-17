@@ -66,8 +66,6 @@ const UploadModal = ({
   const removeImage = (image: ListImageI): void =>
     setImages((images) => images.filter((i) => i.listKey !== image.listKey));
 
-  // todo: wenn selectMultiple, besseres UI zum an- und abwählen.
-
   return (
     <PortalBox
       show={show}
@@ -106,11 +104,12 @@ const UploadModal = ({
                   uploadParams={uploadParams}
                   selectedImages={selectedImages}
                   activeImage={activeImage}
+                  selectMultiple={selectMultiple}
+                  onClickImage={(image) => setActiveImage(image)}
                   onSelectImage={(image) => {
                     const isSelected = Boolean(
                       selectedImages.find((i) => i.id == image.id)
                     );
-                    setActiveImage(image);
                     if (selectMultiple) {
                       setSelectedImages((images) =>
                         isSelected

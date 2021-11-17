@@ -11,9 +11,19 @@ const InputCheckbox = ({
   name: string;
   value?: string;
   className?: string;
-  onChange?: Function;
+  onChange?: (value: boolean) => void;
 }) => (
-  <div className={cn(styles.root)}>
+  <React.Fragment>
+    <input
+      value="checked"
+      id={name}
+      name={name}
+      className={cn(styles.input)}
+      type="checkbox"
+      checked={Boolean(value)}
+      onChange={(e) => onChange((e.target as HTMLInputElement).checked)}
+      tabIndex={-1}
+    />
     <span
       role="checkbox"
       aria-checked={Boolean(value)}
@@ -23,21 +33,13 @@ const InputCheckbox = ({
       onKeyUp={(e) => {
         e.keyCode === 32 && onChange(!Boolean(value));
       }}
-      className={cn(styles.spanInput, {
+      className={cn(className, styles.spanInput, {
         [styles.isActive]: Boolean(value),
       })}
     />
-    <input
-      value="checked"
-      id={name}
-      name={name}
-      className={cn(className, styles.input)}
-      type="checkbox"
-      checked={Boolean(value)}
-      onChange={(e) => onChange((e.target as HTMLInputElement).checked)}
-      tabIndex={-1}
-    />
-  </div>
+  </React.Fragment>
 );
+
+InputCheckbox.displayName = 'InputCheckbox';
 
 export default InputCheckbox;

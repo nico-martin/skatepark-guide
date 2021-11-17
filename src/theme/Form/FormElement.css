@@ -27,6 +27,8 @@
 
 .content {
   flex: 1 1 auto;
+  display: flex;
+  align-items: center;
 }
 
 .input {
@@ -43,7 +45,7 @@
   }
 }
 
-.input:not([type='checkbox']) {
+.input:not([type='checkbox']):not([role='checkbox']) {
   width: 100% !important;
   max-width: 100%;
 }
@@ -155,5 +157,29 @@
 
   .labelContainer {
     margin-left: 0;
+  }
+}
+
+/*
+ checkbox
+ */
+
+.containerIsCheckBox.containerIsStacked.containerIsActive {
+  flex-direction: row;
+
+  .labelContainer {
+    position: relative;
+    transform: translateY(0) scale(1);
+    top: auto;
+    left: auto;
+    pointer-events: auto;
+  }
+
+  .label {
+    margin-right: 1em;
+
+    &:after {
+      content: ':';
+    }
   }
 }

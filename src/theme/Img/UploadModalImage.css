@@ -1,21 +1,36 @@
 .root {
-  border: 5px solid var(--c-bkg-light);
+  position: relative;
 
   button,
   figure,
   img {
     display: block;
   }
+}
 
+.button {
+  border: 5px solid var(--c-bkg-light);
   &:not(:disabled) {
     cursor: pointer;
   }
 }
 
 .isSelected {
-  border-color: var(--c-primary);
+  //border-color: var(--c-primary);
 }
 
 .isActive {
-  border-color: var(--c-secondary);
+  border-color: var(--c-primary);
+}
+
+.checkbox {
+  position: absolute;
+  right: -0.1em;
+  top: -0.1em;
+  z-index: 9999;
+  height: auto;
+  border: 1px solid var(--c-form-border-focus);
+  font-size: 0.8rem;
+  border-radius: 3px;
+  background-color: #fff;
 }

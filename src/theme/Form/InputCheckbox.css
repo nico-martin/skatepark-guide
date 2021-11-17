@@ -4,23 +4,27 @@
   height: 100%;
 }
 
+/*
 .spanInput,
 .input {
   position: absolute;
   left: 0;
-  top: 0.4em;
-}
+}*/
 
 .input {
-  transform: translateY(-55%);
+  position: absolute;
   opacity: 0;
 }
 
 .spanInput {
   display: block;
-  width: 1em;
-  height: 1em;
-  background-color: var(--c-form-background);
+  position: relative;
+  width: 1.3em !important;
+  height: 1.3em !important;
+  align-self: center;
+  padding: 0 !important;
+  cursor: pointer;
+  //background-color: var(--c-form-bkg);
   z-index: 2;
   @mixin transition background-color;
 
@@ -31,16 +35,14 @@
     bottom: 0;
     left: 50%;
     top: -0.1em;
-    border-bottom: 0.2em solid #fff;
-    border-right: 0.2em solid #fff;
+    border-bottom: 0.2em solid var(--c-form-border-focus);
+    border-right: 0.2em solid var(--c-form-border-focus);
     transform: translateX(-55%) scale(0.6) rotate(45deg);
     opacity: 0;
-    @mixin transition opacity;
+    transition: 100ms opacity ease-in;
   }
 
   &.isActive {
-    background-color: var(--c-primary);
-
     &::before {
       opacity: 1;
     }

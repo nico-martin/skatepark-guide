@@ -9,6 +9,7 @@ import {
   MESSAGE_TYPES,
   InputText,
   Button,
+  InputCheckbox,
 } from '@theme';
 import { postLogin } from '@common/api/auth';
 import { useAuth } from '@common/auth/authContext';

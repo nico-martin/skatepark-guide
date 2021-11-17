@@ -31,7 +31,7 @@
 .addImage {
   height: 150px;
   width: 150px;
-  flex: 150px 1 0;
+  flex: 150px 0 0;
   border: 3px dashed var(--c-form-border-light);
   cursor: pointer;
   font-size: 2.5rem;
