@@ -18,14 +18,28 @@
   will-change: opacity;
 }
 
-.titleImage {
+.titleLogo {
   border-radius: 50%;
-  overflow: hidden;
+
+  img,
+  figure {
+    border-radius: 50%;
+    display: block;
+  }
+
   border: 1px solid var(--c-white);
   transform-origin: bottom left;
   will-change: transform;
   background-color: var(--c-bkg);
+  position: relative;
   @mixin box-shadow-hover;
+}
+
+.titleLogoButton {
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  z-index: 999;
 }
 
 .controls {
@@ -56,4 +70,11 @@
 
 .controlLove[aria-checked='true'] {
   color: var(--c-feedback-danger);
+}
+
+.heroButton {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  z-index: 999;
 }

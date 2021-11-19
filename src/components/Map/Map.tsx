@@ -93,6 +93,7 @@ const Map = ({ className = '' }: { className?: string }) => {
         onDragEnd={() => loadParks()}
         onZoomAnimationEnd={() => loadParks()}
         onGoogleApiLoaded={(maps) => setMap(maps.map)}
+        yesIWantToUseGoogleMapApiInternals
       >
         {Object.values(parks).map((marker) => (
           <Marker

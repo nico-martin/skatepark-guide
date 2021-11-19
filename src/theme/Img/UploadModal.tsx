@@ -37,7 +37,7 @@ const UploadModal = ({
   const [loading, setLoading] = React.useState<boolean>(false);
   const [activeImage, setActiveImage] = React.useState<ListImageI>(null);
   const [selectedImages, setSelectedImages] = React.useState<Array<ListImageI>>(
-    initialSelectedImages.map((image) => ({
+    initialSelectedImages.filter(Boolean).map((image) => ({
       ...image,
       listKey: String(image.id),
     }))

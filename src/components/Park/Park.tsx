@@ -5,11 +5,14 @@ import { Button, FullLoader, LazyImage, Loader, Message } from '@theme';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
 import cn from '@common/utils/classnames';
 import ParkContact from '@comp/Park/ParkContact';
+import ParkContactEdit from '@comp/Park/ParkContactEdit';
 import ParkGallery from '@comp/Park/ParkGallery';
 import ParkHeader from '@comp/Park/ParkHeader';
 import ParkTitle from '@comp/Park/ParkTitle';
 import ParkVideo from '@comp/Park/ParkVideo';
 import ParkWeather from '@comp/Park/ParkWeather';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
 import styles from './Park.css';
 
 const Park = ({
@@ -34,8 +37,10 @@ const Park = ({
       <ParkHeader
         className={cn(styles.header)}
         park={data}
+        setPark={setPark}
         scroll={scroll}
         edit={isEdtitable}
+        slug={data?.slug || null}
       />
       <ParkTitle
         title={data?.title || ''}
@@ -93,18 +98,61 @@ const Park = ({
                 }
               />
             )}
-            {Boolean(data.content) && (
+            {edit ? (
+              <div className={cn(styles.content, styles.contentElement)}>
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={data.content}
+                  onChange={(event, editor) =>
+                    setPark({ content: editor.getData() })
+                  }
+                  config={{
+                    toolbar: [
+                      'heading',
+                      '|',
+                      'bold',
+                      'italic',
+                      'link',
+                      'bulletedList',
+                      'numberedList',
+                    ],
+                    heading: {
+                      options: [
+                        {
+                          model: 'paragraph',
+                          title: 'Paragraph',
+                          class: 'ck-heading_paragraph',
+                        },
+                        {
+                          model: 'heading2',
+                          view: 'h2',
+                          title: 'Heading 2',
+                          class: 'ck-heading_heading2',
+                        },
+                      ],
+                    },
+                  }}
+                />
+              </div>
+            ) : Boolean(data.content) ? (
               <div
                 className={cn(styles.content, styles.contentElement)}
                 dangerouslySetInnerHTML={{ __html: data.content }}
               />
-            )}
-            {Object.keys(data.contact).length !== 0 && (
-              <ParkContact
-                contacts={data.contact || {}}
-                className={cn(styles.contact, styles.contentElement)}
-              />
-            )}
+            ) : null}
+            {Object.keys(data.contact).length !== 0 &&
+              (edit ? (
+                <ParkContactEdit
+                  contacts={data.contact}
+                  className={cn(styles.contact, styles.contentElement)}
+                  setContacts={(contact) => setPark({ contact })}
+                />
+              ) : (
+                <ParkContact
+                  contacts={data.contact}
+                  className={cn(styles.contact, styles.contentElement)}
+                />
+              ))}
             {!edit && (
               <ParkWeather
                 className={cn(styles.weather, styles.contentElement)}

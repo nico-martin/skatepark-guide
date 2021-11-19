@@ -30,13 +30,7 @@ export interface ParkI {
   video: string;
   anlage: string;
   facilities: ParkFacilitiesT;
-  contact: {
-    homepage: string;
-    email: string;
-    phone: string;
-    facebook: string;
-    address: string;
-  };
+  contact: ParkContactsI;
   map: GeoDataI;
   canEdit: boolean;
 }
@@ -79,4 +73,13 @@ export interface ParkWeatherI {
     url: string;
     time: string;
   };
+}
+
+export interface ParkContactsI {
+  homepage: string;
+  email: string;
+  phone: string;
+  facebook: string;
+  instagram: string;
+  address: string;
 }

@@ -66,7 +66,7 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
             ),
             pattern: {
               value: /\S+@\S+\.\S+/,
-              message: formatMessage({ id: 'auth.email.validate' }),
+              message: formatMessage({ id: '_validate.email' }),
             },
           }}
           type="stacked"

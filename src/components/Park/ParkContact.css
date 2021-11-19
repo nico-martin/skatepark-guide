@@ -10,7 +10,17 @@
   }
 }
 
+.elementEdit {
+  & + .element {
+    margin-top: 1.5em;
+  }
+}
+
 .icon {
   margin-right: 1em;
   font-size: 0.9rem;
+}
+
+.formElement {
+  width: 100%;
 }

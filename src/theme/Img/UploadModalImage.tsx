@@ -38,7 +38,7 @@ const UploadModalImage = ({
   return (
     <div
       className={cn(className, styles.root, {
-        [styles.isSelected]: isSelected,
+        [styles.isSelected]: isSelected && !selectMultiple,
         [styles.isActive]: 'id' in image && activeImage?.id === image.id,
       })}
     >

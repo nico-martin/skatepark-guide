@@ -15,11 +15,8 @@
   }
 }
 
+.isActive,
 .isSelected {
-  //border-color: var(--c-primary);
-}
-
-.isActive {
   border-color: var(--c-primary);
 }
 

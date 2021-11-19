@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@theme';
+import { ParkContactsI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
-import { nl2br } from '@common/utils/helpers';
 import { formatContact } from '@common/utils/parks';
 import styles from './ParkContact.css';
 
@@ -10,49 +10,50 @@ const mapIconToContact = {
   email: 'at',
   phone: 'phone',
   facebook: 'facebook',
+  instagram: 'instagram',
   address: 'home',
 };
 
 const ParkContact = ({
-  contacts,
+  contacts = null,
   className = '',
 }: {
-  contacts: {
-    [key: string]: string;
-  };
+  contacts: ParkContactsI;
   className?: string;
-}) => (
-  <div className={cn(className, styles.root)}>
-    {Object.entries(contacts).map(([key, value]) => {
-      if (!value) {
-        return;
-      }
+}) => {
+  return (
+    <div className={cn(className, styles.root)}>
+      {Object.entries(contacts || {}).map(([key, value]) => {
+        if (!value) {
+          return;
+        }
 
-      const { url, formattedValue } = formatContact(key, value);
+        const { url, formattedValue } = formatContact(key, value);
 
-      return (
-        <div className={cn(styles.element)}>
-          <Icon
-            className={cn(styles.icon)}
-            icon={`mdi/${
-              key in mapIconToContact ? mapIconToContact[key] : 'link'
-            }`}
-            button
-            round
-          />
-          {url ? (
-            <a
-              href={url}
-              dangerouslySetInnerHTML={{ __html: formattedValue }}
-              target="_blank"
+        return (
+          <div className={cn(styles.element)}>
+            <Icon
+              className={cn(styles.icon)}
+              icon={`mdi/${
+                key in mapIconToContact ? mapIconToContact[key] : 'link'
+              }`}
+              button
+              round
             />
-          ) : (
-            <span dangerouslySetInnerHTML={{ __html: formattedValue }} />
-          )}
-        </div>
-      );
-    })}
-  </div>
-);
+            {url ? (
+              <a
+                href={url}
+                dangerouslySetInnerHTML={{ __html: formattedValue }}
+                target="_blank"
+              />
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: formattedValue }} />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default ParkContact;

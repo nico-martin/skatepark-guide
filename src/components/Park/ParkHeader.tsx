@@ -1,6 +1,8 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Button, LazyImage } from '@theme';
+import { Button, LazyImage, UploadModal } from '@theme';
+import { getImages } from '@common/api/park';
+import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { ParkI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
 import styles from './ParkHeader.css';
@@ -13,19 +15,28 @@ const maxScroll = headerHeight - titleHeght;
 
 const ParkHeader = ({
   park = {},
+  setPark,
   scroll,
   className = '',
   edit = false,
+  slug,
 }: {
   park: Partial<ParkI>;
+  setPark?: (park: Partial<ParkI>) => void;
   scroll: number;
   className?: string;
   edit?: boolean;
+  slug: string;
 }) => {
+  const [showLogoModal, setShowLogoModal] = React.useState<boolean>(false);
+  const [showHeroModal, setShowHeroModal] = React.useState<boolean>(false);
+
   const opacity = React.useMemo(() => {
     const opacity = Math.floor((100 / maxScroll) * scroll) / 100;
     return opacity >= 1 ? 1 : opacity;
   }, [scroll]);
+
+  const { defaultLogo } = useAppSettings();
 
   const logoScale = React.useMemo(() => {
     const min = 0.6;
@@ -46,16 +57,38 @@ const ParkHeader = ({
       }}
     >
       <div className={cn(styles.title)}>
-        {Boolean(park?.logo) && (
-          <LazyImage
-            image={park.logo}
-            width={180}
-            height={180}
-            className={cn(styles.titleImage)}
+        {!Boolean(park?.logo) && !edit ? null : (
+          <div
+            className={cn(styles.titleLogo)}
             style={{
               transform: `translateY(20%) scale(${logoScale})`,
             }}
-          />
+          >
+            {edit && (
+              <Button
+                color="secondary"
+                round
+                icon="mdi/pencil"
+                onClick={() => setShowLogoModal(true)}
+                className={styles.titleLogoButton}
+              />
+            )}
+            {Boolean(park?.logo) ? (
+              <LazyImage
+                image={park.logo}
+                width={180}
+                height={180}
+                className={styles.titleLogoImage}
+              />
+            ) : (
+              <LazyImage
+                image={defaultLogo}
+                width={180}
+                height={180}
+                className={styles.titleLogoImage}
+              />
+            )}
+          </div>
         )}
         <p
           className={cn(styles.titleHeading)}
@@ -88,7 +121,7 @@ const ParkHeader = ({
           round
           white
         />*/}
-        {'share' in window.navigator && (
+        {'share' in window.navigator && !edit && (
           <Button
             icon="mdi/share"
             className={cn(styles.control, styles.controlLove)}
@@ -110,6 +143,15 @@ const ParkHeader = ({
           />
         )}
       </div>
+      {edit && (
+        <Button
+          color="secondary"
+          round
+          icon="mdi/pencil"
+          onClick={() => setShowHeroModal(true)}
+          className={styles.heroButton}
+        />
+      )}
       {park.headImage && (
         <LazyImage
           image={park.headImage}
@@ -119,6 +161,34 @@ const ParkHeader = ({
             opacity: 1 - opacity,
           }}
         />
+      )}
+      {edit && (
+        <React.Fragment>
+          <UploadModal
+            show={showLogoModal}
+            setShow={setShowLogoModal}
+            getImages={!slug ? null : () => getImages(slug)}
+            uploadParams={{ parkSlug: slug }}
+            onSelectImages={(images) =>
+              setPark({
+                logo: images.length === 1 ? images[0] : null,
+              })
+            }
+            selectedImages={[park.logo]}
+          />
+          <UploadModal
+            show={showHeroModal}
+            setShow={setShowHeroModal}
+            getImages={!slug ? null : () => getImages(slug)}
+            uploadParams={{ parkSlug: slug }}
+            onSelectImages={(images) =>
+              setPark({
+                headImage: images.length === 1 ? images[0] : null,
+              })
+            }
+            selectedImages={[park.headImage]}
+          />
+        </React.Fragment>
       )}
     </header>
   );
