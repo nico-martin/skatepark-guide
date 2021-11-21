@@ -6,6 +6,7 @@ const InputText = ({
   name,
   value = '',
   className = '',
+  classNameInput = '',
   inputType = 'text',
   onChange = () => '',
   ...props
@@ -13,6 +14,7 @@ const InputText = ({
   name: string;
   value?: string;
   className?: string;
+  classNameInput?: string;
   onChange?: (value: string) => void;
   inputType?:
     | 'text'
@@ -32,7 +34,7 @@ const InputText = ({
 }) => (
   <input
     name={name}
-    className={cn(className, inputStyles.input)}
+    className={cn(className, classNameInput, inputStyles.input)}
     id={name}
     value={value}
     type={inputType}

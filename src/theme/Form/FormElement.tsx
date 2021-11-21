@@ -95,7 +95,7 @@ const FormElement = ({
       <div className={styles.content}>
         <Input
           name={name}
-          className={cn(styles.input, inputClassName)}
+          classNameInput={cn(styles.input, inputClassName)}
           {...field}
           {...inputProps}
           onFocus={() => setHasFocus(true)}

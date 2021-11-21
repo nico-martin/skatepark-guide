@@ -6,6 +6,7 @@ const InputSelect = ({
   name,
   value = '',
   className = '',
+  classNameInput = '',
   options,
   optionProps = () => ({}),
   emptyOption = false,
@@ -15,6 +16,7 @@ const InputSelect = ({
   name: string;
   value?: string;
   className?: string;
+  classNameInput?: string;
   options: Record<string, string>;
   optionProps?: (value: string, label: string) => Record<string, any>;
   emptyOption?: boolean;
@@ -24,7 +26,7 @@ const InputSelect = ({
     value={value}
     id={name}
     name={name}
-    className={cn(className, inputStyles.input)}
+    className={cn(className, classNameInput, inputStyles.input)}
     onChange={(e) => onChange((e.target as HTMLInputElement).value)}
     {...props}
   >

@@ -6,8 +6,6 @@ import { ParkContactsI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
 import styles from './ParkContact.css';
 
-// todo: add save for other facilities and map
-
 const ParkContact = ({
   contacts = null,
   setContacts,
@@ -52,6 +50,7 @@ const ParkContact = ({
 
   return (
     <Form className={cn(className, styles.root)}>
+      <h2>{formatMessage({ id: 'park.edit.contact' })}</h2>
       {Object.entries(contacts || {}).map(([key, value]) => (
         <FormElement
           form={form}

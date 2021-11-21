@@ -6,17 +6,24 @@ const InputTextarea = ({
   name,
   value = '',
   className = '',
+  classNameInput = '',
   rows = 4,
   ...props
 }: {
   name: string;
   value?: string;
   className?: string;
+  classNameInput?: string;
   rows?: number;
 }) => (
   <textarea
     name={name}
-    className={cn(className, inputStyles.input, inputStyles.textarea)}
+    className={cn(
+      className,
+      classNameInput,
+      inputStyles.input,
+      inputStyles.textarea
+    )}
     id={name}
     value={value}
     rows={rows}

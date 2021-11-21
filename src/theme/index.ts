@@ -18,6 +18,7 @@ export { default as InputText } from './Form/InputText';
 export { default as InputTextarea } from './Form/InputTextarea';
 export { default as InputHidden } from './Form/InputHidden';
 export { default as InputCheckbox } from './Form/InputCheckbox';
+export { default as InputCheckboxList } from './Form/InputCheckboxList';
 export { default as InputSelect } from './Form/InputSelect';
 
 export { default as ShadowBox, SHADOW_BOX_SIZES } from './ShadowBox/ShadowBox';

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Button, FullLoader, LazyImage, Loader, Message } from '@theme';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
 import cn from '@common/utils/classnames';
+import ParkAttributesEdit from '@comp/Park/ParkAttributesEdit';
 import ParkContact from '@comp/Park/ParkContact';
 import ParkContactEdit from '@comp/Park/ParkContactEdit';
 import ParkGallery from '@comp/Park/ParkGallery';
@@ -14,6 +15,8 @@ import ParkWeather from '@comp/Park/ParkWeather';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import styles from './Park.css';
+
+// todo: add save for other facilities and map
 
 const Park = ({
   className = '',
@@ -153,6 +156,16 @@ const Park = ({
                   className={cn(styles.contact, styles.contentElement)}
                 />
               ))}
+            {edit && (
+              <ParkAttributesEdit
+                anlage={data.anlage}
+                className={cn(styles.contentElement)}
+                facilities={data.facilities || {}}
+                setValues={(anlage, facilities) =>
+                  setPark({ facilities, anlage })
+                }
+              />
+            )}
             {!edit && (
               <ParkWeather
                 className={cn(styles.weather, styles.contentElement)}

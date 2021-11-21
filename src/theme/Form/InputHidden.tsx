@@ -5,15 +5,17 @@ const InputHidden = ({
   name,
   value = '',
   className = '',
+  classNameInput = '',
   ...props
 }: {
   name: string;
   value?: string;
   className?: string;
+  classNameInput?: string;
 }) => (
   <input
     name={name}
-    className={cn(className)}
+    className={cn(className, classNameInput)}
     id={name}
     value={value}
     type="hidden"

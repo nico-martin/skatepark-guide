@@ -1,0 +1,16 @@
+.root {
+}
+
+.label {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+
+  & + .label {
+    margin-top: 0.5em;
+  }
+}
+
+.checkbox {
+  margin-right: 1em;
+}
