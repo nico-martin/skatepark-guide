@@ -15,6 +15,16 @@ import Map from '@comp/Map/Map';
 import styles from './App.css';
 import AppContent from './AppContent';
 
+/**
+ * TODO:
+ * - add new Park (title creates new Park, redirect to edit)
+ * - check emails
+ * - like/love
+ * - offlie (save visited parks and loved parks)
+ * - image API as google function
+ * - Filter checkbox styling
+ */
+
 const App = () => {
   return (
     <div className={styles.root}>

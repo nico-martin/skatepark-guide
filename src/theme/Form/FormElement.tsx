@@ -33,7 +33,7 @@ const FormElement = ({
   sanitizeValue?: Function;
   type?: 'table' | 'stacked' | 'inline';
   reverse?: boolean;
-  onChange?: (e: string | boolean) => void;
+  onChange?: (e: any) => void;
   onBlur?: (e: string | boolean) => void;
   propError?: string;
   small?: boolean;

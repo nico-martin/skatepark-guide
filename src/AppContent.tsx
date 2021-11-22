@@ -73,14 +73,14 @@ const AppContent = ({ className = '' }: { className?: string }) => {
       className={cn(className, styles.root)}
       aria-hidden={!open}
       onTouchStart={start}
-      onMouseDown={start}
+      //onMouseDown={start}
       onTouchEnd={end}
-      onMouseUp={end}
+      //onMouseUp={end}
       onTouchMove={(e) => {
         move(e.touches[0].clientX);
       }}
       onMouseMove={(e) => {
-        move(e.clientX);
+        //move(e.clientX);
       }}
       style={{
         cursor: dragging ? 'grabbing' : 'default',

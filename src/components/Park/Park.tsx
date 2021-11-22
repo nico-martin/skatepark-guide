@@ -3,12 +3,14 @@ import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { Button, FullLoader, LazyImage, Loader, Message } from '@theme';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
+import { GeoDataI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
 import ParkAttributesEdit from '@comp/Park/ParkAttributesEdit';
 import ParkContact from '@comp/Park/ParkContact';
 import ParkContactEdit from '@comp/Park/ParkContactEdit';
 import ParkGallery from '@comp/Park/ParkGallery';
 import ParkHeader from '@comp/Park/ParkHeader';
+import ParkPositionEdit from '@comp/Park/ParkPositionEdit';
 import ParkTitle from '@comp/Park/ParkTitle';
 import ParkVideo from '@comp/Park/ParkVideo';
 import ParkWeather from '@comp/Park/ParkWeather';
@@ -164,6 +166,13 @@ const Park = ({
                 setValues={(anlage, facilities) =>
                   setPark({ facilities, anlage })
                 }
+              />
+            )}
+            {edit && (
+              <ParkPositionEdit
+                className={cn(styles.contentElement)}
+                position={data.map}
+                onUpdatePosition={(map: GeoDataI) => setPark({ map })}
               />
             )}
             {!edit && (
