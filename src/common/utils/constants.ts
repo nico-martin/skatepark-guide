@@ -26,6 +26,4 @@ export const PAGES = ['about', 'impressum', 'privacy'];
 
 export const PROFILE_MENU = { profile: 'account', parks: 'account/parks' };
 
-export const PARK_FACILITIES = ['bowl', 'mini', 'street', 'pumptrack'];
-
 export const PARK_BUILDING = ['outside', 'inside', 'both'];

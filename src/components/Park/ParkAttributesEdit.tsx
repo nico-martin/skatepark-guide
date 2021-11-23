@@ -2,9 +2,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { Form, FormElement, InputCheckboxList, InputSelect } from '@theme';
+import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { ParkAnlageT, ParkFacilitiesT } from '@common/types/parks';
 import cn from '@common/utils/classnames';
-import { PARK_BUILDING, PARK_FACILITIES } from '@common/utils/constants';
+import { PARK_BUILDING } from '@common/utils/constants';
 import { objectDiff, objectShallowEqual } from '@common/utils/helpers';
 import styles from './ParkAttributesEdit.css';
 
@@ -12,7 +13,7 @@ let prevValues = null;
 
 const ParkAttributesEdit = ({
   className = '',
-  facilities,
+  facilities: parkFacilities,
   anlage,
   setValues,
 }: {
@@ -21,9 +22,10 @@ const ParkAttributesEdit = ({
   anlage: ParkAnlageT;
   setValues: (anlage: ParkAnlageT, facilities: ParkFacilitiesT) => void;
 }) => {
+  const { facilities: settingsFacilities } = useAppSettings();
   const { formatMessage } = useIntl();
   const form = useForm<{ facilities: ParkFacilitiesT; anlage: ParkAnlageT }>({
-    defaultValues: { facilities, anlage },
+    defaultValues: { facilities: parkFacilities, anlage },
   });
 
   const values = form.watch();
@@ -59,7 +61,7 @@ const ParkAttributesEdit = ({
         name="facilities"
         Input={InputCheckboxList}
         form={form}
-        options={PARK_FACILITIES.reduce(
+        options={settingsFacilities.reduce(
           (acc, key) => ({
             ...acc,
             [key]: formatMessage({ id: `park.edit.facilities.${key}` }),

@@ -17,11 +17,11 @@ import AppContent from './AppContent';
 
 /**
  * TODO:
+ * - image API as google function
  * - add new Park (title creates new Park, redirect to edit)
  * - check emails
  * - like/love
  * - offlie (save visited parks and loved parks)
- * - image API as google function
  * - Filter checkbox styling
  */
 

@@ -2,9 +2,11 @@ import React from 'react';
 import { getAppSettings } from '@common/api/appSettings';
 import { useToast } from '@common/toast/toastContext';
 import { ApiImageI } from '@common/types/image';
+import { FacilitiesT } from '@common/types/parks';
 
 interface AppSettingsI {
   defaultLogo: ApiImageI;
+  facilities: FacilitiesT;
 }
 
 const Context = React.createContext<AppSettingsI>(null);

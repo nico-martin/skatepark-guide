@@ -1,15 +1,10 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { getMapParks, MapBounds } from '@common/api/park';
+import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { TOAST_BUTTON_TYPES, useToast } from '@common/toast/toastContext';
 import { GeoDataI, MapParkI, ParkFacilitiesT } from '@common/types/parks';
-import { PARK_FACILITIES } from '@common/utils/constants';
 import { getActiveFacilities } from '@common/utils/helpers';
-
-const initialFilterState: ParkFacilitiesT = PARK_FACILITIES.reduce(
-  (acc, item) => ({ ...acc, [item]: true }),
-  {}
-);
 
 const MapParksContext = React.createContext<{
   parks: Record<string, MapParkI>;
@@ -24,16 +19,18 @@ const MapParksContext = React.createContext<{
   showLoader: false,
   updateBounds: () => {},
   updateFilter: () => {},
-  filter: initialFilterState,
+  filter: {},
   userPosition: null,
   setUserPosition: () => {},
 });
 
 export const MapParksContextProvider = ({ children }: { children: any }) => {
+  const { facilities } = useAppSettings();
   const [parks, setParks] = React.useState<Record<string, MapParkI>>({});
   const [showLoader, setShowLoader] = React.useState<boolean>(false);
-  const [filter, setFilter] =
-    React.useState<ParkFacilitiesT>(initialFilterState);
+  const [filter, setFilter] = React.useState<ParkFacilitiesT>(
+    facilities.reduce((acc, item) => ({ ...acc, [item]: true }), {})
+  );
   const [userPosition, setUserPosition] = React.useState<GeoDataI>();
 
   const { formatMessage } = useIntl();

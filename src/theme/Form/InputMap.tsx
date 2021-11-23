@@ -39,11 +39,17 @@ const InputMap = ({
     return null;
   }
 
-  // todo: somehow facilities is deleted on each save
-
   return (
     <div className={cn(className, styles.root)}>
-      <div className={cn(classNameInput, styles.mapContainer)}>
+      <div
+        className={cn(classNameInput, styles.mapContainer)}
+        onTouchMove={(e) => {
+          e.stopPropagation();
+        }}
+        onMouseMove={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <Icon icon="mdi/crosshair" className={styles.crosshair} />
         <GoogleMapReact
           bootstrapURLKeys={{ key: gmapsKey }}

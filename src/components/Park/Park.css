@@ -70,3 +70,17 @@
 .main {
   margin-bottom: var(--spacing-page);
 }
+
+.mainEdit {
+  margin-bottom: 0;
+}
+
+.editControls {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--c-bkg-light);
+  z-index: 999;
+  padding: var(--spacing-half) var(--spacing);
+  border-top: 1px solid var(--c-form-border);
+  //box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.23);
+}

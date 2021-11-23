@@ -18,8 +18,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import styles from './Park.css';
 
-// todo: add save for other facilities and map
-
 const Park = ({
   className = '',
   edit,
@@ -59,7 +57,11 @@ const Park = ({
         }
         className={cn(styles.title)}
       />
-      <main className={styles.main}>
+      <main
+        className={cn(styles.main, {
+          [styles.mainEdit]: edit,
+        })}
+      >
         {state === PARK_API_STATES.LOADING ? (
           <FullLoader large spacingTop />
         ) : state === PARK_API_STATES.ERROR ? (
@@ -182,7 +184,7 @@ const Park = ({
               />
             )}
             {edit && (
-              <div className={cn(styles.contentElement)}>
+              <div className={cn(styles.editControls)}>
                 <Button
                   disabled={
                     state === PARK_API_STATES.UPDATING || !hasUnsavedChanges

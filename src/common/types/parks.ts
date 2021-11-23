@@ -1,8 +1,9 @@
 import dayjs from 'dayjs';
 import { ApiImageI } from '@common/types/image';
-import { PARK_BUILDING, PARK_FACILITIES } from '@common/utils/constants';
+import { PARK_BUILDING } from '@common/utils/constants';
 
-export type ParkFacilitiesT = Record<typeof PARK_FACILITIES[number], boolean>;
+export type FacilitiesT = Array<string>;
+export type ParkFacilitiesT = Record<string, boolean>;
 
 export type ParkAnlageT = typeof PARK_BUILDING;
 
