@@ -36,6 +36,9 @@ export const getPark = (slug: string) =>
 export const postPark = (slug: string, data: Partial<ParkI>) =>
   apiPost<ParkI>(`${API.SPG}park/${slug}`, data);
 
+export const putPark = (title: string, location: MapParkI) =>
+  apiPut<string>(`${API.SPG}park/`, { title, location });
+
 export const getWeather = (slug: string, locale: string) =>
   apiGet<ApiParkWeatherI>(`${API.SPG}park-weather/${slug}/?lang=${locale}`);
 

@@ -1,13 +1,15 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Button } from '@theme';
+import { Button, PortalBox } from '@theme';
 import { useLocale } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
 import { unleadingSlashIt, untrailingSlashIt } from '@common/utils/helpers';
 import MenuToggler from '@comp/App/MenuToggler';
+import NewParkModal from '@comp/Park/NewParkModal';
 import styles from './Menu.css';
 
 const Menu = ({ className = '' }: { className?: string }) => {
+  const [newParkModal, setNewParkModal] = React.useState<boolean>(false);
   const [buttonState, setButtonState] = React.useState<
     'open' | 'back' | 'closed'
   >('closed');
@@ -47,6 +49,7 @@ const Menu = ({ className = '' }: { className?: string }) => {
         onClick={onClick}
         buttonState={buttonState}
       />
+      <NewParkModal show={newParkModal} setShow={setNewParkModal} />
       <div className={styles.elements} aria-hidden={buttonState !== 'open'}>
         <Button
           element="router"
@@ -56,8 +59,7 @@ const Menu = ({ className = '' }: { className?: string }) => {
           round
         />
         <Button
-          element="router"
-          href="/park/edit/new/"
+          onClick={() => setNewParkModal(true)}
           className={cn(styles.links, styles.linksAdd)}
           icon="mdi/markerplus"
           round

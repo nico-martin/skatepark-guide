@@ -1,18 +1,20 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Button, LazyImage } from '@theme';
+import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { ApiParkList } from '@common/auth/types';
 import { formatContact } from '@common/utils/parks';
 import styles from './AccountParksSingle.css';
 
 const AccountParkSingle = ({ park }: { park: ApiParkList }) => {
   const adress = formatContact('address', park.parksAddress);
+  const { defaultLogo } = useAppSettings();
   const { formatMessage } = useIntl();
   return (
     <div className={styles.root}>
       <LazyImage
         className={styles.image}
-        image={park.image}
+        image={park.image ? park.image : defaultLogo}
         width={150}
         height={120}
       />

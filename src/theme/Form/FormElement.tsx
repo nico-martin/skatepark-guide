@@ -82,6 +82,7 @@ const FormElement = ({
         [styles.containerIsActive]: hasValue || hasFocus,
         [styles.containerIsDisabled]: disabled,
         [styles.containerIsCheckBox]: Input.displayName === 'InputCheckbox',
+        [styles.containerIsInputMap]: Input.displayName === 'InputMap',
         [styles.containerHasError]: Boolean(error) && Boolean(error.message),
       })}
     >

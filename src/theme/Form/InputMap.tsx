@@ -59,7 +59,7 @@ const InputMap = ({
             disableDefaultUI: false,
             //styles: mapStyles,
             fullscreenControl: false,
-            mapTypeId: map.MapTypeId.SATELLITE,
+            mapTypeId: map.MapTypeId.HYBRID,
             scrollwheel: false,
           })}
           center={initCenter}
@@ -74,10 +74,12 @@ const InputMap = ({
         />
       </div>
       <p className={styles.latlng}>
-        lat: {center.lat} / lng: {center.lng}
+        lat: {center?.lat} / lng: {center?.lng}
       </p>
     </div>
   );
 };
+
+InputMap.displayName = 'InputMap';
 
 export default InputMap;

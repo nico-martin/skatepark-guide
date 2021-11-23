@@ -200,3 +200,19 @@
   transform: translateY(100%);
   padding-top: 0.25em;
 }
+
+/*
+ Map
+ */
+
+.containerIsStacked.containerIsInputMap {
+  padding-top: var(--fs-large);
+
+  &.containerIsActive {
+    .labelContainer {
+      transform: translateY(-10%) scale(1);
+      left: 0;
+      top: 0;
+    }
+  }
+}
