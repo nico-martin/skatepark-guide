@@ -19,7 +19,6 @@ import AppContent from './AppContent';
 /**
  * TODO:
  * - image API as google function
- * - add new Park (title creates new Park, redirect to edit)
  * --> BETA release
  * - check emails
  * - like/love
