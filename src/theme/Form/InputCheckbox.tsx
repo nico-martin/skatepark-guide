@@ -40,7 +40,7 @@ const InputCheckbox = ({
         onKeyUp={(e) => {
           e.keyCode === 32 && onChange(!Boolean(value));
         }}
-        className={cn(className, styles.spanInput, {
+        className={cn(className, styles.spanInput, classNameInput, {
           [styles.isActive]: Boolean(value),
         })}
       />

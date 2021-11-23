@@ -9,6 +9,7 @@ import IntlLink from '@common/intl/IntlLink';
 import { IntlContextProvider } from '@common/intl/intlContext';
 import { ToastProvider } from '@common/toast/toastContext';
 import cn from '@common/utils/classnames';
+import combineProvider from '@common/utils/combineProvider';
 import Menu from '@comp/App/Menu';
 import Settings from '@comp/App/Settings';
 import Map from '@comp/Map/Map';
@@ -19,10 +20,11 @@ import AppContent from './AppContent';
  * TODO:
  * - image API as google function
  * - add new Park (title creates new Park, redirect to edit)
+ * --> BETA release
  * - check emails
  * - like/love
  * - offlie (save visited parks and loved parks)
- * - Filter checkbox styling
+ * - instagram integration
  */
 
 const App = () => {
@@ -42,19 +44,20 @@ const App = () => {
   );
 };
 
+const AppProvider = combineProvider(
+  ...[
+    Router,
+    IntlContextProvider,
+    ToastProvider,
+    AppSettingsProvider,
+    MapParksContextProvider,
+    AuthContextProvider,
+  ]
+);
+
 ReactDOM.render(
-  <Router>
-    <IntlContextProvider>
-      <ToastProvider>
-        <AppSettingsProvider>
-          <MapParksContextProvider>
-            <AuthContextProvider>
-              <App />
-            </AuthContextProvider>
-          </MapParksContextProvider>
-        </AppSettingsProvider>
-      </ToastProvider>
-    </IntlContextProvider>
-  </Router>,
+  <AppProvider>
+    <App />
+  </AppProvider>,
   document.querySelector('#app')
 );

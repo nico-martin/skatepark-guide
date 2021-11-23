@@ -39,16 +39,18 @@ const InputMap = ({
     return null;
   }
 
+  const stopPropagation = (e) => e.stopPropagation();
+
   return (
     <div className={cn(className, styles.root)}>
       <div
         className={cn(classNameInput, styles.mapContainer)}
-        onTouchMove={(e) => {
-          e.stopPropagation();
-        }}
-        onMouseMove={(e) => {
-          e.stopPropagation();
-        }}
+        onTouchStart={stopPropagation}
+        onMouseDown={stopPropagation}
+        onTouchEnd={stopPropagation}
+        onMouseUp={stopPropagation}
+        onTouchMove={stopPropagation}
+        onMouseMove={stopPropagation}
       >
         <Icon icon="mdi/crosshair" className={styles.crosshair} />
         <GoogleMapReact
@@ -58,6 +60,7 @@ const InputMap = ({
             //styles: mapStyles,
             fullscreenControl: false,
             mapTypeId: map.MapTypeId.SATELLITE,
+            scrollwheel: false,
           })}
           center={initCenter}
           zoom={17}
