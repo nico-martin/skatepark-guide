@@ -192,7 +192,12 @@ const Park = ({
                   isLoading={state === PARK_API_STATES.UPDATING}
                   onClick={updatePark}
                 >
-                  {formatMessage({ id: 'park.edit.saveChanges' })}
+                  {formatMessage({
+                    id:
+                      data.status === 'private'
+                        ? 'park.edit.publish'
+                        : 'park.edit.saveChanges',
+                  })}
                 </Button>
               </div>
             )}

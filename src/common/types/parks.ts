@@ -36,6 +36,7 @@ export interface ParkI {
   contact: ParkContactsI;
   map: GeoDataI;
   canEdit: boolean;
+  status: 'publish' | 'private';
 }
 
 export interface ApiParkWeatherI {
