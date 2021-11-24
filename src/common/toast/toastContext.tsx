@@ -5,17 +5,17 @@ import styles from './toastContext.css';
 
 const DEFAULT_TIMEOUT = 5000;
 
-export const TOAST_BUTTON_TYPES = {
-  SUCCESS: 'success',
-  DANGER: 'danger',
-  WARNING: 'warning',
-};
+export enum TOAST_BUTTON_TYPES {
+  SUCCESS = 'success',
+  DANGER = 'danger',
+  WARNING = 'warning',
+}
 
 interface ToastI {
   message: string;
   timeout?: number;
   controls?: Array<{
-    type?: string;
+    type?: TOAST_BUTTON_TYPES;
     text?: string;
     onClick?: ({ remove: Function }) => void;
   }>;

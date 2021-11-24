@@ -1,13 +1,14 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
-import { Button, FullLoader, LazyImage, Loader, Message } from '@theme';
+import { FullLoader, Message } from '@theme';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
 import { GeoDataI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
 import ParkAttributesEdit from '@comp/Park/ParkAttributesEdit';
 import ParkContact from '@comp/Park/ParkContact';
 import ParkContactEdit from '@comp/Park/ParkContactEdit';
+import ParkEditControls from '@comp/Park/ParkEditControls';
 import ParkGallery from '@comp/Park/ParkGallery';
 import ParkHeader from '@comp/Park/ParkHeader';
 import ParkPositionEdit from '@comp/Park/ParkPositionEdit';
@@ -172,7 +173,10 @@ const Park = ({
             )}
             {edit && (
               <ParkPositionEdit
-                className={cn(styles.contentElement)}
+                className={cn(
+                  styles.contentElement,
+                  styles.contentElementPosition
+                )}
                 position={data.map}
                 onUpdatePosition={(map: GeoDataI) => setPark({ map })}
               />
@@ -184,22 +188,13 @@ const Park = ({
               />
             )}
             {edit && (
-              <div className={cn(styles.editControls)}>
-                <Button
-                  disabled={
-                    state === PARK_API_STATES.UPDATING || !hasUnsavedChanges
-                  }
-                  isLoading={state === PARK_API_STATES.UPDATING}
-                  onClick={updatePark}
-                >
-                  {formatMessage({
-                    id:
-                      data.status === 'private'
-                        ? 'park.edit.publish'
-                        : 'park.edit.saveChanges',
-                  })}
-                </Button>
-              </div>
+              <ParkEditControls
+                className={cn(styles.editControls)}
+                updatePark={updatePark}
+                data={data}
+                hasUnsavedChanges={hasUnsavedChanges}
+                parkState={state}
+              />
             )}
           </React.Fragment>
         )}

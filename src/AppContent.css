@@ -1,4 +1,6 @@
 .root {
+  --appcontent-bottom-spacing: 90px;
+
   background-color: #fff;
   transform: translateX(100%);
   will-change: transform;
@@ -22,6 +24,6 @@
   scrollbar-color: var(--c-gray) transparent;
 
   @mixin mobile {
-    padding-bottom: 90px;
+    padding-bottom: var(--appcontent-bottom-spacing);
   }
 }

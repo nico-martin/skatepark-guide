@@ -15,6 +15,10 @@
   }
 }
 
+.contentElementPosition {
+  margin-bottom: var(--spacing);
+}
+
 .title {
   padding: var(--spacing-page) var(--spacing);
 }
@@ -80,6 +84,10 @@
   bottom: 0;
   background-color: var(--c-bkg-light);
   z-index: 999;
-  padding: var(--spacing-half) var(--spacing);
   border-top: 1px solid var(--c-form-border);
+
+  @mixin mobile {
+    position: fixed;
+    width: 100%;
+  }
 }

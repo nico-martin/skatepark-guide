@@ -1,0 +1,17 @@
+.root {
+  padding: var(--spacing-half) var(--spacing);
+  display: flex;
+  justify-content: space-between;
+
+  @mixin mobile {
+    flex-direction: row-reverse;
+    justify-content: right;
+    padding: var(--spacing);
+  }
+}
+
+.deleteButton {
+  @mixin mobile {
+    margin-right: var(--spacing-page);
+  }
+}
