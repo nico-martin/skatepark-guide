@@ -3,11 +3,23 @@
 
   display: flex;
   vertical-align: top;
+
+  @mixin mobile {
+    &:not(.containerIsCheckBox) {
+      display: block;
+    }
+  }
 }
 
 .labelContainer {
   width: 150px;
   margin-right: var(--spacing-half);
+
+  @mixin mobile {
+    width: 100%;
+    margin-right: 0;
+  }
+
   display: block;
   z-index: 999;
 }
@@ -31,6 +43,10 @@
   display: flex;
   align-items: center;
   position: relative;
+
+  @mixin mobile {
+    margin-top: 0.3rem;
+  }
 }
 
 .input {
@@ -107,6 +123,12 @@
     transition: transform 100ms ease-in-out;
     transform-origin: 0 50%;
     pointer-events: none;
+  }
+
+  .content {
+    @mixin mobile {
+      margin-top: 0;
+    }
   }
 
   &.containerIsActive {

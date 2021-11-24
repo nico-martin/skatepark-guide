@@ -39,6 +39,12 @@
     left: 0;
     border-left: 1px solid var(--c-gray);
   }
+
+  &:nth-child(4),
+  &:nth-child(5),
+  &:nth-child(6) {
+    display: none;
+  }
 }
 
 .icon {

@@ -5,6 +5,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--spacing);
+
+  @mixin mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
 .listElement {

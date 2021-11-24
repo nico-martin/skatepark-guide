@@ -3,3 +3,9 @@
     @mixin-content;
   }
 }
+
+@define-mixin mobile {
+  @media (max-width: 899px) {
+    @mixin-content;
+  }
+}

@@ -18,6 +18,7 @@ import AppContent from './AppContent';
 
 /**
  * TODO:
+ * - AppContent mobile touch
  * - image API as google function
  * --> BETA release
  * - check emails
@@ -44,14 +45,12 @@ const App = () => {
 };
 
 const AppProvider = combineProvider(
-  ...[
-    Router,
-    IntlContextProvider,
-    ToastProvider,
-    AppSettingsProvider,
-    MapParksContextProvider,
-    AuthContextProvider,
-  ]
+  Router,
+  IntlContextProvider,
+  ToastProvider,
+  AppSettingsProvider,
+  MapParksContextProvider,
+  AuthContextProvider
 );
 
 ReactDOM.render(

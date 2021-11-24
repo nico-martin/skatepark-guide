@@ -34,9 +34,7 @@ const InputCheckbox = ({
         aria-checked={Boolean(value)}
         aria-labelledby={`label-${name}`}
         tabIndex={0}
-        onClick={() =>
-          checkboxRef.current && onChange(checkboxRef.current.checked)
-        }
+        onClick={() => checkboxRef.current && checkboxRef.current.click()}
         onKeyUp={(e) => {
           e.keyCode === 32 && onChange(!Boolean(value));
         }}

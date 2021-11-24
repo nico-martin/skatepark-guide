@@ -12,6 +12,7 @@ import {
   SHADOW_BOX_SIZES,
 } from '@theme';
 import { putPark } from '@common/api/park';
+import { AuthWrapper } from '@common/auth/authContext';
 import { useLocale } from '@common/intl/intlContext';
 import { MapParkI } from '@common/types/parks';
 
@@ -44,50 +45,52 @@ const NewParkModal = ({
       size={SHADOW_BOX_SIZES.SMALL}
       title={formatMessage({ id: 'park.new.modal.title' })}
     >
-      <Form
-        className={className}
-        onSubmit={form.handleSubmit((data) => {
-          setPending(true);
-          putPark(data.title, data.location)
-            .then((resp) => {
-              setShow(false);
-              history.push(`/${activeLocale}/park/edit/${resp}`);
-            })
-            .catch((e) => setError(e))
-            .finally(() => setPending(false));
-        })}
-      >
-        <FormElement
-          name="title"
-          form={form}
-          Input={InputText}
-          label={formatMessage({ id: 'park.new.title' })}
-          type="stacked"
-          rules={{
-            required: formatMessage(
-              { id: 'form.required' },
-              { field: formatMessage({ id: 'park.new.title' }) }
-            ),
-          }}
-        />
-        <FormElement
-          name="location"
-          form={form}
-          Input={InputMap}
-          label={formatMessage({ id: 'park.new.location' })}
-          type="stacked"
-          rules={{
-            validate: (value) =>
-              !value
-                ? formatMessage(
-                    { id: 'form.required' },
-                    { field: formatMessage({ id: 'park.new.location' }) }
-                  )
-                : null,
-          }}
-        />
-        <FormControls isLoading={pending} />
-      </Form>
+      <AuthWrapper>
+        <Form
+          className={className}
+          onSubmit={form.handleSubmit((data) => {
+            setPending(true);
+            putPark(data.title, data.location)
+              .then((resp) => {
+                setShow(false);
+                history.push(`/${activeLocale}/park/edit/${resp}`);
+              })
+              .catch((e) => setError(e))
+              .finally(() => setPending(false));
+          })}
+        >
+          <FormElement
+            name="title"
+            form={form}
+            Input={InputText}
+            label={formatMessage({ id: 'park.new.title' })}
+            type="stacked"
+            rules={{
+              required: formatMessage(
+                { id: 'form.required' },
+                { field: formatMessage({ id: 'park.new.title' }) }
+              ),
+            }}
+          />
+          <FormElement
+            name="location"
+            form={form}
+            Input={InputMap}
+            label={formatMessage({ id: 'park.new.location' })}
+            type="stacked"
+            rules={{
+              validate: (value) =>
+                !value
+                  ? formatMessage(
+                      { id: 'form.required' },
+                      { field: formatMessage({ id: 'park.new.location' }) }
+                    )
+                  : null,
+            }}
+          />
+          <FormControls isLoading={pending} />
+        </Form>
+      </AuthWrapper>
     </PortalBox>
   );
 };

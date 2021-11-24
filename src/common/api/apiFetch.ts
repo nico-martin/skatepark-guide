@@ -1,3 +1,4 @@
+import { settingsDB } from '@common/idb';
 import { MESSAGES } from '@common/utils/constants';
 
 export const apiGet = <T>(url: string): Promise<T> =>
@@ -48,6 +49,9 @@ const apiFetch = <T>({
         if (resp.status < 300) {
           resolve(data);
         } else {
+          data.code === 'jwt_auth_invalid_token' &&
+            settingsDB.delete('jwt').then(() => window.location.reload());
+
           reject(
             typeof data === 'string'
               ? data

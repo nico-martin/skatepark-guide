@@ -20,4 +20,8 @@
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--c-gray) transparent;
+
+  @mixin mobile {
+    padding-bottom: 90px;
+  }
 }
