@@ -13,11 +13,18 @@ import { gmapsKey, styles as mapStyles } from '@common/utils/maps';
 import styles from './Map.css';
 import Marker from './Marker';
 
-const Map = ({ className = '' }: { className?: string }) => {
+const Map = ({
+  className = '',
+  mapZoom,
+  setMapZoom,
+}: {
+  className?: string;
+  mapZoom: number;
+  setMapZoom: (zoom: number) => void;
+}) => {
   const [center, setCenter] =
     React.useState<{ lat: number; lng: number }>(null);
   const [defaultZoom, setDefaultZoom] = React.useState<number>(null);
-  const [zoom, setZoom] = React.useState<number>(null);
   const [map, setMap] = React.useState(null);
 
   const { showLoader, parks } = useMapParks();
@@ -58,7 +65,7 @@ const Map = ({ className = '' }: { className?: string }) => {
   React.useEffect(() => {
     if (!Boolean(prevUserPosition?.current) && userPosition) {
       setCenter({ lat: userPosition.lat, lng: userPosition.lng });
-      setZoom(14);
+      setMapZoom(14);
     }
     prevUserPosition.current = userPosition;
   }, [userPosition]);
@@ -79,7 +86,7 @@ const Map = ({ className = '' }: { className?: string }) => {
         defaultCenter={center}
         center={center}
         defaultZoom={defaultZoom}
-        zoom={zoom}
+        zoom={mapZoom}
         options={{
           disableDefaultUI: true,
           styles: mapStyles,
@@ -87,7 +94,7 @@ const Map = ({ className = '' }: { className?: string }) => {
         onChange={(v) => {
           settingsDB.set('center', v.center);
           settingsDB.set('zoom', v.zoom);
-          setZoom(v.zoom);
+          setMapZoom(v.zoom);
           setCenter(v.center);
         }}
         onDragEnd={() => loadParks()}
@@ -100,7 +107,7 @@ const Map = ({ className = '' }: { className?: string }) => {
             name={marker.title}
             lat={marker.map.lat}
             lng={marker.map.lng}
-            small={zoom <= 9}
+            small={mapZoom <= 9}
             slug={marker.slug}
           />
         ))}
@@ -109,7 +116,7 @@ const Map = ({ className = '' }: { className?: string }) => {
             name="User"
             lat={userPosition.lat}
             lng={userPosition.lng}
-            small={zoom <= 9}
+            small={mapZoom <= 9}
           />
         )}
       </GoogleMapReact>

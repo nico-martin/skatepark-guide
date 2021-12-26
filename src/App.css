@@ -7,7 +7,8 @@
   overflow: hidden;
 
   .content,
-  .settings {
+  .settings,
+  .mapControls {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -84,5 +85,10 @@
         display: block;
       }
     }
+  }
+
+  &.controlsMap {
+    top: var(--spacing);
+    right: var(--spacing);
   }
 }

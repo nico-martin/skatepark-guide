@@ -13,21 +13,13 @@ import combineProvider from '@common/utils/combineProvider';
 import Menu from '@comp/App/Menu';
 import Settings from '@comp/App/Settings';
 import Map from '@comp/Map/Map';
+import MapControls from '@comp/Map/MapControls';
 import styles from './App.css';
 import AppContent from './AppContent';
 
-/**
- * TODO:
- * - AppContent mobile touch
- * - image API as google function
- * --> BETA release
- * - check emails
- * - like/love
- * - offlie (save visited parks and loved parks)
- * - instagram integration
- */
-
 const App = () => {
+  const [mapZoom, setMapZoom] = React.useState<number>(null);
+
   return (
     <div className={styles.root}>
       <IntlLink href="/" className={cn(styles.controls, styles.controlsLogo)}>
@@ -39,7 +31,11 @@ const App = () => {
         settingsClassName={cn(styles.settings)}
       />
       <AppContent className={styles.content} />
-      <Map className={styles.map} />
+      <Map className={styles.map} mapZoom={mapZoom} setMapZoom={setMapZoom} />
+      <MapControls
+        setMapZoom={setMapZoom}
+        className={cn(styles.controls, styles.controlsMap)}
+      />
     </div>
   );
 };

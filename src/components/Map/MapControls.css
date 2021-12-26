@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.plus {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: 1px solid var(--c-form-border);
+}
+
+.minus {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.plus,
+.minus {
+  &:hover {
+    transform: translateY(0) !important;
+  }
+}
