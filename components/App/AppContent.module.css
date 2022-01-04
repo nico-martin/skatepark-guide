@@ -1,0 +1,17 @@
+.root {
+  --appcontent-bottom-spacing: 90px;
+
+  background-color: #fff;
+  transform: translateX(100%);
+  will-change: transform;
+  overflow: hidden;
+  @mixin transition transform;
+
+  &[aria-hidden='false'] {
+    transform: translateX(0);
+    @mixin box-shadow;
+  }
+}
+
+.content {
+}

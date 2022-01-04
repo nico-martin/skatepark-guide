@@ -1,0 +1,78 @@
+.root {
+  --c-marker-bkg: var(--c-secondary);
+  --c-marker-border: var(--c-secondary-dark);
+  --c-marker-me-bkg: var(--c-primary);
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background-color: var(--c-marker-bkg);
+  border: 2px solid var(--c-marker-border);
+  border-radius: 100%;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  cursor: pointer;
+  @mixin transition transform, 100ms;
+
+  &:hover {
+    z-index: 1;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  70% {
+    transform: scale(3);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.user {
+  background-color: var(--c-marker-me-bkg);
+  border-color: #fff;
+  position: relative;
+  width: 20px;
+  height: 20px;
+
+  &::before,
+  &::after {
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+    inset: 0;
+  }
+
+  &::after {
+    border: 2px solid #fff;
+    inset: -2px;
+  }
+
+  &::before {
+    animation: pulse 2s infinite;
+    background-color: var(--c-marker-me-bkg);
+  }
+}
+
+.isSmall {
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+
+  &.user {
+    width: 10px;
+    height: 10px;
+  }
+}

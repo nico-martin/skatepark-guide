@@ -1,0 +1,23 @@
+.root {
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-page);
+}
+
+.title {
+}
+
+.form {
+  margin-top: 10vh;
+}
+
+.navigation {
+  margin-bottom: var(--spacing-page);
+}
+
+.content {
+}

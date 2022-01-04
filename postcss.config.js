@@ -5,7 +5,7 @@ module.exports = {
     [
       'postcss-mixins',
       {
-        mixinsDir: path.join(__dirname, 'src/styles/mixins'),
+        mixinsDir: path.join(__dirname, 'styles/mixins'),
       },
     ],
     'postcss-nested',
