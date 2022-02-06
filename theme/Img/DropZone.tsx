@@ -63,8 +63,8 @@ const DropZone = ({
   const onInputChange = (e) => onChange((e.target as HTMLInputElement).files);
 
   React.useEffect(() => {
-    if (uploadArea) {
-      const area = uploadArea.current;
+    const area = uploadArea?.current;
+    if (area) {
       area.addEventListener('dragenter', onDragIn);
       area.addEventListener('dragleave', onDragOut);
       area.addEventListener('dragover', onDrag);
@@ -72,15 +72,15 @@ const DropZone = ({
     }
 
     return () => {
-      if (uploadArea) {
-        const area = uploadArea.current;
+      const area = uploadArea?.current;
+      if (area) {
         area.removeEventListener('dragenter', onDragIn);
         area.removeEventListener('dragleave', onDragOut);
         area.removeEventListener('dragover', onDrag);
         area.removeEventListener('drop', onDrop);
       }
     };
-  }, [uploadArea]);
+  }, [uploadArea?.current]);
 
   return (
     <button
