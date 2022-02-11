@@ -43,6 +43,7 @@ const ParkContact = ({
                 href={url}
                 dangerouslySetInnerHTML={{ __html: formattedValue }}
                 target="_blank"
+                rel="noreferrer"
               />
             ) : (
               <span dangerouslySetInnerHTML={{ __html: formattedValue }} />
