@@ -14,7 +14,7 @@ import ParkWeather from '@components/Park/ParkWeather';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
 import { GeoDataI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
-import styles from './park.module.css';
+import styles from './Park.module.css';
 
 const Park = ({
   className = '',
