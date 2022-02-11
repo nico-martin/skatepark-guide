@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa');
+const withClassNamesMap = require('@nico-martin/class-names-map/nextjs.js');
 
-module.exports = {
+module.exports = withPWA({
+  pwa: {
+    dest: 'public',
+  },
+  experimental: {
+    modern: true,
+  },
   i18n: {
     locales: ['en', 'de'],
     defaultLocale: 'en',
@@ -15,4 +23,4 @@ module.exports = {
 
     return config;
   },
-};
+});

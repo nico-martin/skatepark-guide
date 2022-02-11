@@ -5,7 +5,7 @@ import German from './locales/de.json';
 import English from './locales/en.json';
 
 export const locales = {
-  de: German,
+  //de: German,
   en: English,
 };
 
