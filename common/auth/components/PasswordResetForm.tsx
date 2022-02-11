@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+import { useRouter } from 'next/router';
 import {
   Form,
   FormControls,
@@ -19,8 +20,9 @@ import styles from './Form.module.css';
 const PasswordResetForm = ({ className = '' }: { className?: string }) => {
   const { formatMessage } = useIntl();
   const [pending, setPending] = React.useState<boolean>(false);
-  const { key } = useParams<{ key: string }>();
-  const history = useHistory();
+  const router = useRouter();
+
+  //const { key } = useParams<{ key: string }>();
   const { addToast } = useToast();
   const { setEmail: setAuthEmail } = useAuth();
   const [formError, setFormError] = React.useState<string>('');
@@ -33,7 +35,7 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
     defaultValues: {
       password: '',
       repeatPassword: '',
-      key,
+      //key,
     },
   });
 
@@ -52,7 +54,7 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
               addToast({
                 message: formatMessage({ id: 'auth.password.reset.success' }),
               });
-              history.push(data.redirect || '/');
+              router.push(data.redirect || '/');
             })
             .catch((e) => {
               setFormError(

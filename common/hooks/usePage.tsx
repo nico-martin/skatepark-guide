@@ -1,6 +1,6 @@
 import React from 'react';
 import { getPage } from '@common/api/page';
-import { useLocale } from '@common/intl/intlContext';
+//import { useLocale } from '@common/intl/intlContext';
 import { ApiPageI } from '@common/types/page';
 
 export const PAGE_API_STATES = {
