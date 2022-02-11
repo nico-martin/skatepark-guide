@@ -46,6 +46,11 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="robots" content="noindex, nofollow" />
           <meta name="description" content="" />
+          <title>Skatepark.guide - Find skateparks around the world</title>
+          <meta
+            name="description"
+            content="A Progressive Web App for skateparks around the world"
+          />
           <link
             rel="apple-touch-icon"
             sizes="57x57"
