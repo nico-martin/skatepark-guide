@@ -1,4 +1,3 @@
-import { VNode } from 'preact';
 import React from 'react';
 import { Icon, IconType, Loader } from '@theme';
 import IntlLink from '@common/intl/IntlLink';
@@ -25,7 +24,7 @@ const Button = ({
   size?: 'small' | 'medium';
   className?: string;
   classNameIcon?: string;
-  children?: VNode | VNode[] | string;
+  children?: JSX.Element | JSX.Element[] | string;
   onClick?: Function;
   round?: boolean;
   color?: 'primary' | 'secondary' | 'white' | 'danger';
