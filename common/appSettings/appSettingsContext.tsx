@@ -3,10 +3,12 @@ import { getAppSettings } from '@common/api/appSettings';
 import { useToast } from '@common/toast/toastContext';
 import { ApiImageI } from '@common/types/image';
 import { FacilitiesT } from '@common/types/parks';
+import pkg from '../../package.json';
 
 interface AppSettingsI {
   defaultLogo: ApiImageI;
   facilities: FacilitiesT;
+  appVersion: string;
 }
 
 const Context = React.createContext<AppSettingsI>(null);
@@ -14,6 +16,7 @@ const Context = React.createContext<AppSettingsI>(null);
 export const AppSettingsProvider = ({ children }: { children: any }) => {
   const [settings, setSettings] = React.useState<AppSettingsI>(null);
   const [initialized, setInitialized] = React.useState<boolean>(false);
+  const [appVersion, setAppVersion] = React.useState<string>(pkg.version);
 
   const { addToast } = useToast();
 
@@ -29,7 +32,7 @@ export const AppSettingsProvider = ({ children }: { children: any }) => {
   }, []);
 
   return (
-    <Context.Provider value={settings}>
+    <Context.Provider value={{ ...settings, appVersion }}>
       {initialized ? children : null}
     </Context.Provider>
   );

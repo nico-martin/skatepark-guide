@@ -69,7 +69,7 @@
 
 .appSettings {
   position: relative;
-  padding: 0.8em 0;
+  padding: 0.8rem 0;
 
   &::before,
   &::after {
@@ -79,7 +79,7 @@
     right: calc(var(--spacing) * -1);
     left: calc(var(--spacing) * -1);
     height: 1px;
-    background-color: var(--c-gray);
+    //background-color: var(--c-form-border);
   }
 
   &::after {
@@ -102,4 +102,10 @@
 
 .appSettingsButtonIcon {
   margin-right: 0.5rem;
+}
+
+.appVersion {
+  font-size: var(--fs-xsmall);
+  position: absolute;
+  bottom: calc(var(--spacing) + 1.2rem);
 }

@@ -97,6 +97,7 @@
   "park.new.modal.title": "New Park",
   "park.new.title": "Title",
   "park.new.location": "Location",
+  "settings.appVersion": "Version {appVersion}",
   "settings.filter": "Filter",
   "settings.location": "Location",
   "settings.location.action": "Show my position",

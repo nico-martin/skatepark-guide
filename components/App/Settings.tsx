@@ -9,6 +9,7 @@ import {
   InputCheckbox,
   InputSelect,
 } from '@theme';
+import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { useMapFilter, useUserPosition } from '@common/hooks/mapParksContext';
 import { locales } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
@@ -28,6 +29,7 @@ const Settings = ({
   const { updateFilter, filter } = useMapFilter();
   const { watchPosition, clearPosition, userPosition } = useUserPosition();
   const router = useRouter();
+  const { appVersion } = useAppSettings();
 
   return (
     <React.Fragment>
@@ -141,6 +143,9 @@ const Settings = ({
             </div>
           )}
         </div>
+        <p className={styles.appVersion}>
+          {formatMessage({ id: 'settings.appVersion' }, { appVersion })}
+        </p>
       </div>
       <Button
         className={className}
