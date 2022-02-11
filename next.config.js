@@ -10,7 +10,7 @@ module.exports = withPWA({
     modern: true,
   },
   i18n: {
-    locales: ['en', 'de'],
+    locales: ['en' /*, 'de'*/],
     defaultLocale: 'en',
   },
   reactStrictMode: true,

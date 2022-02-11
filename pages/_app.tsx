@@ -1,5 +1,7 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import Link from 'next/link';
 import { Logo } from '@theme';
 import AppContent from '@components/App/AppContent';
@@ -25,17 +27,25 @@ const AppProvider = combineProvider(
   AuthContextProvider
 );
 
-function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const [mapZoom, setMapZoom] = React.useState<number>(null);
+  const { formatMessage } = useIntl();
 
   return (
-    <AppProvider>
+    <React.Fragment>
+      <Head>
+        <title>{formatMessage({ id: 'meta.title' })}</title>
+        <meta
+          name="description"
+          content={formatMessage({ id: 'meta.description' })}
+        />
+      </Head>
       <div className={styles.root}>
         <Link href="/">
           <a className={cn(styles.controls, styles.controlsLogo)}>
             <Logo className={styles.logo} />
           </a>
-        </Link>{' '}
+        </Link>
         <Menu className={cn(styles.controls, styles.controlsMenu)} />
         <Settings
           className={cn(styles.controls, styles.controlsSettings)}
@@ -50,8 +60,14 @@ function App({ Component, pageProps }: AppProps) {
           className={cn(styles.controls, styles.controlsMap)}
         />
       </div>
-    </AppProvider>
+    </React.Fragment>
   );
-}
+};
 
-export default App;
+const AppWrapped = (props) => (
+  <AppProvider>
+    <App {...props} />
+  </AppProvider>
+);
+
+export default AppWrapped;
