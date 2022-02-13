@@ -1,5 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
+import Head from 'next/head';
 import { FullLoader, Message } from '@theme';
 import ParkAttributesEdit from '@components/Park/ParkAttributesEdit';
 import ParkContact from '@components/Park/ParkContact';
@@ -54,6 +55,13 @@ const Park = ({
       className={cn(className, styles.root)}
       onScroll={(e) => setScroll((e.target as HTMLElement).scrollTop)}
     >
+      {data && (
+        <Head>
+          <title>
+            {formatMessage({ id: 'meta.title.sub' }, { title: data.title })}
+          </title>
+        </Head>
+      )}
       <ParkHeader
         className={cn(styles.header)}
         park={data}
