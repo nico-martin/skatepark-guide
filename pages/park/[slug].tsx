@@ -26,14 +26,18 @@ const ParkView = ({
 };
 
 ParkView.getInitialProps = async (context) => {
-  if (!context?.params?.slug) {
+  console.log(context);
+  if (!context?.query?.slug) {
+    context.res.statusCode = 404;
+    context.res.end('Not found');
+    return;
     return {
       notFound: true,
     };
   }
 
   try {
-    const park = await getPark(context.params.slug);
+    const park = await getPark(context.query.slug);
     return {
       props: { park },
     };
