@@ -36,6 +36,12 @@ const ParkView = ({
 }: {
   className?: string;
   park: ParkI;
-}) => <Park className={className} parkObject={park} />;
+}) => {
+  const {
+    query: { slug = '' },
+  } = useRouter();
+
+  return <Park className={className} slug={String(slug)} parkObject={park} />;
+};
 
 export default ParkView;

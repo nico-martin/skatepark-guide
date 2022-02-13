@@ -20,15 +20,18 @@ const Park = ({
   className = '',
   edit,
   parkObject,
+  slug,
 }: {
   className?: string;
   edit?: boolean;
-  parkObject: ParkI;
+  parkObject?: ParkI;
+  slug: string;
 }) => {
   const [scroll, setScroll] = React.useState<number>(0);
+  console.log(parkObject);
 
   const { data, state, error, setPark, hasUnsavedChanges, updatePark } =
-    usePark(String(parkObject.slug), parkObject);
+    usePark(String(slug), parkObject);
   const { formatMessage } = useIntl();
   const isEdtitable: boolean = edit && data?.canEdit;
   const editorRef = React.useRef<{ CKEditor: any; ClassicEditor: any }>();
@@ -82,7 +85,7 @@ const Park = ({
           <div className={cn(styles.contentElement)}>
             <Message type="error">error: {error}</Message>
           </div>
-        ) : edit && !data.canEdit ? (
+        ) : edit && !data?.canEdit ? (
           <div className={cn(styles.contentElement)}>
             <Message type="error">
               {formatMessage({ id: 'park.edit.permission' })}

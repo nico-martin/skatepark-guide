@@ -142,6 +142,16 @@ const ParkHeader = ({
             color="white"
           />
         )}
+        {park.canEdit && !edit && (
+          <Button
+            icon="pencil"
+            className={cn(styles.control, styles.controlLove)}
+            element="router"
+            href={`/park/edit/${park.slug}`}
+            round
+            color="white"
+          />
+        )}
       </div>
       {edit && (
         <Button
