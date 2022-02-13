@@ -19,7 +19,7 @@ import styles from './Park.module.css';
 const Park = ({
   className = '',
   edit,
-  parkObject,
+  parkObject = null,
   slug,
 }: {
   className?: string;
@@ -28,10 +28,10 @@ const Park = ({
   slug: string;
 }) => {
   const [scroll, setScroll] = React.useState<number>(0);
-  console.log(parkObject);
 
   const { data, state, error, setPark, hasUnsavedChanges, updatePark } =
     usePark(String(slug), parkObject);
+
   const { formatMessage } = useIntl();
   const isEdtitable: boolean = edit && data?.canEdit;
   const editorRef = React.useRef<{ CKEditor: any; ClassicEditor: any }>();

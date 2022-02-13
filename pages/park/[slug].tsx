@@ -11,7 +11,21 @@ const enum STATE {
   SUCCESS = 'success',
 }
 
-export const getServerSideProps = async (context) => {
+const ParkView = ({
+  className = '',
+  park = null,
+}: {
+  className?: string;
+  park?: ParkI;
+}) => {
+  const {
+    query: { slug = '' },
+  } = useRouter();
+
+  return <Park className={className} slug={String(slug)} parkObject={park} />;
+};
+
+ParkView.getInitialProps = async (context) => {
   if (!context?.params?.slug) {
     return {
       notFound: true,
@@ -28,20 +42,6 @@ export const getServerSideProps = async (context) => {
       notFound: true,
     };
   }
-};
-
-const ParkView = ({
-  className = '',
-  park,
-}: {
-  className?: string;
-  park: ParkI;
-}) => {
-  const {
-    query: { slug = '' },
-  } = useRouter();
-
-  return <Park className={className} slug={String(slug)} parkObject={park} />;
 };
 
 export default ParkView;

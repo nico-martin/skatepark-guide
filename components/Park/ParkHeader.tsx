@@ -102,7 +102,7 @@ const ParkHeader = ({
               : {}),
           }}
         >
-          {park.title}
+          {park?.title}
         </p>
       </div>
       <div className={cn(styles.controls)}>
@@ -121,7 +121,7 @@ const ParkHeader = ({
           round
           white
         />*/}
-        {'share' in window.navigator && !edit && (
+        {'share' in window.navigator && !edit && park && (
           <Button
             icon="share"
             className={cn(styles.control, styles.controlLove)}
@@ -142,7 +142,7 @@ const ParkHeader = ({
             color="white"
           />
         )}
-        {park.canEdit && !edit && (
+        {park?.canEdit && !edit && (
           <Button
             icon="pencil"
             className={cn(styles.control, styles.controlLove)}
@@ -162,7 +162,7 @@ const ParkHeader = ({
           className={styles.heroButton}
         />
       )}
-      {park.headImage && (
+      {park?.headImage && (
         <LazyImage
           image={park.headImage}
           alt={park.title}
@@ -184,7 +184,7 @@ const ParkHeader = ({
                 logo: images.length === 1 ? images[0] : null,
               })
             }
-            selectedImages={[park.logo]}
+            selectedImages={[park?.logo]}
           />
           <UploadModal
             show={showHeroModal}
@@ -196,7 +196,7 @@ const ParkHeader = ({
                 headImage: images.length === 1 ? images[0] : null,
               })
             }
-            selectedImages={[park.headImage]}
+            selectedImages={[park?.headImage]}
           />
         </React.Fragment>
       )}

@@ -21,7 +21,9 @@ export const usePark = (
   setPark: (partData: Partial<ParkI>) => void;
   hasUnsavedChanges: boolean;
 } => {
-  const [state, setState] = React.useState<string>(PARK_API_STATES.SUCCESS);
+  const [state, setState] = React.useState<string>(
+    parkObject ? PARK_API_STATES.SUCCESS : PARK_API_STATES.LOADING
+  );
   const [error, setError] = React.useState<string>('');
   const [data, setData] = React.useState<ParkI>(parkObject);
   const [initialData, setInitialData] = React.useState<ParkI>();
@@ -61,6 +63,6 @@ export const usePark = (
     error,
     updatePark,
     setPark: (partData) => setData((data) => ({ ...data, ...partData })),
-    hasUnsavedChanges: objectShallowEqual(initialData, data),
+    hasUnsavedChanges: objectShallowEqual(initialData, data || {}),
   };
 };
