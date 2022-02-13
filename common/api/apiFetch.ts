@@ -30,14 +30,19 @@ const apiFetch = <T>({
     fetch(url, {
       method,
       ...(method === 'POST' || method === 'PUT'
-        ? { body: body instanceof FormData ? body : JSON.stringify(body) }
+        ? {
+            body:
+              typeof FormData !== 'undefined' && body instanceof FormData
+                ? body
+                : JSON.stringify(body),
+          }
         : {}),
       headers: {
         ...headers,
-        ...(body instanceof FormData
+        ...(typeof FormData !== 'undefined' && body instanceof FormData
           ? {}
           : { 'Content-Type': 'application/json' }),
-        ...(Boolean(window.jwt)
+        ...(typeof window !== 'undefined' && Boolean(window.jwt)
           ? {
               Authorization: `Bearer ${window.jwt}`,
             }

@@ -87,26 +87,28 @@ const Settings = ({
           <h2 className={styles.appHeading}>
             {formatMessage({ id: 'settings.app' })}
           </h2>
-          <div className={styles.appSettings}>
-            <FormElement
-              name="app-language"
-              label={formatMessage({ id: 'language' }) + ':'}
-              value={activeLocale}
-              onChange={(newLocale) =>
-                router.push(router.pathname, router.pathname, {
-                  locale: newLocale,
-                })
-              }
-              Input={InputSelect}
-              options={localeKeys.reduce(
-                (acc, key) => ({
-                  ...acc,
-                  [key]: formatMessage({ id: `language.${key}` }),
-                }),
-                {}
-              )}
-            />
-          </div>
+          {localeKeys.length >= 1 && (
+            <div className={styles.appSettings}>
+              <FormElement
+                name="app-language"
+                label={formatMessage({ id: 'language' }) + ':'}
+                value={activeLocale}
+                onChange={(newLocale) =>
+                  router.push(router.pathname, router.pathname, {
+                    locale: newLocale,
+                  })
+                }
+                Input={InputSelect}
+                options={localeKeys.reduce(
+                  (acc, key) => ({
+                    ...acc,
+                    [key]: formatMessage({ id: `language.${key}` }),
+                  }),
+                  {}
+                )}
+              />
+            </div>
+          )}
           {window.installEvent !== null && (
             <div className={styles.appSettings}>
               <Button

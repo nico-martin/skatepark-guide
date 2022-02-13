@@ -12,23 +12,23 @@ import ParkTitle from '@components/Park/ParkTitle';
 import ParkVideo from '@components/Park/ParkVideo';
 import ParkWeather from '@components/Park/ParkWeather';
 import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
-import { GeoDataI } from '@common/types/parks';
+import { GeoDataI, ParkI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
 import styles from './Park.module.css';
 
 const Park = ({
   className = '',
   edit,
-  slug,
+  parkObject,
 }: {
   className?: string;
   edit?: boolean;
-  slug: string;
+  parkObject: ParkI;
 }) => {
   const [scroll, setScroll] = React.useState<number>(0);
 
   const { data, state, error, setPark, hasUnsavedChanges, updatePark } =
-    usePark(String(slug));
+    usePark(String(parkObject.slug), parkObject);
   const { formatMessage } = useIntl();
   const isEdtitable: boolean = edit && data?.canEdit;
   const editorRef = React.useRef<{ CKEditor: any; ClassicEditor: any }>();

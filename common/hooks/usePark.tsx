@@ -11,7 +11,8 @@ export enum PARK_API_STATES {
 }
 
 export const usePark = (
-  slug: string
+  slug: string,
+  parkObject: ParkI
 ): {
   state: string;
   data: ParkI;
@@ -20,11 +21,12 @@ export const usePark = (
   setPark: (partData: Partial<ParkI>) => void;
   hasUnsavedChanges: boolean;
 } => {
-  const [state, setState] = React.useState<string>(PARK_API_STATES.LOADING);
+  const [state, setState] = React.useState<string>(PARK_API_STATES.SUCCESS);
   const [error, setError] = React.useState<string>('');
-  const [data, setData] = React.useState<ParkI>();
+  const [data, setData] = React.useState<ParkI>(parkObject);
   const [initialData, setInitialData] = React.useState<ParkI>();
 
+  /*
   React.useEffect(() => {
     setState(PARK_API_STATES.LOADING);
     getPark(slug)
@@ -39,6 +41,7 @@ export const usePark = (
         setState(PARK_API_STATES.ERROR);
       });
   }, [slug]);
+*/
 
   const updatePark = () => {
     setState(PARK_API_STATES.UPDATING);
