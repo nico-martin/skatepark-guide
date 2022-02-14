@@ -1,4 +1,5 @@
 import { openDB, DBSchema } from 'idb';
+import { isBrowser } from '@common/utils/helpers';
 
 const dbName = 'skatepark-guide';
 
@@ -9,11 +10,17 @@ interface SettingsDBSchema extends DBSchema {
   };
 }
 
-const dbPromise = openDB<SettingsDBSchema>(dbName, 1, {
-  upgrade(db) {
-    db.createObjectStore('settings');
-  },
-});
+const dbPromise = isBrowser()
+  ? openDB<SettingsDBSchema>(dbName, 1, {
+      upgrade(db) {
+        db.createObjectStore('settings');
+      },
+    })
+  : {
+      get: () => {},
+      put: () => {},
+      delete: () => {},
+    };
 
 export const settingsDB = {
   get: async (key: string) => (await dbPromise).get('settings', key),
