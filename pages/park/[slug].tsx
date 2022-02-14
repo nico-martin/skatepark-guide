@@ -62,7 +62,7 @@ const ParkView = ({
                 { id: 'meta.title.sub' },
                 { title: park.data.title }
               )
-            : formatMessage({ id: 'meta.title' })}
+            : 'test' + formatMessage({ id: 'meta.title' })}
         </title>
       </Head>
       <Park className={className} park={park} />
