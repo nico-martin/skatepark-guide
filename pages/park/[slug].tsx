@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -48,13 +49,21 @@ const ParkView = ({
   const {
     query: { slug = '' },
   } = useRouter();
+  const { formatMessage } = useIntl();
 
   const park = usePark(String(slug), parkObject);
 
   return (
     <React.Fragment>
       <Head>
-        <title>test</title>
+        <title>
+          {park.data?.title
+            ? formatMessage(
+                { id: 'meta.title.sub' },
+                { title: park.data.title }
+              )
+            : formatMessage({ id: 'meta.title' })}
+        </title>
       </Head>
       <Park className={className} park={park} />
     </React.Fragment>
