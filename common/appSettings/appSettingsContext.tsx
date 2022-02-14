@@ -33,7 +33,7 @@ export const AppSettingsProvider = ({ children }: { children: any }) => {
 
   return (
     <Context.Provider value={{ ...settings, appVersion }}>
-      {initialized ? children : null}
+      {children}
     </Context.Provider>
   );
 };
