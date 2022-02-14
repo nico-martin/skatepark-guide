@@ -45,7 +45,6 @@ export default class MyDocument extends Document {
           <meta charSet="utf-8" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="robots" content="noindex, nofollow" />
-          <title>Skatepark.guide - Find skateparks around the world</title>
           <meta
             name="description"
             content="A Progressive Web App for skateparks around the world"
