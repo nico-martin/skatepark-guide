@@ -56,7 +56,7 @@ const ParkView = ({
   return (
     <React.Fragment>
       <Head>
-        <title>
+        <title key="title">
           {park.data?.title
             ? formatMessage(
                 { id: 'meta.title.sub' },

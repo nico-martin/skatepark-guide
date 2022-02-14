@@ -34,7 +34,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <React.Fragment>
       <Head>
-        <title>{formatMessage({ id: 'meta.title' })}</title>
+        <title key="title">{formatMessage({ id: 'meta.title' })}</title>
         <meta
           name="description"
           content={formatMessage({ id: 'meta.description' })}
