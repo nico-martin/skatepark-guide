@@ -10,17 +10,16 @@ export enum PARK_API_STATES {
   SUCCESS = 'SUCCESS',
 }
 
-export const usePark = (
-  slug: string,
-  parkObject?: ParkI
-): {
+export interface UseParkI {
   state: string;
   data: ParkI;
   error: string;
   updatePark: () => void;
   setPark: (partData: Partial<ParkI>) => void;
   hasUnsavedChanges: boolean;
-} => {
+}
+
+export const usePark = (slug: string, parkObject?: ParkI): UseParkI => {
   const [state, setState] = React.useState<string>(
     parkObject ? PARK_API_STATES.SUCCESS : PARK_API_STATES.LOADING
   );

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Park from '@components/Park/Park';
 import { getPark, getParkShort } from '@common/api/park';
+import { usePark } from '@common/hooks/usePark';
 import { ParkI } from '@common/types/parks';
 import { API } from '@common/utils/constants';
 
@@ -26,9 +27,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-    const park = await getPark(slug);
+    const parkObject = await getPark(slug);
     return {
-      props: { park },
+      props: { parkObject },
     };
   } catch (e) {
     return {
@@ -39,21 +40,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const ParkView = ({
   className = '',
-  park = null,
+  parkObject = null,
 }: {
   className?: string;
-  park?: ParkI;
+  parkObject?: ParkI;
 }) => {
   const {
     query: { slug = '' },
   } = useRouter();
+
+  const park = usePark(String(slug), parkObject);
 
   return (
     <React.Fragment>
       <Head>
         <title>test</title>
       </Head>
-      <Park className={className} slug={String(slug)} parkObject={park} />
+      <Park className={className} park={park} />
     </React.Fragment>
   );
 };

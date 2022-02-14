@@ -12,7 +12,7 @@ import ParkPositionEdit from '@components/Park/ParkPositionEdit';
 import ParkTitle from '@components/Park/ParkTitle';
 import ParkVideo from '@components/Park/ParkVideo';
 import ParkWeather from '@components/Park/ParkWeather';
-import { PARK_API_STATES, usePark } from '@common/hooks/usePark';
+import { PARK_API_STATES, UseParkI } from '@common/hooks/usePark';
 import { GeoDataI, ParkI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
 import styles from './Park.module.css';
@@ -20,18 +20,14 @@ import styles from './Park.module.css';
 const Park = ({
   className = '',
   edit,
-  parkObject = null,
-  slug,
+  park,
 }: {
   className?: string;
   edit?: boolean;
-  parkObject?: ParkI;
-  slug: string;
+  park: UseParkI;
 }) => {
   const [scroll, setScroll] = React.useState<number>(0);
-
-  const { data, state, error, setPark, hasUnsavedChanges, updatePark } =
-    usePark(String(slug), parkObject);
+  const { data, state, error, updatePark, setPark, hasUnsavedChanges } = park;
 
   const { formatMessage } = useIntl();
   const isEdtitable: boolean = edit && data?.canEdit;
@@ -55,13 +51,13 @@ const Park = ({
       className={cn(className, styles.root)}
       onScroll={(e) => setScroll((e.target as HTMLElement).scrollTop)}
     >
-      {data && (
+      {/*data && (
         <Head>
           <title>
             {formatMessage({ id: 'meta.title.sub' }, { title: data.title })}
           </title>
         </Head>
-      )}
+      )*/}
       <ParkHeader
         className={cn(styles.header)}
         park={data}
