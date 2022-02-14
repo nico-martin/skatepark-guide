@@ -3,8 +3,18 @@ import ReactDOM from 'react-dom';
 import { ShadowBox } from '../index';
 import { SHADOW_BOX_SIZES } from './ShadowBox';
 
-const Portal = ({ children }: { children?: JSX.Element }) =>
-  ReactDOM.createPortal(children, document.querySelector('#shadowbox'));
+const Portal = ({ children }: { children?: JSX.Element }) => {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+    return setMounted(false);
+  }, []);
+
+  return mounted
+    ? ReactDOM.createPortal(children, document.querySelector('#shadowbox'))
+    : null;
+};
 
 const PortalBox = ({
   children,
