@@ -6,7 +6,7 @@ const Test: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>mein test</title>
+        <title key="title">mein test</title>
       </Head>
       dasisteintest
     </div>
