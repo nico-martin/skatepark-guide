@@ -1,4 +1,5 @@
 import React from 'react';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Park from '@components/Park/Park';
 import { getPark, getParkShort } from '@common/api/park';
@@ -10,6 +11,30 @@ const enum STATE {
   NOT_FOUND = 'not_found',
   SUCCESS = 'success',
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const isRouterRequest = !context.req.url.startsWith('/_next/data');
+  if (isRouterRequest) {
+    return { props: {} };
+  }
+  const slug = String(context?.params?.slug);
+  if (!slug) {
+    return {
+      notFound: true,
+    };
+  }
+
+  try {
+    const park = await getPark(slug);
+    return {
+      props: { park },
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+    };
+  }
+};
 
 const ParkView = ({
   className = '',
@@ -23,29 +48,6 @@ const ParkView = ({
   } = useRouter();
 
   return <Park className={className} slug={String(slug)} parkObject={park} />;
-};
-
-ParkView.getInitialProps = async (context) => {
-  console.log(context);
-  if (!context?.query?.slug) {
-    context.res.statusCode = 404;
-    context.res.end('Not found');
-    return;
-    return {
-      notFound: true,
-    };
-  }
-
-  try {
-    const park = await getPark(context.query.slug);
-    return {
-      props: { park },
-    };
-  } catch (e) {
-    return {
-      notFound: true,
-    };
-  }
 };
 
 export default ParkView;
