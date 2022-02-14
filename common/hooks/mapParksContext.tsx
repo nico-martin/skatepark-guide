@@ -33,6 +33,15 @@ export const MapParksContextProvider = ({ children }: { children: any }) => {
   );
   const [userPosition, setUserPosition] = React.useState<GeoDataI>();
 
+  React.useEffect(() => {
+    setFilter((filter) =>
+      facilities.reduce(
+        (acc, item) => ({ ...acc, [item]: filter[item] || true }),
+        {}
+      )
+    );
+  }, [facilities]);
+
   const { formatMessage } = useIntl();
   const { addToast } = useToast();
 

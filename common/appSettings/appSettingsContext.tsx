@@ -14,7 +14,11 @@ interface AppSettingsI {
 const Context = React.createContext<AppSettingsI>(null);
 
 export const AppSettingsProvider = ({ children }: { children: any }) => {
-  const [settings, setSettings] = React.useState<AppSettingsI>(null);
+  const [settings, setSettings] = React.useState<AppSettingsI>({
+    defaultLogo: null,
+    facilities: [],
+    appVersion: '',
+  });
   const [initialized, setInitialized] = React.useState<boolean>(false);
   const [appVersion, setAppVersion] = React.useState<string>(pkg.version);
 
