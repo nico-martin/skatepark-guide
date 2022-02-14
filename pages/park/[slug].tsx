@@ -16,7 +16,7 @@ const enum STATE {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isRouterRequest = !context.req.url.startsWith('/_next/data');
+  const isRouterRequest = context.req.url.startsWith('/_next/data');
   if (isRouterRequest) {
     return { props: {} };
   }
