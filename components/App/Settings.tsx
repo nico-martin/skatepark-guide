@@ -13,6 +13,7 @@ import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { useMapFilter, useUserPosition } from '@common/hooks/mapParksContext';
 import { locales } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
+import { isBrowser } from '@common/utils/helpers';
 import styles from './Settings.module.css';
 
 const localeKeys = Object.keys(locales);
@@ -122,7 +123,7 @@ const Settings = ({
               </Button>
             </div>
           )}
-          {'share' in window.navigator && (
+          {isBrowser() && 'share' in window.navigator && (
             <div className={styles.appSettings}>
               <Button
                 icon="share"
