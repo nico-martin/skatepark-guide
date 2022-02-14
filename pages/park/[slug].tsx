@@ -1,5 +1,6 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Park from '@components/Park/Park';
 import { getPark, getParkShort } from '@common/api/park';
@@ -47,7 +48,14 @@ const ParkView = ({
     query: { slug = '' },
   } = useRouter();
 
-  return <Park className={className} slug={String(slug)} parkObject={park} />;
+  return (
+    <React.Fragment>
+      <Head>
+        <title>test</title>
+      </Head>
+      <Park className={className} slug={String(slug)} parkObject={park} />
+    </React.Fragment>
+  );
 };
 
 export default ParkView;
