@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { isBrowser } from '@common/utils/helpers';
 
