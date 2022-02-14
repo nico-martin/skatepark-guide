@@ -56,7 +56,7 @@ const Settings = ({
             ))}
           </Form>
         </div>
-        {'geolocation' in window.navigator && (
+        {isBrowser() && 'geolocation' in window.navigator && (
           <div className={cn(styles.location)}>
             <h2>{formatMessage({ id: 'settings.location' })}</h2>
             <Button
