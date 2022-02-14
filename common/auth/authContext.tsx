@@ -47,7 +47,7 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
 
   return (
     <AuthContext.Provider value={{ jwt, setJwt, email, setEmail }}>
-      {init ? children : null}
+      {children}
     </AuthContext.Provider>
   );
 };
