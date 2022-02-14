@@ -1,8 +1,8 @@
 import React from 'react';
 import type { NextPage } from 'next';
 
-const Home: NextPage = () => {
+function Test() {
   return <p>dasisteintest</p>;
-};
+}
 
-export default Home;
+export default Test;
