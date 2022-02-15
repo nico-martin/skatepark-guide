@@ -1,6 +1,6 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { isBrowser } from '@common/utils/helpers';
+import { IS_BROWSER } from '@common/utils/helpers';
 
 declare global {
   interface Window {
@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-if (typeof window !== 'undefined') {
+if (IS_BROWSER) {
   window.jwt = '';
   window.installEvent = null;
   window.addEventListener('beforeinstallprompt', (e) => {

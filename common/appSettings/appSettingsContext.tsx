@@ -3,14 +3,12 @@ import { getAppSettings } from '@common/api/appSettings';
 import { useToast } from '@common/toast/toastContext';
 import { ApiImageI } from '@common/types/image';
 import { FacilitiesT } from '@common/types/parks';
-import { isBrowser } from '@common/utils/helpers';
 import pkg from '../../package.json';
 
 interface AppSettingsI {
   defaultLogo: ApiImageI;
   facilities: FacilitiesT;
   appVersion: string;
-  isBrowser: boolean;
 }
 
 const Context = React.createContext<AppSettingsI>(null);
@@ -20,7 +18,6 @@ export const AppSettingsProvider = ({ children }: { children: any }) => {
     defaultLogo: null,
     facilities: [],
     appVersion: '',
-    isBrowser: isBrowser(),
   });
   const [initialized, setInitialized] = React.useState<boolean>(false);
   const [appVersion, setAppVersion] = React.useState<string>(pkg.version);
@@ -28,7 +25,7 @@ export const AppSettingsProvider = ({ children }: { children: any }) => {
   const { addToast } = useToast();
 
   React.useEffect(() => {
-    setSettings({ ...settings, isBrowser: isBrowser() });
+    setSettings(settings);
     getAppSettings<AppSettingsI>()
       .then((newSettings) => setSettings({ ...settings, ...newSettings }))
       .catch((e) =>

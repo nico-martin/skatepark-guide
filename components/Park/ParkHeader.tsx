@@ -5,7 +5,7 @@ import { getImages } from '@common/api/park';
 import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { ParkI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
-import { isBrowser } from '@common/utils/helpers';
+import { IS_BROWSER } from '@common/utils/helpers';
 import styles from './ParkHeader.module.css';
 
 const headerHeight = 260;
@@ -120,7 +120,7 @@ const ParkHeader = ({
           round
           white
         />*/}
-        {isBrowser() && 'share' in window.navigator && !edit && park && (
+        {IS_BROWSER && 'share' in window.navigator && !edit && park && (
           <Button
             icon="share"
             className={cn(styles.control, styles.controlLove)}

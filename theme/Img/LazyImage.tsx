@@ -1,11 +1,11 @@
 import React from 'react';
 import { ApiImageI } from '@common/types/image';
 import cn from '@common/utils/classnames';
-import { isBrowser } from '@common/utils/helpers';
+import { IS_BROWSER } from '@common/utils/helpers';
 import { createImage, createSrcSet } from '@common/utils/imageProxy';
 import styles from './LazyImage.module.css';
 
-isBrowser() && require('./lazyConfig');
+IS_BROWSER && require('./lazyConfig');
 
 const LazyImage = ({
   image,

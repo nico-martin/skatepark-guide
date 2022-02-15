@@ -4,14 +4,14 @@ import { Icon, LazyImage, UploadModal } from '@theme';
 import { getImages } from '@common/api/park';
 import { ApiImageI } from '@common/types/image';
 import cn from '@common/utils/classnames';
-import { isBrowser } from '@common/utils/helpers';
+import { IS_BROWSER } from '@common/utils/helpers';
 import { createImage, heightByWidth } from '@common/utils/imageProxy';
 import styles from './ParkGallery.module.css';
 
 let PhotoSwipeLightbox = null;
 let PhotoSwipe = null;
 
-if (isBrowser()) {
+if (IS_BROWSER) {
   PhotoSwipeLightbox =
     require('@common/modules/photoswipe/photoswipe-lightbox.esm.js').default;
   PhotoSwipe = require('@common/modules/photoswipe/photoswipe.esm.js').default;

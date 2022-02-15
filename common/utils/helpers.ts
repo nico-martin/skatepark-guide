@@ -72,8 +72,8 @@ export const nextWindow: {
         navigator: {},
         addEventListener: () => {},
       };
-export const isBrowser = () => typeof window !== 'undefined';
-export const isNode = () => !isBrowser();
+export const IS_BROWSER = typeof window !== 'undefined';
+export const IS_NODE = !IS_BROWSER;
 
 export const isNextRouterRequest = (context: GetServerSidePropsContext) =>
   context.req.url.startsWith('/_next/data');

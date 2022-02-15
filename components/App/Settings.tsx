@@ -13,7 +13,7 @@ import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { useMapFilter, useUserPosition } from '@common/hooks/mapParksContext';
 import { locales } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
-import { isBrowser, nextWindow } from '@common/utils/helpers';
+import { IS_BROWSER, nextWindow } from '@common/utils/helpers';
 import styles from './Settings.module.css';
 
 const localeKeys = Object.keys(locales);
@@ -110,7 +110,7 @@ const Settings = ({
               />
             </div>
           )}
-          {typeof window !== 'undefined' && window.installEvent && (
+          {IS_BROWSER && window.installEvent && (
             <div className={styles.appSettings}>
               <Button
                 className={styles.appSettingsButton}

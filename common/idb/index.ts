@@ -1,5 +1,5 @@
 import { openDB, DBSchema } from 'idb';
-import { isBrowser } from '@common/utils/helpers';
+import { IS_BROWSER } from '@common/utils/helpers';
 
 const dbName = 'skatepark-guide';
 
@@ -10,7 +10,7 @@ interface SettingsDBSchema extends DBSchema {
   };
 }
 
-const dbPromise = isBrowser()
+const dbPromise = IS_BROWSER
   ? openDB<SettingsDBSchema>(dbName, 1, {
       upgrade(db) {
         db.createObjectStore('settings');
