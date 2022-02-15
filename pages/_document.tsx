@@ -1,6 +1,6 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { isBrowser, nextWindow } from '@common/utils/helpers';
+import { isBrowser } from '@common/utils/helpers';
 
 declare global {
   interface Window {
@@ -9,12 +9,14 @@ declare global {
   }
 }
 
-nextWindow.jwt = '';
-nextWindow.installEvent = null;
-nextWindow.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  nextWindow.installEvent = e;
-});
+if (typeof window !== 'undefined') {
+  window.jwt = '';
+  window.installEvent = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    window.installEvent = e;
+  });
+}
 
 const loadingScreenCSS = `.loading-body {
   position: fixed;

@@ -110,7 +110,7 @@ const Settings = ({
               />
             </div>
           )}
-          {nextWindow.installEvent && (
+          {typeof window !== 'undefined' && window.installEvent && (
             <div className={styles.appSettings}>
               <Button
                 className={styles.appSettingsButton}
