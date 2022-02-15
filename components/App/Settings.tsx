@@ -11,6 +11,7 @@ import {
 } from '@theme';
 import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { useMapFilter, useUserPosition } from '@common/hooks/mapParksContext';
+import { useAddToHomescreenPrompt } from '@common/hooks/useAddToHomescreenPrompt';
 import { locales } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
 import { IS_BROWSER, nextWindow } from '@common/utils/helpers';
@@ -31,6 +32,12 @@ const Settings = ({
   const { watchPosition, clearPosition, userPosition } = useUserPosition();
   const router = useRouter();
   const { appVersion } = useAppSettings();
+  const [prompt, promptToInstall] = useAddToHomescreenPrompt();
+  const [isA2hVisible, setA2HVisibleState] = React.useState(false);
+
+  React.useEffect(() => {
+    prompt && setA2HVisibleState(true);
+  }, [prompt]);
 
   return (
     <React.Fragment>
@@ -110,11 +117,14 @@ const Settings = ({
               />
             </div>
           )}
-          {IS_BROWSER && window.installEvent && (
+          {isA2hVisible && (
             <div className={styles.appSettings}>
               <Button
                 className={styles.appSettingsButton}
-                onClick={() => nextWindow.installEvent.prompt()}
+                onClick={() => {
+                  promptToInstall();
+                  setA2HVisibleState(false);
+                }}
                 icon="a2h"
                 color="white"
                 type="text"

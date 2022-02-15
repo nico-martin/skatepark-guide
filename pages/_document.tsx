@@ -4,18 +4,12 @@ import { IS_BROWSER } from '@common/utils/helpers';
 
 declare global {
   interface Window {
-    installEvent: any;
     jwt: string;
   }
 }
 
 if (IS_BROWSER) {
   window.jwt = '';
-  window.installEvent = null;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    window.installEvent = e;
-  });
 }
 
 const loadingScreenCSS = `.loading-body {
