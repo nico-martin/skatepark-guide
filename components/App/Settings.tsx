@@ -110,11 +110,11 @@ const Settings = ({
               />
             </div>
           )}
-          {isBrowser() && window.installEvent && (
+          {nextWindow.installEvent && (
             <div className={styles.appSettings}>
               <Button
                 className={styles.appSettingsButton}
-                onClick={() => window.installEvent.prompt()}
+                onClick={() => nextWindow.installEvent.prompt()}
                 icon="a2h"
                 color="white"
                 type="text"

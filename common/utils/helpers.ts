@@ -1,3 +1,4 @@
+import { Func } from 'idb/build/util';
 import { GetServerSidePropsContext } from 'next';
 import { ParkFacilitiesT } from '@common/types/parks';
 
@@ -63,6 +64,7 @@ export const nextWindow: {
   jwt?: string;
   navigator?: {};
   installEvent?: any;
+  addEventListener?: Function;
 } =
   typeof window !== 'undefined'
     ? window
