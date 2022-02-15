@@ -105,8 +105,6 @@ export const ToastProvider = ({ children }: { children: any }) => {
   );
 };
 
-// todo: create Message Bus and hook into APP
-
 export const useToast = () => {
   const { addToast } = React.useContext(Context);
   return { addToast };

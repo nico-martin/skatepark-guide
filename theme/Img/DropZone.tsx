@@ -2,7 +2,7 @@ import React from 'react';
 import cn from '@common/utils/classnames';
 import styles from './DropZone.module.css';
 
-// todo: check mime types
+// todo: check mime types - https://app.clickup.com/t/263akvx
 
 const DropZone = ({
   className = '',

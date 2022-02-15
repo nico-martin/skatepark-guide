@@ -8,8 +8,6 @@ import cn from '@common/utils/classnames';
 import { isBrowser } from '@common/utils/helpers';
 import styles from './ParkHeader.module.css';
 
-// todo: readd "love" functionality
-
 const headerHeight = 260;
 const titleHeght = 60;
 const maxScroll = headerHeight - titleHeght;

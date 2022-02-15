@@ -19,10 +19,6 @@ const Menu = ({
 }) => {
   return (
     <nav className={cn(className, styles.root)}>
-      {/*
-      todo: active border bottom animation
-      <span className={styles.line} style={{ left: 0, width: 100 }} />
-      */}
       {Object.entries(menu).map(([menuSlug, menuItem]) => (
         <Link key={menuSlug} href={menuSlug}>
           <a
