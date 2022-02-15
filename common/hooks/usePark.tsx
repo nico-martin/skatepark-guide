@@ -19,7 +19,7 @@ export interface UseParkI {
   hasUnsavedChanges: boolean;
 }
 
-export const usePark = (slug: string, parkObject?: ParkI): UseParkI => {
+export const usePark = (slug: string, parkObject: ParkI = null): UseParkI => {
   const [state, setState] = React.useState<string>(
     parkObject ? PARK_API_STATES.SUCCESS : PARK_API_STATES.LOADING
   );

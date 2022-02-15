@@ -1,17 +1,17 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Park from '@components/Park/Park';
 import { getPark } from '@common/api/park';
 import { usePark } from '@common/hooks/usePark';
 import { ParkI } from '@common/types/parks';
+import { isNextRouterRequest } from '@common/utils/helpers';
 import { createImage } from '@common/utils/imageProxy';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isRouterRequest = context.req.url.startsWith('/_next/data');
-  if (isRouterRequest) {
+  if (isNextRouterRequest(context)) {
     return { props: {} };
   }
   const slug = String(context?.params?.slug);
@@ -33,13 +33,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 };
 
-const ParkView = ({
-  className = '',
-  parkObject = null,
-}: {
+const ParkView: NextPage<{
   className?: string;
   parkObject?: ParkI;
-}) => {
+}> = ({ className = '', parkObject = null }) => {
   const {
     query: { slug = '' },
   } = useRouter();

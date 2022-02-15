@@ -88,7 +88,7 @@ const Settings = ({
           <h2 className={styles.appHeading}>
             {formatMessage({ id: 'settings.app' })}
           </h2>
-          {localeKeys.length >= 1 && (
+          {localeKeys.length >= 2 && (
             <div className={styles.appSettings}>
               <FormElement
                 name="app-language"

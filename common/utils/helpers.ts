@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from 'next';
 import { ParkFacilitiesT } from '@common/types/parks';
 
 export const untrailingSlashIt = (str: string = ''): string =>
@@ -70,3 +71,6 @@ export const nextWindow: {
       };
 export const isBrowser = () => typeof window !== 'undefined';
 export const isNode = () => !isBrowser();
+
+export const isNextRouterRequest = (context: GetServerSidePropsContext) =>
+  context.req.url.startsWith('/_next/data');
