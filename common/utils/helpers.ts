@@ -70,6 +70,7 @@ export const nextWindow: {
     ? window
     : {
         navigator: {},
+        addEventListener: () => {},
       };
 export const isBrowser = () => typeof window !== 'undefined';
 export const isNode = () => !isBrowser();
