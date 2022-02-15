@@ -8,6 +8,7 @@ import { getPark, getParkShort } from '@common/api/park';
 import { usePark } from '@common/hooks/usePark';
 import { ParkI } from '@common/types/parks';
 import { API } from '@common/utils/constants';
+import { createImage } from '@common/utils/imageProxy';
 
 const enum STATE {
   LOADING = 'loading',
@@ -57,14 +58,44 @@ const ParkView = ({
   return (
     <React.Fragment>
       <Head>
-        <title key="title">
-          {park.data?.title
-            ? formatMessage(
+        {park.data?.title && (
+          <React.Fragment>
+            <title key="title">
+              {formatMessage(
                 { id: 'meta.title.sub' },
                 { title: park.data.title }
-              )
-            : formatMessage({ id: 'meta.title' })}
-        </title>
+              )}
+            </title>
+            <meta
+              name="description"
+              content={formatMessage(
+                { id: 'meta.description.sub' },
+                { title: park.data.title }
+              )}
+            />
+          </React.Fragment>
+        )}
+        {park.data?.headImage && (
+          <React.Fragment>
+            <meta
+              property="og:image"
+              content={createImage({
+                imageUrl: park.data.headImage.url,
+                width: 1200,
+                height: 630,
+              })}
+            />
+            <meta
+              property="twitter:image"
+              content={createImage({
+                imageUrl: park.data.headImage.url,
+                width: 1024,
+                height: 512,
+              })}
+            />
+          </React.Fragment>
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Park className={className} park={park} />
     </React.Fragment>
