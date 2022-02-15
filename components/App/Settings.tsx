@@ -114,7 +114,7 @@ const Settings = ({
             <div className={styles.appSettings}>
               <Button
                 className={styles.appSettingsButton}
-                onClick={() => nextWindow.installEvent.prompt()}
+                onClick={() => window.installEvent.prompt()}
                 icon="a2h"
                 color="white"
                 type="text"
