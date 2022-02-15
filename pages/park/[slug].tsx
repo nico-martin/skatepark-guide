@@ -4,17 +4,10 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Park from '@components/Park/Park';
-import { getPark, getParkShort } from '@common/api/park';
+import { getPark } from '@common/api/park';
 import { usePark } from '@common/hooks/usePark';
 import { ParkI } from '@common/types/parks';
-import { API } from '@common/utils/constants';
 import { createImage } from '@common/utils/imageProxy';
-
-const enum STATE {
-  LOADING = 'loading',
-  NOT_FOUND = 'not_found',
-  SUCCESS = 'success',
-}
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const isRouterRequest = context.req.url.startsWith('/_next/data');
@@ -54,7 +47,6 @@ const ParkView = ({
 
   const park = usePark(String(slug), parkObject);
 
-  // todo: add description and image
   return (
     <React.Fragment>
       <Head>
@@ -67,12 +59,41 @@ const ParkView = ({
               )}
             </title>
             <meta
+              name="twitter:title"
+              content={formatMessage(
+                { id: 'meta.title.sub' },
+                { title: park.data.title }
+              )}
+            />
+            <meta
+              name="og:title"
+              content={formatMessage(
+                { id: 'meta.title.sub' },
+                { title: park.data.title }
+              )}
+            />
+            <meta
               name="description"
               content={formatMessage(
                 { id: 'meta.description.sub' },
                 { title: park.data.title }
               )}
             />
+            <meta
+              name="og:description"
+              content={formatMessage(
+                { id: 'meta.description.sub' },
+                { title: park.data.title }
+              )}
+            />
+            <meta
+              name="twitter:description"
+              content={formatMessage(
+                { id: 'meta.description.sub' },
+                { title: park.data.title }
+              )}
+            />
+            <meta property="og:type" content="website" />
           </React.Fragment>
         )}
         {park.data?.headImage && (

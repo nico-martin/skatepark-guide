@@ -33,9 +33,6 @@ export const getMapParks = (bounds: MapBounds) =>
 export const getPark = (slug: string) =>
   apiGet<ParkI>(`${API.SPG}park/${slug}`);
 
-export const getParkShort = (slug: string) =>
-  apiGet<ParkI>(`${API.SPG}park-short/${slug}`);
-
 export const postPark = (slug: string, data: Partial<ParkI>) =>
   apiPost<ParkI>(`${API.SPG}park/${slug}`, data);
 
