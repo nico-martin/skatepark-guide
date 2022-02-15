@@ -58,5 +58,15 @@ export const objectDiff = (
     };
   }, {});
 
+export const nextWindow: {
+  jwt?: string;
+  navigator?: {};
+  installEvent?: any;
+} =
+  typeof window !== 'undefined'
+    ? window
+    : {
+        navigator: {},
+      };
 export const isBrowser = () => typeof window !== 'undefined';
 export const isNode = () => !isBrowser();

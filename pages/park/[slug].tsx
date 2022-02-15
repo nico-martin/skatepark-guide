@@ -53,6 +53,7 @@ const ParkView = ({
 
   const park = usePark(String(slug), parkObject);
 
+  // todo: add description and image
   return (
     <React.Fragment>
       <Head>
@@ -62,7 +63,7 @@ const ParkView = ({
                 { id: 'meta.title.sub' },
                 { title: park.data.title }
               )
-            : 'test' + formatMessage({ id: 'meta.title' })}
+            : formatMessage({ id: 'meta.title' })}
         </title>
       </Head>
       <Park className={className} park={park} />

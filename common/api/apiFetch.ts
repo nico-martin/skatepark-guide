@@ -1,5 +1,6 @@
 import { settingsDB } from '@common/idb';
 import { MESSAGES } from '@common/utils/constants';
+import { nextWindow } from '@common/utils/helpers';
 
 export const apiGet = <T>(url: string): Promise<T> =>
   apiFetch({ url, method: 'GET' });
@@ -42,9 +43,9 @@ const apiFetch = <T>({
         ...(typeof FormData !== 'undefined' && body instanceof FormData
           ? {}
           : { 'Content-Type': 'application/json' }),
-        ...(typeof window !== 'undefined' && Boolean(window.jwt)
+        ...(Boolean(nextWindow.jwt)
           ? {
-              Authorization: `Bearer ${window.jwt}`,
+              Authorization: `Bearer ${nextWindow.jwt}`,
             }
           : {}),
       },

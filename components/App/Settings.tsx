@@ -13,7 +13,7 @@ import { useAppSettings } from '@common/appSettings/appSettingsContext';
 import { useMapFilter, useUserPosition } from '@common/hooks/mapParksContext';
 import { locales } from '@common/intl/intlContext';
 import cn from '@common/utils/classnames';
-import { isBrowser } from '@common/utils/helpers';
+import { nextWindow } from '@common/utils/helpers';
 import styles from './Settings.module.css';
 
 const localeKeys = Object.keys(locales);
@@ -56,7 +56,7 @@ const Settings = ({
             ))}
           </Form>
         </div>
-        {isBrowser() && 'geolocation' in window.navigator && (
+        {'geolocation' in nextWindow.navigator && (
           <div className={cn(styles.location)}>
             <h2>{formatMessage({ id: 'settings.location' })}</h2>
             <Button
@@ -110,11 +110,11 @@ const Settings = ({
               />
             </div>
           )}
-          {isBrowser() && window.installEvent !== null && (
+          {nextWindow.installEvent !== null && (
             <div className={styles.appSettings}>
               <Button
                 className={styles.appSettingsButton}
-                onClick={() => window.installEvent.prompt()}
+                onClick={() => nextWindow.installEvent.prompt()}
                 icon="a2h"
                 color="white"
                 type="text"
@@ -123,7 +123,7 @@ const Settings = ({
               </Button>
             </div>
           )}
-          {isBrowser() && 'share' in window.navigator && (
+          {'share' in nextWindow.navigator && (
             <div className={styles.appSettings}>
               <Button
                 icon="share"
