@@ -110,7 +110,7 @@ const Settings = ({
               />
             </div>
           )}
-          {isBrowser() && window.installEvent !== null && (
+          {isBrowser() && window.installEvent && (
             <div className={styles.appSettings}>
               <Button
                 className={styles.appSettingsButton}
