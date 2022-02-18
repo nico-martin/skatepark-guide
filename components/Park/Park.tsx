@@ -51,13 +51,6 @@ const Park = ({
       className={cn(className, styles.root)}
       onScroll={(e) => setScroll((e.target as HTMLElement).scrollTop)}
     >
-      {/*data && (
-        <Head>
-          <title>
-            {formatMessage({ id: 'meta.title.sub' }, { title: data.title })}
-          </title>
-        </Head>
-      )*/}
       <ParkHeader
         className={cn(styles.header)}
         park={data}

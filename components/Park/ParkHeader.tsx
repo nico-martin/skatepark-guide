@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 import { Button, LazyImage, UploadModal } from '@theme';
 import { getImages } from '@common/api/park';
 import { useAppSettings } from '@common/appSettings/appSettingsContext';
+import useWindowSize from '@common/hooks/useWindowSize';
 import { ParkI } from '@common/types/parks';
 import cn from '@common/utils/classnames';
 import { IS_BROWSER } from '@common/utils/helpers';
@@ -29,6 +30,7 @@ const ParkHeader = ({
 }) => {
   const [showLogoModal, setShowLogoModal] = React.useState<boolean>(false);
   const [showHeroModal, setShowHeroModal] = React.useState<boolean>(false);
+  const { isMobile } = useWindowSize();
 
   const opacity = React.useMemo(() => {
     const opacity = Math.floor((100 / maxScroll) * scroll) / 100;
@@ -38,10 +40,10 @@ const ParkHeader = ({
   const { defaultLogo } = useAppSettings();
 
   const logoScale = React.useMemo(() => {
-    const min = 0.6;
+    const min = isMobile ? 0.3 : 0.6;
     const scale = 1 - opacity;
     return scale <= min ? min : scale;
-  }, [opacity]);
+  }, [opacity, isMobile]);
 
   const { formatMessage } = useIntl();
 
@@ -60,7 +62,9 @@ const ParkHeader = ({
           <div
             className={cn(styles.titleLogo)}
             style={{
-              transform: `translateY(20%) scale(${logoScale})`,
+              transform: `translateY(${
+                isMobile ? '15%' : '20%'
+              }) scale(${logoScale})`,
             }}
           >
             {edit && (
@@ -89,20 +93,22 @@ const ParkHeader = ({
             )}
           </div>
         )}
-        <p
-          className={cn(styles.titleHeading)}
-          style={{
-            opacity,
-            ...(Boolean(park?.logo)
-              ? {
-                  transform: `translateX(${100 * logoScale * 1.5}px)`,
-                  marginLeft: -140,
-                }
-              : {}),
-          }}
-        >
-          {park?.title}
-        </p>
+        {!isMobile && (
+          <p
+            className={cn(styles.titleHeading)}
+            style={{
+              opacity,
+              ...(Boolean(park?.logo)
+                ? {
+                    transform: `translateX(${100 * logoScale * 1.5}px)`,
+                    marginLeft: -140,
+                  }
+                : {}),
+            }}
+          >
+            {park?.title}
+          </p>
+        )}
       </div>
       <div className={cn(styles.controls)}>
         {/*<Button

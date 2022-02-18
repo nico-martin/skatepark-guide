@@ -2,7 +2,7 @@
   "name": "skatepark.guide",
   "author": "Nico Martin - https://nico.dev",
   "license": "GPL-3.0+",
-  "version": "1.0.4",
+  "version": "0.9.5",
   "description": "A Progressive Web App for skateparks around the world",
   "private": true,
   "scripts": {
