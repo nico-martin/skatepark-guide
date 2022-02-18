@@ -77,3 +77,12 @@ export const IS_NODE = !IS_BROWSER;
 
 export const isNextRouterRequest = (context: GetServerSidePropsContext) =>
   context.req.url.startsWith('/_next/data');
+
+export const getParents = (el: HTMLElement): Array<HTMLElement> => {
+  let parents = [];
+  for (parents; el; el = el.parentNode as HTMLElement) {
+    parents.push(el);
+  }
+
+  return parents;
+};

@@ -1,3 +1,7 @@
 .root {
   padding: var(--spacing);
+
+  @mixin mobile {
+    padding-bottom: calc(var(--spacing-page) * 2);
+  }
 }

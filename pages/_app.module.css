@@ -22,6 +22,7 @@
 
   .settings {
     max-width: 400px;
+    width: 80%;
     z-index: 200;
   }
 
@@ -101,7 +102,7 @@
   top: 0;
   overflow: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--c-gray) transparent;
+  scrollbar-color: var(--c-p-light) transparent;
 
   @mixin mobile {
     padding-bottom: var(--appcontent-bottom-spacing);

@@ -86,7 +86,7 @@ const ParkGallery = ({
   const { formatMessage } = useIntl();
 
   return (
-    <div className={cn(className, styles.root)}>
+    <div className={cn(className, styles.root)} data-notouch="true">
       <h2 className={cn(styles.title)}>
         {formatMessage({ id: 'park.gallery' })}
       </h2>
