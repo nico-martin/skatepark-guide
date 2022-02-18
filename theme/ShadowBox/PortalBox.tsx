@@ -1,20 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { IS_BROWSER } from '@common/utils/helpers';
 import { ShadowBox } from '../index';
 import { SHADOW_BOX_SIZES } from './ShadowBox';
 
-const Portal = ({ children }: { children?: JSX.Element }) => {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-    return setMounted(false);
-  }, []);
-
-  return mounted
+const Portal = ({ children }: { children?: JSX.Element }) =>
+  IS_BROWSER
     ? ReactDOM.createPortal(children, document.querySelector('#shadowbox'))
     : null;
-};
 
 const PortalBox = ({
   children,
