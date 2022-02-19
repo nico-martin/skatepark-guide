@@ -37,6 +37,9 @@ const SignupForm = ({ className = '' }: { className?: string }) => {
   return (
     <div className={cn(className, styles.root)}>
       <h2 className={styles.title}>{formatMessage({ id: 'auth.signup' })}</h2>
+      <p className={styles.formDescription}>
+        {formatMessage({ id: 'auth.login.description' })}
+      </p>
       <Form
         className={cn(styles.form)}
         onSubmit={form.handleSubmit((data) => {

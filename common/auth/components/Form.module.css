@@ -1,6 +1,11 @@
 .root {
 }
 
+.formDescription {
+  margin-top: var(--spacing-half);
+  font-size: var(--fs-xsmall);
+}
+
 .title {
 }
 

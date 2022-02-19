@@ -26,6 +26,7 @@
   "account.park.edit": "bearbeiten",
   "account.park.view": "ansehen",
   "auth.login": "Login",
+  "auth.login.description": "Skatepark.guide uses the same user database as Skateparkguide.ch. You can use your Skateparkguide.ch account to login.",
   "auth.login.success": "You have been logged in successfully!",
   "auth.logout": "Logout",
   "auth.signup": "Sign up",

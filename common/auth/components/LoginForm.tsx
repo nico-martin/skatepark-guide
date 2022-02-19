@@ -8,8 +8,6 @@ import {
   FormFeedback,
   MESSAGE_TYPES,
   InputText,
-  Button,
-  InputCheckbox,
 } from '@theme';
 import { postLogin } from '@common/api/auth';
 import { useAuth } from '@common/auth/authContext';
@@ -37,6 +35,9 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
   return (
     <div className={cn(className, styles.root)}>
       <h2 className={styles.title}>{formatMessage({ id: 'auth.login' })}</h2>
+      <p className={styles.formDescription}>
+        {formatMessage({ id: 'auth.login.description' })}
+      </p>
       <Form
         className={cn(styles.form)}
         onSubmit={form.handleSubmit((data) => {
