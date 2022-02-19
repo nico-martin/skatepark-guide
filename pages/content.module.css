@@ -5,3 +5,7 @@
     padding-bottom: calc(var(--spacing-page) * 2);
   }
 }
+
+.rootMt {
+  margin-top: 10vh;
+}

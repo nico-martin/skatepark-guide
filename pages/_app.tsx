@@ -1,3 +1,4 @@
+import { init } from '@socialgouv/matomo-next';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import type { AppProps } from 'next/app';
@@ -19,6 +20,9 @@ import combineProvider from '@common/utils/combineProvider';
 import '../styles/globals.css';
 import styles from './_app.module.css';
 
+const MATOMO_URL = process.env.NEXT_PUBLIC_MATOMO_URL;
+const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID;
+
 const AppProvider = combineProvider(
   IntlContextProvider,
   ToastProvider,
@@ -30,6 +34,10 @@ const AppProvider = combineProvider(
 const App = ({ Component, pageProps }: AppProps) => {
   const [mapZoom, setMapZoom] = React.useState<number>(null);
   const { formatMessage } = useIntl();
+
+  React.useEffect(() => {
+    init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID });
+  }, []);
 
   return (
     <React.Fragment>

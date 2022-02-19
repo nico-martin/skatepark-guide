@@ -47,7 +47,8 @@ const PasswordForm = ({ className = '' }: { className?: string }) => {
               setPending(true);
               postPasswordReset(
                 data.email,
-                `${window.location.protocol}//${window.location.host}/${locale}/account/password-reset/{key}/`,
+                // todo: https://app.clickup.com/t/25qyvda
+                `${window.location.protocol}//${window.location.host}/account/password-reset/{key}/`,
                 location.pathname
               )
                 .then((data) => {

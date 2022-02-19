@@ -93,7 +93,7 @@ const ParkHeader = ({
             )}
           </div>
         )}
-        {!isMobile && (
+        {(!isMobile || !park?.logo) && (
           <p
             className={cn(styles.titleHeading)}
             style={{

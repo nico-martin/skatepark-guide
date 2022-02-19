@@ -7,7 +7,6 @@ import {
   FormControls,
   FormElement,
   InputText,
-  InputHidden,
   FormFeedback,
   MESSAGE_TYPES,
 } from '@theme';
@@ -17,12 +16,17 @@ import { useToast } from '@common/toast/toastContext';
 import cn from '@common/utils/classnames';
 import styles from './Form.module.css';
 
-const PasswordResetForm = ({ className = '' }: { className?: string }) => {
+const PasswordResetForm = ({
+  className = '',
+  pwKey,
+}: {
+  className?: string;
+  pwKey: string;
+}) => {
   const { formatMessage } = useIntl();
   const [pending, setPending] = React.useState<boolean>(false);
   const router = useRouter();
 
-  //const { key } = useParams<{ key: string }>();
   const { addToast } = useToast();
   const { setEmail: setAuthEmail } = useAuth();
   const [formError, setFormError] = React.useState<string>('');
@@ -30,12 +34,10 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
   const form = useForm<{
     password: string;
     repeatPassword: string;
-    key: string;
   }>({
     defaultValues: {
       password: '',
       repeatPassword: '',
-      //key,
     },
   });
 
@@ -48,7 +50,7 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
         className={cn(styles.form)}
         onSubmit={form.handleSubmit((data) => {
           setPending(true);
-          postPasswordConfirm(data.password, data.key)
+          postPasswordConfirm(data.password, pwKey)
             .then((data) => {
               setAuthEmail(data.userEmail);
               addToast({
@@ -56,7 +58,7 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
               });
               router.push(data.redirect || '/');
             })
-            .catch((e) => {
+            .catch((e) =>
               setFormError(
                 formatMessage({
                   id:
@@ -64,8 +66,8 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
                       ? 'auth.password.reset.invalidLink'
                       : 'error.general',
                 })
-              );
-            })
+              )
+            )
             .finally(() => setPending(false));
         })}
       >
@@ -98,14 +100,6 @@ const PasswordResetForm = ({ className = '' }: { className?: string }) => {
               value === form.getValues('password') ||
               formatMessage({ id: 'auth.signup.error.repeatPassword' }),
           }}
-          type="stacked"
-        />
-        <FormElement
-          name="key"
-          label="key"
-          Input={InputHidden}
-          inputType="text"
-          form={form}
           type="stacked"
         />
         {formError !== '' && (
