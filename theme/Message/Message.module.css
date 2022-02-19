@@ -8,4 +8,9 @@
     color: var(--c-feedback-danger);
     border-color: var(--c-feedback-danger);
   }
+
+  &.warning {
+    color: var(--c-feedback-warning);
+    border-color: var(--c-feedback-warning);
+  }
 }

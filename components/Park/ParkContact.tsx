@@ -12,6 +12,7 @@ const mapIconToContact = {
   facebook: 'facebook',
   instagram: 'instagram',
   address: 'home',
+  googleplaces: 'googlePlaces',
 };
 
 const ParkContact = ({

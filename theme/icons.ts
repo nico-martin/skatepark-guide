@@ -6,6 +6,7 @@ import crosshair from './_icons/crosshair.svg';
 import eye from './_icons/eye.svg';
 import facebook from './_icons/facebook.svg';
 import filter from './_icons/filter.svg';
+import googlePlaces from './_icons/google-places.svg';
 import heartEmpty from './_icons/heart-empty.svg';
 import heart from './_icons/heart.svg';
 import home from './_icons/home.svg';
@@ -48,6 +49,7 @@ const icons = {
   eye,
   facebook,
   filter,
+  googlePlaces,
   heart,
   heartEmpty,
   home,

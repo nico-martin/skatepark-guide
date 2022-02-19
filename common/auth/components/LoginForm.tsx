@@ -50,7 +50,9 @@ const LoginForm = ({ className = '' }: { className?: string }) => {
               });
             })
             .catch((e) => {
-              setFormError(e.message);
+              setFormError(
+                e.message || formatMessage({ id: 'auth.login.error' })
+              );
             })
             .finally(() => setPending(false));
         })}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import { Message, MESSAGE_TYPES } from '@theme';
 import { ApiGetUserI } from '@common/auth/types';
 import cn from '@common/utils/classnames';
@@ -12,10 +13,13 @@ const AccountParks = ({
   className?: string;
   user: ApiGetUserI;
 }) => {
+  const { formatMessage } = useIntl();
   return (
     <div className={cn(className, styles.root)}>
       {user.parks.length === 0 ? (
-        <Message type={MESSAGE_TYPES.WARNING}>No parks found</Message>
+        <Message type={MESSAGE_TYPES.WARNING}>
+          {formatMessage({ id: 'park.overview.empty' })}
+        </Message>
       ) : (
         <ul className={styles.list}>
           {user.parks.map((park) => (

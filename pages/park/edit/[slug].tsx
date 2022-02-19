@@ -12,4 +12,14 @@ const ParkEdit = ({ className = '' }: { className?: string }) => {
   return <Park className={className} park={park} edit />;
 };
 
-export default ParkEdit;
+const ParkEditWrapper = ({ className = '' }: { className?: string }) => {
+  const [mounted, setMounted] = React.useState<boolean>(false);
+  React.useEffect(() => {
+    setTimeout(() => setMounted(true), 1000);
+    return () => setMounted(false);
+  }, []);
+
+  return mounted ? <ParkEdit className={className} /> : null;
+};
+
+export default ParkEditWrapper;
