@@ -1,9 +1,8 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Message, Button } from '@theme';
+import { Button } from '@theme';
 import LoginForm from '@common/auth/components/LoginForm';
 import PasswordForm from '@common/auth/components/PasswordForm';
-import PasswordResetForm from '@common/auth/components/PasswordResetForm';
 import SignupForm from '@common/auth/components/SignupForm';
 import cn from '@common/utils/classnames';
 import styles from './AuthForm.module.css';
@@ -27,9 +26,6 @@ const AuthForm = ({
       {formType === 'login' && <LoginForm className={styles.form} />}
       {formType === 'signup' && <SignupForm className={styles.form} />}
       {formType === 'password' && <PasswordForm className={styles.form} />}
-      {formType === 'password-reset' && (
-        <PasswordResetForm className={styles.form} />
-      )}
       <p className={cn(styles.links)}>
         {formType !== 'login' && (
           <Button
