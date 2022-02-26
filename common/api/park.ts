@@ -31,16 +31,16 @@ export const getMapParks = (bounds: MapBounds) =>
   }>(`${API.SPG}map-parks/?bounds=${bounds.join('|')}`);
 
 export const getPark = (slug: string) =>
-  apiGet<ParkI>(`${API.SPG}parks/${slug}`);
+  apiGet<ParkI>(`${API.SPG}park/${slug}`);
 
 export const postPark = (slug: string, data: Partial<ParkI>) =>
-  apiPost<ParkI>(`${API.SPG}parks/${slug}`, data);
+  apiPost<ParkI>(`${API.SPG}park/${slug}`, data);
 
 export const deletePark = (slug: string) =>
-  apiDelete<ParkI>(`${API.SPG}parks/${slug}`);
+  apiDelete<ParkI>(`${API.SPG}park/${slug}`);
 
 export const putPark = (title: string, location: MapParkI) =>
-  apiPut<string>(`${API.SPG}parks/`, { title, location });
+  apiPut<string>(`${API.SPG}park/`, { title, location });
 
 export const getWeather = (slug: string, locale: string) =>
   apiGet<ApiParkWeatherI>(`${API.SPG}park-weather/${slug}/?lang=${locale}`);
