@@ -26,7 +26,7 @@ const AccountParkSingle = ({ park }: { park: ApiParkList }) => {
           className={styles.controlElement}
           icon="pencil"
           element="router"
-          href={`/park/edit/${park.slug}`}
+          href={`/parks/edit/${park.slug}`}
           round
           title={formatMessage({ id: 'account.park.edit' })}
           color="white"
@@ -35,7 +35,7 @@ const AccountParkSingle = ({ park }: { park: ApiParkList }) => {
           className={styles.controlElement}
           icon="eye"
           element="router"
-          href={`/park/${park.slug}`}
+          href={`/parks/${park.slug}`}
           round
           title={formatMessage({ id: 'account.park.view' })}
           color="white"

@@ -51,7 +51,7 @@ const NewParkModal = ({
             putPark(data.title, data.location)
               .then((resp) => {
                 setShow(false);
-                router.push(`/park/edit/${resp}`);
+                router.push(`/parks/edit/${resp}`);
               })
               .catch((e) => setError(e))
               .finally(() => setPending(false));

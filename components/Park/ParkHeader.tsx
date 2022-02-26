@@ -152,7 +152,7 @@ const ParkHeader = ({
             icon="pencil"
             className={cn(styles.control, styles.controlLove)}
             element="router"
-            href={`/park/edit/${park.slug}`}
+            href={`/parks/edit/${park.slug}`}
             round
             color="white"
           />

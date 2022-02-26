@@ -15,7 +15,7 @@ const Marker = ({
   small?: boolean;
 }) => {
   return slug ? (
-    <Link href={`/park/${slug}/`}>
+    <Link href={`/parks/${slug}/`}>
       <a
         className={cn(styles.root, { [styles.isSmall]: small })}
         title={name}
