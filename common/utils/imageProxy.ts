@@ -1,5 +1,5 @@
-const IMAGE_HOST = 'https://skateparkguide.ch/';
-const PROXY_HOST = 'https://img.skatepark.guide/';
+const IMAGE_HOST = 'https://skateparkguide.ch/wp-content/uploads/';
+
 const SIZES: {
   [key: string]: number;
 } = {
@@ -14,31 +14,35 @@ export const createImage = ({
   imageUrl,
   width = 0,
   height = 0,
-  transform = {},
+  blur = 0,
+  quality = 0,
 }: {
   imageUrl: string;
   width?: number;
   height?: number;
-  transform?: {
-    [key: string]: any;
-  };
+  blur?: number;
+  quality?: number;
 }): string => {
-  let proxyString = '';
+  let proxyString = 'hello-images/';
   width = Math.round(width);
   height = Math.round(height);
   if (width !== 0 || height !== 0) {
-    proxyString = `size-${width}x${height}/`;
+    proxyString += `size-${width}x${height}/`;
+  }
+  if (blur !== 0) {
+    proxyString += `blur-${blur}/`;
+  }
+  if (quality !== 0) {
+    proxyString += `quality-${quality}/`;
   }
 
-  const transforms: Array<string> = [];
-  Object.entries(transform).map(([key, value]) => {
-    transforms.push(`[${key},${value}]`);
-  });
-  if (transforms.length) {
-    proxyString += `transform${transforms.join('')}/`;
+  if (imageUrl.indexOf(IMAGE_HOST) !== 0) {
+    return '';
   }
 
-  return imageUrl.replace(IMAGE_HOST, PROXY_HOST + proxyString);
+  const imgFolder = imageUrl.replace(IMAGE_HOST, '');
+
+  return IMAGE_HOST + proxyString + imgFolder;
 };
 
 export const heightByWidth = ({

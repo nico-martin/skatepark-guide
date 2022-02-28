@@ -80,10 +80,8 @@ const LazyImage = ({
         imageUrl: image.url,
         width: 400,
         height: imageSize.height / (imageSize.width / 400),
-        transform: {
-          blur: 20,
-          quality: 50,
-        },
+        blur: 20,
+        quality: 50,
       }),
     [image, imageSize]
   );
