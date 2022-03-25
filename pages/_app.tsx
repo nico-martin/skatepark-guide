@@ -45,7 +45,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <title key="title">{formatMessage({ id: 'meta.title' })}</title>
         <meta
           name="description"
-          content={formatMessage({ id: 'meta.description.sub' })}
+          content={formatMessage({ id: 'meta.description' })}
         />
       </Head>
       <div className={styles.root}>
