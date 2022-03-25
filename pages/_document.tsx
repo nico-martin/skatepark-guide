@@ -38,7 +38,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <link rel="shortcut icon" href="/favicon.ico" />
-          <meta name="robots" content="noindex, nofollow" />
+          <meta name="robots" content="index, follow" />
           <link
             rel="apple-touch-icon"
             sizes="57x57"
