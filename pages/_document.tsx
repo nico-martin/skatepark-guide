@@ -1,6 +1,7 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { IS_BROWSER } from '@common/utils/helpers';
+import { createImage } from '@common/utils/imageProxy';
 
 declare global {
   interface Window {
@@ -110,6 +111,8 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <meta name="msapplication-TileColor" content="#00796Bs" />
           <style id="loading-screen">{loadingScreenCSS}</style>
+          <meta property="og:image" content="/img/fb-image.png" />
+          <meta property="twitter:image" content="/img/twitter-image.png" />
         </Head>
         <body>
           <svg className="lazysizes-svgfilter">

@@ -71,18 +71,6 @@ const ParkGallery = ({
   const [model, setModal] = React.useState<boolean>(false);
   const edit = setImages !== null;
 
-  React.useEffect(() => {
-    if (!edit) {
-      const options = {
-        gallerySelector: '#park-gallery',
-        childSelector: 'a',
-        pswpModule: PhotoSwipe,
-      };
-      const lightbox = new PhotoSwipeLightbox(options);
-      lightbox.init();
-    }
-  }, []);
-
   const { formatMessage } = useIntl();
 
   return (
