@@ -12,7 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^31.1.0",
+    "@ckeditor/ckeditor5-build-classic": "^36.0.1",
     "@ckeditor/ckeditor5-react": "^3.0.3",
     "@nico-martin/class-names-map": "^1.0.1",
     "@socialgouv/matomo-next": "^1.2.2",
